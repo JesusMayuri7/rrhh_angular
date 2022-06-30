@@ -1,0 +1,40 @@
+<div class="p-grid">
+  <div class="p-col-12">
+    <dx-select-box
+    [items]="anios"
+    placeholder="Año"    
+    [value]="anios[2]"
+    [readOnly]="false"
+    (onValueChanged)="onValueChanged($event)"
+></dx-select-box>
+  </div>
+</div>
+       <dx-pivot-grid id="pivotgrid"
+            [allowSorting]="true"      
+            [allowFiltering]="true"  
+            [allowSortingBySummary]="true"
+            [allowFiltering]="true"
+            [height]="800"            
+            [showBorders]="true"
+            rowHeaderLayout="standard"
+            [showColumnGrandTotals]="false"
+            [showRowGrandTotals]="true"
+            [showColumnTotals]="false"
+            [showRowTotals]="false"
+            [allowExpandAll]="true"
+            [dataSource]="pivotGridDataSource"  
+            (onCellPrepared)="onCellPrepared($event)"          
+          >
+            <dxo-export [enabled]="true" fileName="Sales"></dxo-export>
+            <dxo-field-panel
+            [showDataFields]="false"
+            [showRowFields]="true"
+            [showColumnFields]="true"
+            [showFilterFields]="true"
+            [allowFieldDragging]="true"
+            [visible]="true">
+        </dxo-field-panel>
+            <dxo-scrolling mode="stardard"></dxo-scrolling>
+        </dx-pivot-grid>    
+
+

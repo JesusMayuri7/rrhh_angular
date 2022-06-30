@@ -1,0 +1,80 @@
+/* Master Styles */
+/*
+h1 {
+  color: #369;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 250%;
+}
+h2, h3 {
+  color: #444;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: lighter;
+}
+body {
+  margin: 2em;
+}
+body, input[text], button {
+  color: #888;
+  font-family: Cambria, Georgia;
+}
+a {
+  cursor: pointer;
+  cursor: hand;
+}
+button {
+  font-family: Arial;
+  background-color: #eee;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  cursor: hand;
+}
+button:hover {
+  background-color: #cfd8dc;
+}
+button:disabled {
+  background-color: #eee;
+  color: #aaa;
+  cursor: auto;
+}
+
+/* Navigation link styles */
+
+/*
+nav a:visited, a:link {
+  color: #ffffff;
+}
+*/
+
+nav a.active {
+  color:#039be5;
+  background-color:  #ffffff;
+}
+
+
+/*
+.active-link {
+   color:#428bca; 
+}
+*/
+
+::ng-deep .ui-menubar .ui-menubar-root-list > .ui-menuitem > .ui-menuitem-link {
+  padding: 0.3em 0.3em !important;
+  margin-bottom: 0.2em !important;
+}
+
+
+::ng-deep .ui-menuitem > .ui-menuitem-link > .ui-menuitem-text{
+  color:#0786c5 !important;
+}
+
+::ng-deep .ui-menubar  {
+  border: 1px solid #0786c5 !important;
+  
+  color: #ffffff !important;
+  font-weight: bolder !important;
+}
+
+
+

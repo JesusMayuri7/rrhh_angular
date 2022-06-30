@@ -1,0 +1,13 @@
+.ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-tabview-selected a {  
+    padding: 2px !important;
+    margin-right: 8px !important;
+    margin-top: 1px !important;
+    text-align: center;
+}
+
+.ui-tabview.ui-tabview-top .ui-tabview-nav li a{
+    padding: 2px !important;
+    margin-right: 8px !important;
+    margin-top: 1px !important;
+    text-align: center;
+}

@@ -1,0 +1,178 @@
+<div class="p-grid" style="margin:0.5em;">
+    <div class="p-col">
+        Mes de Proyeccion: <p-dropdown autoWidth="true" [scrollHeight]="500" #Mes (onChange)='onOptionsSelected($event)' [options]="meses" optionLabel="label"></p-dropdown>
+    </div>
+    <div class="p-col">Proyeccion desde el mes de: {{Mes.label=='Seleccione'? '': Mes.label}}</div>
+    <div class="p-col"><p-button label="Descargar" (onClick)="onDescargar(Mes)" [disabled]="!habilitado"></p-button></div>
+</div>
+<p-table [value]="presupuesto" [scrollable]="true" scrollHeight="calc(100vh - 180px)" [columns]="cols" sortMode="multiple" sortMode="single" (onSort)="onSort()" [loading]="loading" dataKey="id">
+    <ng-template pTemplate="colgroup" let-columns>
+                <colgroup>
+                    <ng-container *ngFor="let col of columns"> 
+                    <col *ngIf="col.visible" [style.width]="col.ancho">
+                    </ng-container>
+                </colgroup>
+            </ng-template>
+    <ng-template pTemplate="header" let-columns >
+        <tr>         
+            <ng-container *ngFor="let col of columns"> 
+            <th *ngIf='col.visible' [ngStyle]="col.estilo">                
+                    {{col.header}}                
+            </th>
+            </ng-container>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-expanded="expanded" let-columns="columns">
+        <tr class="ui-widget-header" *ngIf="rowGroupFuente[rowData.fuente].index === rowIndex" style="background-color:cadetblue;color:white">
+            <td colspan="2">
+                <span style="font-weight:bold" style='font-size:0.75em'>{{calculateGroupFuente(rowData.fuente)}} Fuente: {{  rowData.fuente==1 ? ' RO':' RDR' }}</span>
+            </td>            
+            <td style='font-size:0.75em;text-align:right'>{{ totalPim | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalTot | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalSal | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalEne | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalFeb | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalMar | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalAbr | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalMay | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalJun | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalJul | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalAgo | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalSet | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalOct | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalNov | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalDic | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalAna | number : '1.0-0'}}</td>
+        </tr>
+        <tr class="ui-widget-header" 
+        *ngIf="(rowGroupActividad[rowData.fuente+rowData.idactividad].index === rowIndex)" style="color:blue">        
+            <td colspan="2">
+                <span style="font-weight:bold" style='font-size:0.71em'>{{calculateGroupActividad(rowData.fuente,rowData.idactividad)}} Actividad: {{ rowData.actividad}}</span>
+            </td>
+ 
+            <td style='font-size:0.75em;text-align:right'>{{ totalPim | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalTot | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalSal | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalEne | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalFeb | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalMar | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalAbr | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalMay | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalJun | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalJul | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalAgo | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalSet | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalOct | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalNov | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalDic | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalAna | number : '1.0-0'}}</td>
+        </tr>
+        <!--Especifica-->
+        <tr class="ui-widget-header" 
+        *ngIf="(rowGroupEspecifica[rowData.fuente+rowData.idactividad+rowData.especifica].index === rowIndex) " style="color:blue">        
+            <td colspan="16">                                            
+                            <span style="font-weight:bold" style='font-size:0.6em'><span>{{calculateGroupEspecifica(rowData.fuente,rowData.idactividad,rowData.especifica)}}&nbsp;&nbsp;{{rowData.especifica}}</span>&nbsp;-&nbsp;{{rowData.detalle}}</span>                                                    
+            </td>
+        </tr>
+        <tr *ngIf="(rowGroupEspecifica[rowData.fuente+rowData.idactividad+rowData.especifica].index === rowIndex) ">
+            <td colspan="2"></td>           
+            <td style='font-size:0.75em;text-align:right'>{{ totalPim | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalTot | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalSal | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalEne | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalFeb | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalMar | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalAbr | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalMay | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalJun | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalJul | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalAgo | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalSet | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalOct | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalNov | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalDic | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{ totalAna | number : '1.0-0'}}</td>
+        </tr>
+        <tr>        
+            <ng-container *ngFor="let col of columns">                
+                <td *ngIf='(col.visible) && (rowGroupMeta[rowData.fuente+rowData.idactividad+rowData.especifica+rowData.meta].index === rowIndex)' [ngStyle]="col.estilo">                                                 
+                            <div *ngIf="col.field=='meta'; then thenMeta else elseAll"></div>
+                            <ng-template #thenMeta>
+                                    <a href="#" [pRowToggler]="rowData">
+                                            <i [ngClass]="expanded ? 'pi pi-fw pi-chevron-circle-down' : 'pi pi-fw pi-chevron-circle-right'"></i></a>               
+                                    <div style='text-align:right'>{{rowData[col.field]}}</div>
+                            </ng-template>
+                            <ng-template #elseAll>
+                                <div style='text-align:right'>{{rowData[col.field] | number : '2.2-2'}}</div>
+                            </ng-template>                                                
+                 </td>                              
+            </ng-container>
+        </tr>
+    </ng-template>
+    
+    <ng-template pTemplate="rowexpansion" let-data let-rowIndex="rowIndex">          
+    <tr style='font-size:0.6em;text-align:center'><td colspan="18">Detalle</td></tr>                            
+                            <tr style='font-size:0.6em;text-align:center'><td colspan="18">
+                                    <p-table [value]="data.pea" > 
+                                            <ng-template pTemplate="colgroup">
+                                                    <colgroup>
+                                                        <ng-container *ngFor="let col of colspeas"> 
+                                                        <col *ngIf="col.visible" [style.width]="col.ancho">
+                                                        </ng-container>
+                                                    </colgroup>
+                                                </ng-template>                  
+                                            <ng-template pTemplate="header">
+                                                <tr>         
+                                                    <ng-container *ngFor="let col of colspeas"> 
+                                                    <td *ngIf='col.visible' [ngStyle]="col.estilo" [attr.colspan]="col.colspan">                
+                                                            {{col.header}}                
+                                                    </td>
+                                                    </ng-container>
+                                                </tr>                       
+                                            </ng-template>                                                        
+                                            <ng-template pTemplate="body" let-data>
+                                                    <tr>
+                                                            <ng-container *ngFor="let col of colspeas"> 
+                                                                    <td *ngIf='col.visible' [ngStyle]="col.estilo" [attr.colspan]="col.colspan"> 
+                                                                            <div *ngIf="col.field=='nombres' || col.field=='nrocap' || col.field=='situacion2'; then thenMeta else elseAll"></div>
+                                                                            <ng-template #thenMeta>
+                                                                                    <div style='text-align:left'> {{data[col.field]}}</div>
+                                                                            </ng-template>
+                                                                            <ng-template #elseAll>
+                                                                                <div style='text-align:right'>{{data[col.field] | number : '2.2-2'}}</div>
+                                                                            </ng-template>                                      
+                                                                    </td>
+                                                            </ng-container>
+                                                    </tr>
+                                                </ng-template>
+                                        </p-table>
+                                </td>
+                            </tr>                                                                                                   
+    </ng-template>
+    <ng-template pTemplate="footer">
+        <tr>
+            <td>Totales</td>
+            <td></td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesPim | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesEje | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesSal | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesEne | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesFeb | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesMar | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesAbr | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesMay | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesJun | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesJul | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesAgo | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesSet | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesOct | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesNov | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesDic | number : '1.0-0'}}</td>
+            <td style='font-size:0.75em;text-align:right'>{{totalesAna | number : '1.0-0'}}</td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+ 
+    </ng-template>
+</p-table>
+

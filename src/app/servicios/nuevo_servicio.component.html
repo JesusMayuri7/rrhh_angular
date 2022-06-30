@@ -1,0 +1,104 @@
+<p-toast position="bottom-center"></p-toast>
+<form [formGroup]="form">    
+<div class="p-grid" >
+    <div class="p-col-12">
+            <div class="p-grid" style="height: 100%;">
+                    <div class="p-col-3">            
+                            Funcional : 
+                    </div>
+                    <div class="p-col-9">            
+                        {{org_data.funcional.desc_funcional}}        
+                    </div>                    
+                    <div class="p-col-3">            
+                            Direccion : 
+                    </div>
+                    <div class="p-col-9">            
+                            {{org_data.direccion.desc_direccion}}        
+                    </div>
+                    <div class="p-col-3">            
+                            Unidad :
+                    </div>
+                    <div class="p-col-9">            
+                            {{org_data.unidad.desc_unidad}}        
+                    </div>                    
+                    <div class="p-col-3">            
+                            Area : 
+                    </div>
+                    <div class="p-col-9">            
+                           {{org_data.unidad.desc_unidad}}        
+                    </div>                                        
+            </div>            
+        <!--<pre>   Cap: {{cap_data.nroCap}}  Plaza: {{cap_data.plaza}}   Estado Pap: {{cap_data.PapSituacion}} </pre>
+        <pre>   Ultimo estado: {{cap_data.MatrizEstado? cap_data.MatrizEstado : 'OCUPADO'}}</pre>
+        <pre>   Ultimo registro: {{cap_data.papNombres? cap_data.papNombres : cap_data.MatrizNombres}}</pre>-->
+        <hr style="margin-bottom: 15px">
+    </div>
+</div>
+<div class="p-grid" style="height: 60px;">
+    <div class="p-col">   
+        <span class="ui-float-label">             
+            <p-dropdown formControlName="autorizacion" id="float-autorizacion" [autoDisplayFirst]="false" [options]="autorizaciones" [style]="{'width':'100%'}" scrollHeight="400px" showClear="true"
+            optionLabel="label" >
+            <ng-template let-item pTemplate="selectedItem">
+                <span style="font-size:0.9em;float:left;margin-top:3.5px">{{item.label}}</span>
+            </ng-template>
+            <ng-template let-car pTemplate="item">
+                <div class="ui-helper-clearfix" >
+                    <div style="font-size:0.7em;float:left;margin-top:3.5px">{{car.label}}</div>
+                </div>
+            </ng-template>
+        </p-dropdown>     
+        <label for="float-autorizacion" style="color: #000050">Autorizacion</label>
+        </span>      
+    </div>
+</div>
+
+<div class="p-grid" style="height: 60px;">    
+        <div class="p-col">        
+            <span class="ui-float-label">
+                <p-dropdown [options]="condiciones" id="float-condicion" [autoDisplayFirst]="false" formControlName="condicion" [style]="{'width':'100%'}" scrollHeight="400px" showClear="true"
+                    optionLabel="label" >
+                    <ng-template let-item pTemplate="selectedItem">
+                        <span style="font-size:0.9em;float:left;margin-top:3.5px">{{item.label}}</span>
+                    </ng-template>
+                    <ng-template let-car pTemplate="item">
+                        <div class="ui-helper-clearfix" >
+                            <div style="font-size:0.7em;float:left;margin-top:3.5px">{{car.label}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>           
+                <label for="float-condicion" style="color: #000050">Condicion</label>
+            </span>
+        </div>
+</div>
+
+
+<div class="p-grid">          
+    <div class="p-col">
+            <span class="ui-float-label">                       
+                        <textarea pInputTextarea style="width: 100%;" [rows]="4" id="float-servicio" [cols]="30" formControlName="servicio" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.servicio.errors }"></textarea>                                    
+                <label for="float-servicio" style="color: #000050">Servicio</label>          
+            </span>
+            <div *ngIf="submitted && f.servicio.errors" class="invalid-feedback">
+                    <div *ngIf="f.servicio.errors.required">Servicio requerido</div>
+            </div>
+    </div>
+</div>
+<div class="p-grid">          
+    <div class="p-col">
+            <span class="ui-float-label">                       
+                        <textarea pInputTextarea style="width: 100%;" [rows]="4" id="float-detalle" [cols]="30" formControlName="detalle" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.detalle.errors }"></textarea>                                    
+                <label for="float-detalle" style="color: #000050">Detalle</label>          
+            </span>
+            <div *ngIf="submitted && f.detalle.errors" class="invalid-feedback">
+                    <div *ngIf="f.detalle.errors.required">Detalle requerido</div>
+            </div>
+    </div>
+</div>
+<div class="p-grid">
+        <div class="p-col p-col-align-start"></div>
+        <div class="p-col p-col-align-center">  <button [disabled]="loading" pButton type="button" (click)='onSubmitNew()' label="Guardar"></button></div>
+        <div class="p-col p-col-align-end"></div>
+    </div>
+</form>
+

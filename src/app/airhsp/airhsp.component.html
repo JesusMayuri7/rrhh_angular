@@ -1,0 +1,69 @@
+ <p-table #dt [columns]="cols" [value]="ordenes"  [loading]="loading"  loadingIcon="pi pi-spinner"  [rows]="rowCount"
+ tableStyleClass="prime-table" (onFilter)="handleFilter($event)" scrollHeight="calc(100vh - 235px)" [scrollable]="true" [style]="{padding:'15px 10px 0px 10px'}">
+        <ng-template pTemplate="caption">                
+                <div class="ui-g">
+                    <div class="ui-g-3">                        
+                    
+                    </div>                        
+                    <div class="ui-g-3">
+                        <div class="ui-inputgroup">                                                                                         
+                            <input type="text" pInputText size="50" #valor (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Busqueda" style="width:auto">
+                            <span class="ui-inputgroup-addon"><i class="pi pi-search" style="margin:4px 4px 0 0;" ></i></span>
+                        </div>
+                    </div>
+                    <div class="ui-g-1">
+                            
+                        </div>                    
+                    <div class="ui-g-3">
+                         Total: {{dt.totalRecords}}  -  Filtrados: {{filtrados}}
+                    </div>                    
+                </div>                                                                                                           
+        </ng-template>
+        <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>     
+                <col *ngFor="let col of columns" [style.width]="col.ancho">
+            </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>       
+            <tr>
+                <th colspan="6" style="background-color:rgb(3, 41, 148); color:aliceblue !important;font-size:0.8em;">Datos</th>
+                <th colspan="3" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.11.14</th>  
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.19.13</th>                  	              
+                <th colspan="4" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.19.399</th>                
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.13.15</th>                
+            </tr>
+            <tr>
+                <th *ngFor="let col of columns" style="font-size:0.8em;" [ngSwitch]="col.field">     
+                    <span *ngSwitchCase="'escolaridad'" [ngClass]="'rotate'">{{col.header}}</span>           
+                    <span *ngSwitchDefault>{{col.header}}</span>                    
+                </th>           
+            </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex" let-expanded="expanded">
+        <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [ngClass]="rowIndex % 2 == 0 ? 'odd-row' : null" >           
+            <td *ngFor="let col of columns" style="font-size:0.7em;padding:3px" [ngSwitch]="col.field">                  
+                <span *ngSwitchCase="'codigo_plaza'" style="float: right;text-align: right;padding-left: 1.5em;">{{rowData[col.field] }}</span>                                                      
+                <span *ngSwitchCase="'numero_documento'" style="float: right;text-align: left;padding-left: 1.0em;">{{rowData[col.field] }}</span>                                                      
+                 <span *ngSwitchCase="'nombres'" style="float: left;text-align: left;padding-left: 0.5em;">{{rowData[col.field] }}</span>                                                      
+                 <span *ngSwitchCase="'desc_cargo_funcional'" style="float: left;text-align: left;padding-left: 0.5em;">{{rowData[col.field] }}</span>                                                      
+                 <span *ngSwitchCase="'desc_establecimiento'" style="float: left;text-align: left;padding-left: 0.5em;">{{rowData[col.field]  }}</span>                                                      
+                 <span *ngSwitchCase="'desc_unidad_organica'" style="float: left;text-align: left;padding-left: 0.5em;">{{rowData[col.field] }}</span>                                                                       
+                 <span *ngSwitchDefault style="float: right;text-align: right;">{{rowData[col.field] | number : '1.2-2' }}</span>
+            </td>            
+        </tr>
+    </ng-template> 
+    <ng-template pTemplate="footer">
+            <tr>
+                <td colspan="6">Totales</td>    
+                <td style='font-size:0.75em;text-align:right'>{{RemPrinRO | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{RemPrinRDR | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{BonFam | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{BonifEsco | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{BoniPatrias | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{BoniNavidad | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{BoniExtJulio | number : '1.0-0' | millonPeople}}</td>                
+                <td style='font-size:0.75em;text-align:right'>{{BoniExtDic | number : '1.0-0' | millonPeople}}</td>                
+                <td style='font-size:0.75em;text-align:right'>{{Essalud | number : '1.0-0' | millonPeople}}</td>                
+            </tr>
+        </ng-template>
+</p-table>

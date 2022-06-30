@@ -1,0 +1,53 @@
+<div style="height:calc(100vh - 80px)">
+    <dx-popup [height]="650" [showTitle]="true" title="Agregar Certificado" [dragEnabled]="false" (onHidden)='closeAdd()' [closeOnOutsideClick]="true"
+        [(visible)]="popupAdd">
+        <div *dxTemplate="let data of 'content'">
+            <zd-add-certificado ></zd-add-certificado>
+        </div>
+    </dx-popup>
+
+    <div>
+        <dx-data-grid [columnMinWidth]="30" width="100%" height="100%" [dataSource]="dataSource" [showRowLines]="true"
+            [showColumnLines]="true" [showBorders]="true" [remoteOperations]="false" [paging]="false"
+            [selectedRowKeys]="[]" (onToolbarPreparing)="onToolbarPreparing($event)" (onToolbarPreparing)="onToolbarPreparing($event)"
+            (onContextMenuPreparing)="addMenuItems($event)">
+            <dxo-export [enabled]="true" fileName="Certificados" [allowExportSelectedData]="true"></dxo-export>  
+            <dxo-selection mode="single"></dxo-selection>
+            <dxo-load-panel [enabled]="true"></dxo-load-panel>
+            <dxo-filter-row [visible]="true"></dxo-filter-row>
+            <dxo-header-filter [visible]="true"></dxo-header-filter>
+            <dxo-scrolling mode="standard" rowRenderingMode="standard" columnRenderingMode="standard"
+                showScrollbar="always">
+                <!-- or "virtual" | "infinite" -->
+            </dxo-scrolling>
+            <dxi-column [width]="50" dataField="anio" caption="Año" dataType="string" selectedFilterOperation="contains"
+                [filterOperations]="[]">
+            </dxi-column>
+            <dxi-column [width]="100" dataField="dsc_modalidad" caption="Modalidad" dataType="string"
+                selectedFilterOperation="contains" [filterOperations]="[]">
+            </dxi-column>
+            <dxi-column [width]="100" dataField="dsc_certificado" caption="Certificado" dataType="string"
+                selectedFilterOperation="contains" [filterOperations]="[]">
+            </dxi-column>
+            <dxi-column [width]="80" dataField="dsc_clasificador" caption="Clasificador" dataType="string"
+                selectedFilterOperation="contains" [filterOperations]="[]">
+            </dxi-column>
+            <dxi-column [width]="80" caption="Concepto" alignment="left" dataField="dsc_concepto" dataType="string"
+                selectedFilterOperation="contains" [filterOperations]="[]">
+            </dxi-column>
+            <dxi-column [width]="420" dataField="detalle" caption="Detalle" alignment="left" dataType="string"
+                selectedFilterOperation="contains" [filterOperations]="[]">
+            </dxi-column>
+            <dxi-column [width]="180" dataField="doc_solicitado" caption="Doc. ORH" alignment="left" dataType="string"
+                selectedFilterOperation="contains" [filterOperations]="[]">
+            </dxi-column>
+            <dxi-column [width]="180" dataField="doc_certificacion" caption="Doc. OPP" alignment="left"
+                dataType="string" selectedFilterOperation="contains" [filterOperations]="[]">
+            </dxi-column>
+
+            <dxo-paging [enabled]="false"></dxo-paging>
+
+
+        </dx-data-grid>
+
+    </div>

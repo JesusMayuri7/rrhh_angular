@@ -1,0 +1,73 @@
+
+<div>
+    <p-fieldset legend="Convocatoria">        
+        <div class="p-grid">
+            <div class="p-col-6">
+                <span class="ui-float-label">
+                    <input id="float-convocatoria_nro" type="text" size="20" pInputText [ngModel]="row[0].convocatoria_nro"> 
+                    <label for="float-convocatoria_nro">Nro.</label>
+                </span>
+                <br>
+                <span class="ui-float-label">
+                    <input id="float-codigo_plaza" type="text" size="10" pInputText [ngModel]="row[0].codigo_plaza"> 
+                    <label for="float-codigo_plaza">Codigo Plaza</label>
+                </span>                 
+            </div>
+            <div class="p-col-6">
+                <span class="ui-float-label">
+                    <input id="float-vigencia" type="text" size="20" pInputText [ngModel]="row[0].vigencia"> 
+                    <label for="float-vigencia">Vigencia</label>
+                </span>
+                <br>
+                <span class="ui-float-label">
+                    <input id="float-estado" type="text" size="20" pInputText [ngModel]="row[0].estado"> 
+                    <label for="float-estado">Estado</label>
+                </span>
+            </div>
+            <div class="p-col-6">       
+                <span class="ui-float-label">
+                    <input id="float-dependencia" type="text" size="30" pInputText [ngModel]="row[0].dependencia"> 
+                    <label for="float-dependencia">Meta</label>
+                </span>        
+            </div>
+            <div class="p-col-6">       
+                <span class="ui-float-label">
+                    <input id="float-cargo" type="text" size="30" pInputText [ngModel]="row[0].cargo"> 
+                    <label for="float-cargo">Meta</label>
+                </span>    
+            </div>
+        </div>
+    </p-fieldset>
+    <hr>
+    <p-fieldset legend="Convocatoria">             
+                <div class="p-grid">
+                    
+                    <div class="p-col-3">                       
+                        <label for="float-estado_final">Estado</label>
+                        <span class="ui-float-label">
+                            <dx-select-box id="float-estado_final"
+                            [dataSource]="estados" 
+                            (onValueChanged)="onValueChanged($event)"      
+                            [value]="row[0].estado_final"                    
+                            ></dx-select-box>                    
+                        </span>
+                    </div>
+                    <div class="p-col-3">       
+                        <label for="float-dni">Dni</label>
+                        <span class="ui-float-label">
+                            <input id="float-dni" type="text" size="10" pInputText [(ngModel)]="row[0].dni"> 
+                        </span>
+                    </div>
+                    <div class="p-col-6">       
+                        <label for="float-nombres">Nombres</label>
+                        <span class="ui-float-label">
+                            <input id="float-nombres" type="text" size="30" pInputText [(ngModel)]="row[0].nombres"> 
+                        </span>
+                    </div>
+                    <div class="p-col-11"></div>
+                    <div class="p-col-1">
+                        <p-button label="Actualizar" (onClick) ="actualizar()"></p-button>
+                    </div>            
+                </div>
+    </p-fieldset>
+</div>

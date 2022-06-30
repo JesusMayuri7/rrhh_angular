@@ -1,0 +1,317 @@
+<div style="height:calc(100vh - 105px)">
+            <dx-data-grid id="gridContainer"   
+            [columnMinWidth]="30"                
+            [dataSource]="cap"
+            [showRowLines]="true"
+            [showColumnLines]="true"
+            [showBorders]="true"
+            [rowAlternationEnabled]="true"
+            [remoteOperations]="false"
+            [paging]="false"
+            (onToolbarPreparing)="onToolbarPreparing($event)"
+            >
+            <dxo-export [enabled]="true" fileName="BaseCas" [allowExportSelectedData]="true"></dxo-export>                                                      
+            <dxo-filter-row 
+            [visible]="true"             
+            ></dxo-filter-row>
+            <dxo-header-filter 
+            [visible]="true"></dxo-header-filter>
+            <div *dxTemplate="let data of 'actualizado'">                
+                <span >Actualizado {{actualizado}}   </span>                
+            </div>
+            <dxi-column                   
+                [width]="50"
+                caption="Codigo"                    
+                dataField="codigo_plaza"                
+                dataType="string"
+                alignment="center"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">                                        
+            </dxi-column>
+            <dxi-column                   
+            [width]="60"
+            caption="Fte."
+            alignment="center"
+            dataField="fuente_air"                    
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">                                        
+            </dxi-column>
+ 
+            <dxi-column
+            [width]="250"  
+            dataField="nombres"
+            alignment="left"            
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column>
+            <dxi-column     
+                [width]="280"          
+                dataField="desc_establecimiento"
+                caption="Dependencia">                
+            </dxi-column>                
+            <dxi-column
+            [width]="280"  
+            dataField="desc_unidad_organica"
+            caption="Unidad"
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">                  
+            </dxi-column>  
+
+ 
+            <dxi-column
+            [width]="80"  
+            dataField="estado"
+            caption="Estado"
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column> 
+            <dxi-column
+            [width]="80"  
+            dataField="desc_grupo_ocupacional"
+            caption="Grupo"
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column>                
+            <dxi-column
+            [width]="80"  
+            dataField="desc_cargo_estructural"
+            caption="Nivel"
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column> 
+            <dxi-column
+            [width]="80"  
+            dataField="RemPrinRO"
+            caption="RO"
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+            <dxi-column
+            [width]="80"  
+            dataField="RemPrinRDR"
+            caption="RDR"
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+            <dxi-column
+            [width]="80"  
+            dataField="BonFam"
+            caption="Bonif. Fam."
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+            <dxi-column
+            [width]="80"  
+            dataField="Essalud"
+            caption="Essalud"
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+            <dxi-column
+            [width]="80"  
+            dataField="mensual"
+            caption="Mensual"
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+            <dxi-column
+            [width]="80"  
+            dataField="BonifEsco"
+            caption="Escolaridad"
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+            <dxi-column
+            [width]="80"  
+            dataField="BoniPatrias"
+            caption="Grati Julio"
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+            <dxi-column
+            [width]="80"  
+            dataField="BoniNavidad"
+            caption="Grati Dic."
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+            <dxi-column
+            [width]="80"  
+            dataField="BoniExtJulio"
+            caption="Bonif. Ext. Jul."
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+            <dxi-column
+            [width]="80"  
+            dataField="BoniExtDic"
+            caption="Bonif. Ext. Dic."
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+ 
+            <dxi-column
+            [width]="100"  
+            alignment="center"
+            dataField="total"
+            caption="Total"
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+            <dxo-summary>
+                <dxi-total-item
+                    column="codigo_plaza"
+                    summaryType="count"                    
+                    displayFormat="{0}"
+                    >
+                </dxi-total-item>
+                <dxi-total-item
+                    column="RemPrinRO"
+                    summaryType="sum"
+                    valueFormat="#,##0.00"
+                    displayFormat="{0}">
+                </dxi-total-item>
+                <dxi-total-item
+                column="RemPrinRDR"
+                summaryType="sum"                
+                displayFormat="{0}"
+                valueFormat= "#,##0.00">
+                </dxi-total-item>
+                <dxi-total-item
+                column="Essalud"
+                summaryType="sum"                
+                displayFormat="{0}"
+                valueFormat= "#,##0.00">
+                </dxi-total-item>
+                <dxi-total-item
+                column="BonFam"
+                summaryType="sum"                
+                displayFormat="{0}"
+                valueFormat= "#,##0.00">
+                </dxi-total-item>
+                <dxi-total-item
+                column="mensual"
+                summaryType="sum"                
+                displayFormat="{0}"
+                valueFormat= "#,##0.00">
+                </dxi-total-item>
+                <dxi-total-item
+                column="BonifEsco"
+                summaryType="sum"                
+                displayFormat="{0}"
+                valueFormat= "#,##0.00">
+                </dxi-total-item>
+                <dxi-total-item
+                column="BoniPatrias"
+                summaryType="sum"                
+                displayFormat="{0}"
+                valueFormat= "#,##0.00">
+                </dxi-total-item>
+                <dxi-total-item
+                column="BoniNavidad"
+                summaryType="sum"                
+                displayFormat="{0}"
+                valueFormat= "#,##0.00">
+                </dxi-total-item>
+                <dxi-total-item
+                column="BoniExtJulio"
+                summaryType="sum"                
+                displayFormat="{0}"
+                valueFormat= "#,##0.00">
+                </dxi-total-item>
+                <dxi-total-item
+                column="BoniExtDic"
+                summaryType="sum"                
+                displayFormat="{0}"
+                valueFormat= "#,##0.00">
+                </dxi-total-item>
+                <dxi-total-item
+                column="total"
+                summaryType="sum"                
+                displayFormat="{0}"
+                valueFormat= "#,##0.00"
+
+>
+
+                </dxi-total-item>
+            </dxo-summary>                
+            <dxo-paging [enabled]="false"></dxo-paging>
+            <dxo-group-panel [visible]="true"></dxo-group-panel>
+            <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+            <dxo-search-panel
+            [width]="300"
+            [visible]="true"
+            [highlightCaseSensitive]="false">
+            </dxo-search-panel>
+        <dxo-summary>
+            <dxi-group-item
+                column="codigo_plaza"
+                summaryType="count"
+                displayFormat="{0} registros">
+            </dxi-group-item>
+            <dxi-group-item
+            column="RemPrinRO"
+            summaryType="sum"                
+            displayFormat="{0}"
+            valueFormat= "#,##0.00"
+            [showInGroupFooter]="true"
+            [alignByColumn]="true">
+                <dxo-format
+                type="fixedPoint"
+                [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+            <dxi-group-item
+            column="total"
+            summaryType="sum"                
+            displayFormat="{0}"
+            valueFormat= "#,##0.00"
+            [showInGroupFooter]="false"
+            [alignByColumn]="true">
+                <dxo-format
+                type="fixedPoint"
+                [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+           </dxo-summary>
+        </dx-data-grid>
+</div>

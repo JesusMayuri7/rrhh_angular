@@ -1,0 +1,19 @@
+        .odd-row {
+            background-color: #CEE3F6 !important;
+            color: #000000 !important;
+            width: 5% !important;
+        }
+        .even-row {
+            background-color: #2CA8B1 !important;
+            color: #ffffff !important;
+            width: 10%;
+        }
+        .ui-table .ui-table-tbody > tr > td {
+            padding: 0.2em 0.5em 0.2em 0.35em !important;
+        }
+
+        body .ui-widget {
+            font-size: 10px;
+        }
+
+        

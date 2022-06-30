@@ -1,0 +1,33 @@
+ <p-table #dt [columns]="cols" [value]="cap" [resizableColumns]="true" [loading]="loading"  [(selection)]="selectCap" loadingIcon="fa fa-spinner" 
+ tableStyleClass="prime-table" (onFilter)="handleFilter($event)" scrollHeight="calc(100vh - 200px)" [scrollable]="true" [style]="{padding:'5px 5px 0px 5px'}">
+    <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+            <ng-container *ngFor="let col of columns"> 
+            <col [style.width]="col.ancho">
+            </ng-container>
+        </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>     
+            <tr>  
+                    <th colspan="6" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Datos</th>                    
+                    <th colspan="3" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Ingreso</th>                
+                    <th colspan="3" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Salida</th>                                    
+                    <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Detalle</th>                                    
+            </tr>  
+            <tr>
+                <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">                          
+                        <th *ngSwitchCase="'detalle'" rowspan="2" style="font-size:0.8em;">{{col.header}}</th>                                        
+                        <th *ngSwitchDefault colspan="1" style="font-size:0.8em;">{{col.header}}</th>                                        
+                </ng-container>
+            </tr>
+
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex" >
+        <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [ngClass]="rowIndex % 2 == 0 ? 'odd-row' : null" >
+            <td *ngFor="let col of columns" style="font-size:0.7em;padding:3px" [ngSwitch]="col.field">                  
+                 <span *ngSwitchCase="'servicio'" style="float: right;text-align: right;padding-right: 1.5em;">{{rowData[col.field] | number : '1.0-0' }}</span>                                                      
+                 <span *ngSwitchDefault style="float: left;text-align: left;">{{rowData[col.field]}}</span>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>

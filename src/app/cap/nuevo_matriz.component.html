@@ -1,0 +1,254 @@
+<p-toast position="bottom-center"></p-toast>
+<form [formGroup]="form">
+    <div class="p-grid">
+        <div class="p-col-12">
+            <div class="p-grid" style="height: 100%;">
+                <div class="p-col-4">
+                    Cap <br> {{cap_data.nroCap}}
+                </div>
+                <div class="p-col-4">
+                    Plaza:<br> {{cap_data.plaza}}
+
+                </div>
+                <div class="p-col-4">
+                    Estado Pap:<br> {{cap_data.PapSituacion}}
+                </div>
+                <div class="p-col-4">
+                    Ultimo estado:<br> {{cap_data.MatrizEstado? cap_data.MatrizEstado : 'VACANTE'}}
+                </div>
+                <div class="p-col-8">
+                    Ultimo registro:<br> {{cap_data.papNombres? cap_data.papNombres : cap_data.MatrizNombres}}
+                </div>
+            </div>
+            <!--<pre>   Cap: {{cap_data.nroCap}}  Plaza: {{cap_data.plaza}}   Estado Pap: {{cap_data.PapSituacion}} </pre>
+        <pre>   Ultimo estado: {{cap_data.MatrizEstado? cap_data.MatrizEstado : 'OCUPADO'}}</pre>
+        <pre>   Ultimo registro: {{cap_data.papNombres? cap_data.papNombres : cap_data.MatrizNombres}}</pre>-->
+            <hr style="margin-bottom: 15px">
+        </div>
+    </div>
+    <div class="p-grid" style="height: 60px;">
+        <div class="p-col">
+            <span class="ui-float-label">
+                <p-dropdown #escala_id formControlName="escala" id="float-escala" [autoDisplayFirst]="true"
+                    [disabled]='true' [options]="escalas" [style]="{'width':'100%'}" scrollHeight="400px"
+                    placeholder="Escala" showClear="true" optionLabel="full_escala">
+                    <ng-template let-item pTemplate="selectedItem">
+                        <span style="font-size:0.9em;float:left;margin-top:3.5px">{{item.label}}</span>
+                    </ng-template>
+                    <ng-template let-car pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                            <div style="font-size:0.7em;float:left;margin-top:3.5px">{{car.label}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <label for="float-escala" style="color: #000050">Escala</label>
+            </span>
+        </div>
+    </div>
+    <div class="p-grid" style="height: 60px;">
+        <div class="p-col">
+            <span class="ui-float-label">
+                <p-dropdown #area_id [options]="areas" id="float-area" [autoDisplayFirst]="false" formControlName="area" filter="true"
+                    [style]="{'width':'100%'}" scrollHeight="400px" showClear="true" optionLabel="desc_area">
+                    <ng-template let-item pTemplate="selectedItem">
+                        <span style="font-size:0.9em;float:left;margin-top:3.5px">{{item.label}}</span>
+                    </ng-template>
+                    <ng-template let-car pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                            <div style="font-size:0.7em;float:left;margin-top:3.5px">{{car.label}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <label for="float-area" style="color: #000050">Area</label>
+            </span>
+        </div>
+    </div>
+    <div class="p-grid" style="height: 60px;">
+        <div class="p-col-3">
+            <span class="ui-float-label">
+                <input type="text" formControlName="dni" #dni id="float-dni" pInputText class="form-control"
+                    (keyup.enter)="getNombres({dni:dni.value})"
+                    [ngClass]="{ 'is-invalid': submitted && f.dni.errors }" />
+                <label for="float-dni" style="color: #000050">Dni</label>
+            </span>
+            <div *ngIf="submitted && f.dni.errors" class="invalid-feedback">
+                <div *ngIf="f.dni.errors.required">Dni requerido</div>
+            </div>
+        </div>
+        <div class="p-col-1"></div>
+        <div class="p-col-3">
+            <span class="ui-float-label">
+                <p-dropdown #modalidad_id [options]="modalidades" formControlName="modalidad" id="float-modalidad"
+                [autoWidth]="false" [style]="{'width':'10%'}" scrollHeight="400px"
+                    optionLabel="label">
+                    <ng-template let-item pTemplate="selectedItem">
+                        <span style="font-size:0.9em;float:left;margin-top:3.5px">{{item.label}}</span>
+                    </ng-template>
+                    <ng-template let-car pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                            <div style="font-size:0.7em;float:left;margin-top:3.5px">{{car.label}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <label for="float-modalidad" style="color: #000050">Modalidad</label>
+            </span>
+        </div>
+        <div class="p-col-1"></div>
+        <div class="p-col-3">
+            <span class="ui-float-label">
+                <p-dropdown #tipo_contrato_id [options]="contratos" formControlName="tipo_contrato" id="float-contratos"
+                [autoWidth]="false" [style]="{'width':'10%'}" scrollHeight="400px"
+                    optionLabel="label">
+                    <ng-template let-item pTemplate="selectedItem">
+                        <span style="font-size:0.9em;float:left;margin-top:3.5px">{{item.label}}</span>
+                    </ng-template>
+                    <ng-template let-car pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                            <div style="font-size:0.7em;float:left;margin-top:3.5px">{{car.label}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <label for="float-contratos" style="color: #000050">Tipo de Contrato</label>
+            </span>
+        </div>
+    </div>
+    <div class="p-grid" style="height: 60px;">
+        <div class="p-col">
+            <span class="ui-float-label">
+                <input type="text" formControlName="nombres" id="float-nombres" pInputText class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.nombres.errors }" style="width: 100%;" />
+                <label for="float-nombres" style="color: #000050">Nombres</label>
+            </span>
+            <div *ngIf="submitted && f.nombres.errors" class="invalid-feedback">
+                <div *ngIf="f.nombres.errors.required">Monto total requerido</div>
+            </div>
+        </div>
+    </div>
+
+    <p-card styleClass="ui-card-shadow">
+        <p-header>
+            <div style="float:center;text-align:center">Ingreso</div>
+        </p-header>
+        <div class="p-grid">
+            <div class="p-col-4">
+                <span class="ui-float-label">
+                    <p-calendar formControlName="inicio" [style]="{'width':'90%'}" [inputStyle]="{'width':'90%'}"
+                        id="float-inicio" [locale]="es" dateFormat="yy-mm-dd"
+                        [ngClass]="{ 'is-invalid': submitted && f.inicio.errors }"></p-calendar>
+                    <!--<input type="text" formControlName="inicio" id="float-inicio" pInputText class="form-control" [ngClass]="{ 'is-invalid': submitted && f.inicio.errors }" />-->
+                    <label for="float-inicio" style="color: #000050">Inicio</label>
+                </span>
+                <div *ngIf="submitted && f.inicio.errors" class="invalid-feedback">
+                    <div *ngIf="f.inicio.errors.required">Inicio es requerido</div>
+                </div>
+            </div>
+            <div class="p-col-4">
+                <span class="ui-float-label">
+                    <input type="text" style="width:90%" formControlName="nro_documento" id="float-nro_documento"
+                        pInputText class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.nro_documento.errors }" />
+                    <label for="float-nro_documento" style="color: #000050">N° Doc.</label>
+                </span>
+                <div *ngIf="submitted && f.nro_documento.errors" class="invalid-feedback">
+                    <div *ngIf="f.inicio.nro_documento.required">N° Doc. es requerido</div>
+                </div>
+            </div>
+            <div class="p-col-4">
+                <span class="ui-float-label">
+                    <p-calendar formControlName="fecha_documento" [style]="{'width':'90%'}" [inputStyle]="{'width':'90%'}"
+                        id="float-fecha_documento" [locale]="es" dateFormat="yy-mm-dd"
+                        [ngClass]="{ 'is-invalid': submitted && f.fecha_documento.errors }"></p-calendar>
+                    <label for="float-fecha_documento" style="color: #000050">Fecha Doc.</label>
+                </span>
+                <div *ngIf="submitted && f.fecha_documento.errors" class="invalid-feedback">
+                    <div *ngIf="f.fecha_documento.errors.required">Fecha Doc. es requerido</div>
+                </div>
+            </div>
+        </div>
+    </p-card>
+<br>
+    <p-card styleClass="ui-card-shadow" >
+        <p-header>
+            <div style="float:center;text-align:center">Salida</div>
+        </p-header>
+        <div class="p-grid">
+            <div class="p-col-4">
+                <span class="ui-float-label">
+                    <p-calendar formControlName="fin" [style]="{'width':'90%'}" [inputStyle]="{'width':'90%'}"
+                        id="float-fin" [locale]="es" dateFormat="yy-mm-dd"
+                        [ngClass]="{ 'is-invalid': submitted && f.fin.errors }"></p-calendar>
+                    <label for="float-fin" style="color: #000050">Fin</label>
+                </span>
+                <div *ngIf="submitted && f.fin.errors" class="invalid-feedback">
+                    <div *ngIf="f.fin.errors.required">fin es requerido</div>
+                </div>
+            </div>
+            <div class="p-col-4">
+                <span class="ui-float-label">
+                    <input type="text" style="width:90%" formControlName="nro_documento_fin"
+                        id="float-nro_documento_fin" pInputText class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.nro_documento_fin.errors }" />
+                    <label for="float-nro_documento_fin" style="color: #000050">N° Doc.</label>
+                </span>
+                <div *ngIf="submitted && f.nro_documento.errors" class="invalid-feedback">
+                    <div *ngIf="f.nro_documento_fin.required">N° Doc. es requerido</div>
+                </div>
+            </div>
+            <div class="p-col-4">
+                <span class="ui-float-label">
+                    <p-calendar formControlName="fecha_documento_fin" [style]="{'width':'90%'}" [inputStyle]="{'width':'90%'}"
+                    id="float-fecha_documento_fin" [locale]="es" dateFormat="yy-mm-dd"
+                    [ngClass]="{ 'is-invalid': submitted && f.fecha_documento_fin.errors }"></p-calendar>
+                    <label for="float-fecha_documento_fin" style="color: #000050">Fecha Doc.</label>
+                </span>
+                <div *ngIf="submitted && f.fecha_documento_fin.errors" class="invalid-feedback">
+                    <div *ngIf="f.fecha_documento_fin.errors.required">Fecha Doc. es requerido</div>
+                </div>
+            </div>
+        </div>
+    </p-card>
+    <div class="p-grid" style="margin-top: 0.5em">
+        <div class="p-col">
+            <span class="ui-float-label">
+                <textarea pInputTextarea style="width: 100%;" [rows]="4" id="float-detalle" [cols]="30"
+                    formControlName="detalle" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.detalle.errors }"></textarea>
+                <label for="float-detalle" style="color: #000050">Detalle</label>
+            </span>
+            <div *ngIf="submitted && f.detalle.errors" class="invalid-feedback">
+                <div *ngIf="f.detalle.errors.required">Detalle requerido</div>
+            </div>
+        </div>
+    </div>
+    <hr style="margin-bottom: 23px">
+    <div class="p-grid" style="height: 60px;">
+        <div class="p-col-12">
+            <span class="ui-float-label">
+                <p-dropdown #estado [options]="estados" formControlName="estado" id="float-estado"
+                    [style]="{'width':'100%'}" scrollHeight="400px" placeholder="Estado" showClear="true"
+                    optionLabel="desc_estado">
+                    <ng-template let-item pTemplate="selectedItem">
+                        <span style="font-size:0.9em;float:left;margin-top:3.5px">{{item.label}}</span>
+                    </ng-template>
+                    <ng-template let-car pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                            <div style="font-size:0.7em;float:left;margin-top:3.5px">{{car.label}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <label for="float-estado" style="color: #000050">Estado Pap</label>
+            </span>
+        </div>
+        <div class="p-col-12">
+            <p-checkbox [formControl]="form.controls['pap']" label="Actualizar nombres en el PAP ?" binary="true">
+            </p-checkbox>
+        </div>
+    </div>
+    <hr style="margin-top: 23px">
+    <div class="p-grid">
+        <div class="p-col p-col-align-start"></div>
+        <div class="p-col p-col-align-center"> <button [disabled]="loading" pButton type="button"
+                (click)='onSubmitNew()' label="Guardar"></button></div>
+        <div class="p-col p-col-align-end"></div>
+    </div>
+</form>

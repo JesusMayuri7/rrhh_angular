@@ -1,0 +1,67 @@
+<p-toast position="bottom-center"></p-toast>
+<form [formGroup]="form">
+    <div class="p-grid" style="padding-top: 2.0em;">
+            <div class="p-col-4">
+                    <span class="ui-float-label">
+                            <input type="text" style="width:90%" formControlName="expediente" id="float-expediente" pInputText
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nro_convocatoria.errors }" />
+                            <label for="float-expediente" style="color: #000050">N° Expediente</label>
+                    </span>
+                        <div *ngIf="submitted && f.expediente.errors" class="invalid-feedback">
+                            <div *ngIf="f.expediente.errors.required">N° Expediente</div>
+                        </div>
+            </div>
+            <div class="p-col-4">
+                    <span class="ui-float-label">
+                            <input type="text" style="width:90%" formControlName="nro_convocatoria" id="float-convocatoria" pInputText
+                                class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nro_convocatoria.errors }" />
+                            <label for="float-convocatoria" style="color: #000050">N° Convocatoria</label>
+                    </span>
+                        <div *ngIf="submitted && f.nro_convocatoria.errors" class="invalid-feedback">
+                            <div *ngIf="f.nro_convocatoria.errors.required">N° Convocatoria</div>
+                        </div>
+            </div>
+    </div>
+    <div class="p-grid" style="padding-top: 2.0em;">
+        <div class="p-col">
+            <span class="ui-float-label">
+                <p-dropdown #unidad_id [options]="unidades" id="float-unidad" [autoDisplayFirst]="false"
+                    formControlName="unidad" filter="true" [style]="{'width':'100%'}" scrollHeight="400px"
+                    showClear="true" optionLabel="desc_unidad">
+                    <ng-template let-item pTemplate="selectedItem">
+                        <span style="font-size:1.2em;Float:left;margin-top:3.5px">{{item.label}}</span>
+                    </ng-template>
+                    <ng-template let-car pTemplate="item">
+                        <div class="ui-helper-clearfix">
+                            <div style="font-size:1.2em;float:left;margin-top:3.5px">{{car.label}}</div>
+                        </div>
+                    </ng-template>
+                </p-dropdown>
+                <label for="float-unidad" style="color: #000050">Unidad</label>
+            </span>
+            <div *ngIf="submitted && f.unidad.errors" class="invalid-feedback">
+                <div *ngIf="f.unidad.errors.required">Unidad requerida</div>
+            </div>
+        </div>
+    </div>
+    <hr style="margin-bottom: 23px">    
+    <div class="p-grid" style="margin-top: 2.0em">
+        <div class="p-col">
+            <span class="ui-float-label">
+                <textarea pInputTextarea style="width: 100%;" [rows]="4" id="float-detalle" [cols]="30"
+                    formControlName="detalle" class="form-control"
+                    [ngClass]="{ 'is-invalid': submitted && f.detalle.errors }"></textarea>
+                <label for="float-detalle" style="color: #000050">Jurado</label>
+            </span>
+            <div *ngIf="submitted && f.detalle.errors" class="invalid-feedback">
+                <div *ngIf="f.detalle.errors.required">Jurado requerido</div>
+            </div>
+        </div>
+    </div>        
+    <div class="p-grid">
+        <div class="p-col p-col-align-start"></div>
+        <div class="p-col p-col-align-center"> <button [disabled]="loading" pButton type="button"
+                (click)='onSubmitNew()' label="Guardar"></button></div>
+        <div class="p-col p-col-align-end"></div>
+    </div>
+</form>

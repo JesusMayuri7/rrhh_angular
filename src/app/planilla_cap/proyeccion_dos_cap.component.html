@@ -1,0 +1,101 @@
+<div class="p-grid">
+  <div class="p-col-12">
+          <dx-drop-down-button          
+          [dropDownOptions]="{width: 100}"  
+          [width]="150"        
+          [useSelectMode]="true"  
+          [items]="estados"                
+          displayExpr="label"         
+          keyExpr="value"    
+          [selectedItemKey]=null
+          (onItemClick)="onEstadoClick($event)"        
+          ></dx-drop-down-button>  
+        <dx-drop-down-button
+        text="Vigencia"
+        [dropDownOptions]="{width: 100}"  
+        [width]="150"        
+        [useSelectMode]="true"  
+        [items]="vigencias"                
+        displayExpr="label"         
+        keyExpr="value"    
+        [selectedItemKey]=null
+        (onItemClick)="onVigenciaClick($event)"        
+        ></dx-drop-down-button>   
+        <dx-drop-down-button
+        text="Mes"
+        [dropDownOptions]="{width: 100}"  
+        [width]="150"        
+        [useSelectMode]="true"           
+        [items]="meses"
+        displayExpr="label"
+        keyExpr="value"    
+        [selectedItemKey]="0"
+        (onItemClick)="onItemClick($event)"        
+        ></dx-drop-down-button>  
+        <dx-button
+        stylingMode="outlined"
+        text="Actualizar"
+        type="default"
+        [width]="90"
+        (onClick)="onClickme()"
+        >
+        </dx-button>  
+        <dx-button
+        stylingMode="outlined"
+        text="Negativos"
+        type="default"
+        [width]="90"
+        (onClick)="onClickNegativos()"
+        >
+        </dx-button>         
+          <div class="dx-field-value">
+              <dx-check-box 
+              (onValueChanged)="onValueChanged()"
+              [(value)]="meses_exp"></dx-check-box>
+          </div>        
+        <div class="dx-field-value">
+          <dx-number-box
+          [width]="100"
+          [(value)]="uit"
+          [min]="4300"     
+          [step]="50"   
+          [showSpinButtons]="true"
+          ></dx-number-box>
+        </div>
+
+  </div>  
+</div>
+        <dx-pivot-grid id="pivotgrid"
+        [allowSorting]="true"        
+        [allowSortingBySummary]="true"
+        [allowFiltering]="true"
+        [height]="790"
+        [showBorders]="true"
+        rowHeaderLayout="standard"
+        [showColumnGrandTotals]="false"
+        [showColumnTotals]="false"
+        [showRowTotals]="false"
+        [allowExpandAll]="true"
+        [dataSource]="pivotGridDataSource"  
+        (onCellPrepared)="onCellPrepared($event)"             
+      >
+        <dxo-header-filter
+        [allowSearch]="false"
+        [showRelevantValues]="true"
+        [width]="400"
+        [height]="500">
+        </dxo-header-filter>
+        <dxo-export [enabled]="true" fileName="Sales"></dxo-export>
+        <dxo-field-panel
+        [showDataFields]="false"
+        [showRowFields]="true"
+        [showColumnFields]="true"
+        [showFilterFields]="true"
+        [allowFieldDragging]="true"
+        [visible]="true">
+        </dxo-field-panel>
+        <dxo-scrolling mode="stardard"></dxo-scrolling>
+    </dx-pivot-grid>
+  
+
+

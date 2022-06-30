@@ -1,0 +1,17 @@
+<input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
+<div class="p-grid">  
+  <div class="p-col-2">
+    <button [disabled]="uploading || uploadSuccessful" color="primary" pButton (click)="addFiles()" label="Agregar "></button>        
+  </div>
+    <div class="p-col-4">
+      <div *ngFor="let file of files">
+          <h4><span style="color: blue">Archivo:</span> {{file.name}}</h4>
+          <!--<mat-progress-bar *ngIf="progress" mode="determinate" [value]="progress[file.name].progress | async"></mat-progress-bar>    -->
+      </div>
+    </div>        
+  <div class="p-col-5">  
+    <p-dropdown #mes autoWidth="true" dataKey="value" [scrollHeight]="500" [options]="meses" optionLabel="label" [disabled]=!paramData.mes></p-dropdown>
+    <button *ngIf="showCancelButton" pButton label="Cancelar"></button>  
+    <button color="primary" [disabled]="!canBeClosed" (click)="closeDialog(mes)" pButton label="{{primaryButtonText}}"></button>
+  </div>  
+</div>

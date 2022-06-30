@@ -1,0 +1,109 @@
+ <p-table #dt [columns]="cols" [value]="cap" [resizableColumns]="true" [loading]="loading"  [(selection)]="selectCap" loadingIcon="pi pi-spinner" 
+ tableStyleClass="prime-table" (onFilter)="handleFilter($event)" [frozenColumns]="frozenCols" scrollHeight="calc(100vh - 315px)" [scrollable]="true" [style]="{width:'2200px'}">
+        <ng-template pTemplate="caption">                
+                <div class="ui-g">
+                    <div class="ui-g-1">
+                            <p-multiSelect defaultLabel="Todos" [options]="estados" [style]="{'font-size':'0.8em','width':'100%','overflow':'visible',margin: '-0.5em'}" styleClass="ui-column-filter" appendTo="body" (onChange)="addFilter(dt,$event)"></p-multiSelect>
+                    </div>
+                    <div class="ui-g-2">                        
+                        <button pButton (click)="cargarCap()" type="button" label="Actualizar" class="ui-button-raised ui-button-info"></button>                               
+                    </div>                        
+                    <div class="ui-g-3">
+                        <div class="ui-inputgroup">                                                             
+                            <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                            <input type="text" pInputText size="50" placeholder="Busqueda" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                        </div>
+                    </div>
+                    <div class="ui-g-3">
+                        <button pButton (click)="exportAsXLSX()" style="display: inline-block;text-align: right;" type="button" label="Exportar" class="ui-button-raised ui-button-info"></button>                                                                                            
+                    </div>
+                    <div class="ui-g-1">
+                         Total: {{dt.totalRecords}}  -  Filtrados: {{filtrados}}
+                    </div>
+                    <div class="ui-g-2">
+                        
+                   </div>
+                </div>                                                                                                           
+        </ng-template>
+        <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+                <col *ngFor="let col of columns" [style.width]="col.ancho">
+            </colgroup>
+        </ng-template>
+    <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th rowspan="2" colspan="6" style="background-color:rgb(3, 41, 148); color:aliceblue !important;font-size:0.8em;">Datos</th>
+                <th colspan="10" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Mensual</th>                
+                <th colspan="9" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Anual</th>                
+                <th colspan="6" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Total</th>                
+            </tr>
+            <tr>
+                <th colspan="5" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.11.14</th>
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.13.15</th>
+                <th colspan="3" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.13.16</th>                
+                <th colspan="2" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Planilla</th>
+                <th colspan="3" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.11.14</th>
+
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.19.13</th>
+                <th colspan="4" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.19.399</th>
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Total</th>                
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.19.21</th>
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.13.15</th>
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.13.15</th>
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.13.16</th>                
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Total</th>                
+            </tr>                        
+            <tr>
+                <th *ngFor="let col of columns" style="font-size:0.8em;" [ngSwitch]="col.field">     
+                    <span *ngSwitchCase="'escolaridad'" [ngClass]="'rotate'">{{col.header}}</span>        
+                    <span *ngSwitchCase="'fuente'" [ngClass]="'rotate'">{{col.header}}</span>        
+                    <span *ngSwitchCase="'nivelO'" [ngClass]="'rotate'">{{col.header}}</span>        
+                    <span *ngSwitchDefault>{{col.header}}</span>                    
+                </th>
+            </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex" >
+        <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [ngClass]="rowIndex % 2 == 0 ? 'odd-row' : null" >
+            <td *ngFor="let col of columns" style="font-size:0.7em;padding:3px" [ngSwitch]="col.field"> 
+                 <span *ngSwitchCase="'nroCap'" style="float: right;text-align: left;">{{rowData[col.field] }}</span>     
+                 <span *ngSwitchCase="'monto'" style="float: right;text-align: left;">{{rowData[col.field] | number : '1.2-2' }}</span>                                     
+                 <span *ngSwitchCase="'fuente'" style="float: center;text-align: center;">{{rowData[col.field]==1? 'RO':'RDR' }}</span>   
+                 <span *ngSwitchCase="'nombres'" style="float: left;text-align: left;">{{rowData[col.field] }}</span>     
+                 <span *ngSwitchCase="'estado'" style="float: left;text-align: left;">{{rowData[col.field] }}</span>     
+                 <span *ngSwitchCase="'nivelO'" style="float: left;text-align: left;">{{rowData[col.field] }}</span>     
+                 <span *ngSwitchCase="'meta'" style="float: center;text-align: left;">{{rowData[col.field] }}</span>     
+                 <span *ngSwitchDefault style="float: right;text-align: left;">{{rowData[col.field] | number : '1.2-2'}}</span>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+            <tr>
+                <td colspan="6">Totales</td>                
+                <td style='font-size:0.75em;text-align:right' i18n>{{TotalBasico | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right' i18n>{{TotalAsigFam | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalLaudoAnt | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalLaudoAct | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right' >{{TotalRemu | number : '1.0-0' | millonPeople }}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalEssalud | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalVidaLey | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalSctrSalud | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalSctrPension | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalMensual | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalMensualAnual | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalBasicoAnual | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalLaudoAnteriorAnual | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalLaudoActualAnual | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalEscolaridad | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalBoniJulio | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalBoniDic | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalGratiJulio | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalGratiDic | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalContinua | number : '1.0-0' | millonPeople}}</td>                
+                <td style='font-size:0.75em;text-align:right'>{{TotalCts | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalEssaludAnual | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalVidaLeyAnual | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalSctrAnual | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.75em;text-align:right'>{{TotalAnual | number : '1.0-0' | millonPeople}}</td>
+            </tr>
+        </ng-template>
+</p-table>

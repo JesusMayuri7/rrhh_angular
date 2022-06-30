@@ -1,0 +1,271 @@
+
+<p-table #dt [columns]="cols" [value]="ordenes" dataKey="id" editMode="row" [frozenColumns]="frozenCols" [lazy]="false"
+(onEditComplete)="onRowEditSave($event)" (onEditInit)="onRowEditInit($event)" (onEditCancel)="onRowEditCancel($event)"
+[loading]="loading"  loadingIcon="pi pi-spinner" [globalFilterFields]="['revisar_air','revisar_monto','revisar_meta']"
+[rows]="rowCount" selectionMode="single" [(selection)]="selectedCar" style="width:100%;"
+tableStyleClass="prime-table" (onFilter)="handleFilter($event)" scrollHeight="calc(100vh - 170px)" 
+[scrollable]="true" [style]="{padding:'15px 10px 0px 10px'}" frozenWidth="290px"
+>  
+<ng-template pTemplate="caption">                
+        <div class="ui-g">
+                     
+            <div class="ui-g-1">                        
+                <button pButton (click)="sigaIngresos()" style="display: inline-block;text-align: right;" type="button" label="Siga Ingresos" class="ui-button-raised ui-button-info"></button>                                                                                                        
+            </div>                                    
+            <div class="ui-g-4">                
+            </div>
+            <div class="ui-g-1">
+                    
+            </div>                    
+            <div class="ui-g-3">
+                 Total: {{dt.totalRecords}}  -  Filtrados: {{filtrados}}
+            </div> 
+            <div class="ui-g-1">
+                <button pButton (click)="exportAsXLSX()" style="display: inline-block;text-align: right;" type="button" label="Exportar" class="ui-button-raised ui-button-info"></button>                                                                                            
+            </div>  
+            <div class="ui-g-1">                        
+                <button pButton (click)="actualizar()" style="display: inline-block;text-align: right;" type="button" label="Actualizar" class="ui-button-raised ui-button-info"></button>                                                                                                        
+            </div>   
+            <div class="ui-g-1">
+            {{validar }}<p-inputSwitch (onChange)="validarChange(dt,$event)"></p-inputSwitch>                       
+            </div>
+            
+        </div>                                                                                                           
+</ng-template>
+<ng-template pTemplate="frozencolgroup" let-columns>
+        <colgroup>
+            <ng-container *ngFor="let col of columns"> 
+            <col [style.width]="col.ancho">
+            </ng-container>
+        </colgroup>
+</ng-template>
+    <ng-template pTemplate="frozenheader" let-frozenColumns>
+            <tr>
+              <th *ngFor="let cola of frozenColumns" [ngStyle]="cola.estilo_header" [pSortableColumn]="cola.field">{{cola.header}}</th>
+            </tr>
+            <tr>
+                <th *ngFor="let col of frozenColumns" [ngStyle]="col.estilo_header" [ngSwitch]="col.field">                        
+                   <div class="ui-fluid"><input *ngSwitchCase="'codigo_plaza'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>                                                                               
+                   <div class="ui-fluid"><input *ngSwitchCase="'meta'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>                                                                               
+                   <div class="ui-fluid"><p-multiSelect *ngSwitchCase="'fuente_id'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="fuentes" styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterFuente(dt,$event)"></p-multiSelect></div>                   
+                   <div class="ui-fluid"><p-multiSelect *ngSwitchCase="'sede'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="sedes" (onEditComplete)="onRowEditSave($event)" styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterSede(dt,$event)"></p-multiSelect></div>                   
+                   <div class="ui-fluid"><input *ngSwitchCase="'monto'" [style]="{'width':'100%'}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>
+                </th>
+            </tr>
+    </ng-template>
+    <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+            <col *ngFor="let col of columns" [style.width]="col.ancho" [ngStyle]="col.estilo_header">
+        </colgroup>
+    </ng-template>
+<!--    <ng-template pTemplate="frozenbody" let-rowData let-columns="columns">
+		<tr>
+            <td *ngFor="let col of columns">
+				{{ rowData[col.field] }}
+			</td>
+		</tr>
+	</ng-template>-->
+       <ng-template pTemplate="header" let-columns let-rowData >       
+           <tr>
+               <th *ngFor="let col of columns" [ngStyle]="col.estilo_header" [ngSwitch]="col.field" [pSortableColumn]="col.field">                        
+                   <span *ngSwitchCase="'estado'" >{{col.header}}</span>    
+                   <span *ngSwitchCase="'monto'" >{{col.header}}</span>                        
+                   <span *ngSwitchDefault>{{col.header}}</span>                    
+               </th>   
+            <!--    <th colspan="2">
+                <button pButton (click)="exportAsXLSX()" style="display: inline-block;text-align: right;" type="button" label="Export" class="ui-button-raised ui-button-info"></button>
+               
+                </th>     -->               
+           </tr>
+           <tr>                
+               <th *ngFor="let col of columns"  [ngSwitch]="col.field">
+                   <i [ngClass]="'pi pi-plus-circle'" *ngSwitchCase="'id'"  (click)="newPlaza()"></i>
+                   <div class="ui-fluid"><input *ngSwitchCase="'codigo_plaza'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>                                           
+                   <div class="ui-fluid"><input *ngSwitchCase="'proyectar'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'equals')"></div>                                           
+                   <div class="ui-fluid"><input *ngSwitchCase="'prioridad'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'equals')"></div>                                           
+                   <div class="ui-fluid"><input *ngSwitchCase="'estado_air'" [style]="{'width':'100%'}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>
+                   <div class="ui-fluid"><input *ngSwitchCase="'nombres'" [style]="{'width':'100%'}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>                   
+                   <div class="ui-fluid"><input *ngSwitchCase="'cargo'"  [style]="{'width':'100%'}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>
+                   <p-multiSelect *ngSwitchCase="'desc_unidad'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="unidades"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterUnidad(dt,$event)"></p-multiSelect>                  
+                   <p-multiSelect *ngSwitchCase="'fecha_fin_vigencia_cas'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="vigencias"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterVigencias(dt,$event)"></p-multiSelect>                    
+                   <div class="ui-fluid"><p-multiSelect *ngSwitchCase="'estados'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="estadosControl" styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterEstados(dt,$event)"></p-multiSelect></div>
+               </th>
+          <!--     <th colspan="2">
+                   <i [ngClass]="'pi pi-list'" style="font-size: 1.0em;text-align: center;color: green;" (click)="listConvocatoria(rowData)"></i>
+               </th>-->
+           </tr>
+   </ng-template>
+   <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex" let-expanded="expanded">
+        <tr [pSelectableRow]="rowData" [pEditableRow]="rowData" [pSelectableRowIndex]="rowIndex" [ngClass]="rowIndex % 2 == 0 ? 'odd-row' : null" >                            
+                <td *ngFor="let col of columns" [ngStyle]="col.estilo" [ngSwitch]="col.field" pEditableColumn [pEditableColumnField]="col.field" [pEditableColumn]="rowData">   
+               <span *ngSwitchCase="'id'" style="float: center;text-align: center;" (click)="editPlaza(rowData)"><a href="javascript:void(0);">{{rowData[col.field]}}</a></span>                                                                                            
+               <span *ngSwitchCase="'estado'" >{{rowData[col.field]}}</span>  
+               <span *ngSwitchCase="'estados'" style="float: center;text-align: center;" [style.color]="(rowData['revisar_air']==0) ? 'white':''" [style.background-color]="(rowData['revisar_air']==0) ? 'red':''">{{rowData['estados']}}</span>                                                    
+               <div *ngSwitchCase="'proyectar'" class="ui-fluid">
+                <p-cellEditor >
+                    <ng-template pTemplate="input">
+                        <input pInputText type="text" [(ngModel)]="rowData[col.field]">
+                    </ng-template>
+                    <ng-template pTemplate="output">
+                        <span style="float: left;text-align: left;">{{rowData[col.field] }}</span>                                                                                                                                                                                                                                                                                       
+                    </ng-template>
+                </p-cellEditor>                
+                </div>  
+                <div *ngSwitchCase="'prioridad'" class="ui-fluid">
+                    <p-cellEditor >
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData[col.field]">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <span style="float: left;text-align: left;">{{rowData[col.field] }}</span>                                                                                                                                                                                                                                                                                       
+                        </ng-template>
+                    </p-cellEditor>                
+                    </div>  
+                <div *ngSwitchCase="'meses'" class="ui-fluid">
+                    <p-cellEditor >
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData[col.field]">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <span style="float: left;text-align: left;">{{rowData[col.field] }}</span>                                                                                                                                                                                                                                                                                       
+                        </ng-template>
+                    </p-cellEditor>                
+                </div> 
+               <div *ngSwitchCase="'monto'" class="ui-fluid">
+                    <p-cellEditor >
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData[col.field]">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                                <span *ngSwitchCase="'monto'" style="float: right;text-align: right;margin-right:3.5px" pTooltip="Base: {{rowData['monto'] | number : '1.2-2'}} &#013; Air: {{rowData['monto_air'] | number : '1.2-2'}} &#013; Siga: {{rowData['monto_siga'] | number : '1.2-2' }}" [style.color]="rowData['revisar_monto']==0 ? 'white':''" [style.background-color]="rowData['revisar_monto']==0 ? 'red' :'' ">{{rowData[col.field] | number : '1.2-2' }}</span>                  
+                        </ng-template>
+                    </p-cellEditor>                
+                </div>                
+               <div *ngSwitchCase="'cargo'" class="ui-fluid">
+                    <p-cellEditor >
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData[col.field]">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <span style="float: left;text-align: left;">{{rowData[col.field] }}</span>                                                                                                                                                                                                                                                                                       
+                        </ng-template>
+                    </p-cellEditor>                
+                </div>   
+                <div *ngSwitchCase="'dni'" class="ui-fluid">
+                        <p-cellEditor >
+                            <ng-template pTemplate="input">
+                                <input pInputText type="text" [(ngModel)]="rowData[col.field]">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                <span style="float: center;text-align: center;">{{rowData[col.field] }}</span>                                                                                                                                                                                                                                                                                       
+                            </ng-template>
+                        </p-cellEditor>                
+                </div>  
+                <div *ngSwitchCase="'nombres'" class="ui-fluid">
+                        <p-cellEditor >
+                            <ng-template pTemplate="input">                            
+                                <input pInputText type="text" [(ngModel)]="rowData[col.field]">
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                <span style="float: left;text-align: left;">{{rowData[col.field] }}</span>                                                                                                                                                                                                                                                                                       
+                            </ng-template>
+                        </p-cellEditor>                
+                </div> 
+                <div *ngSwitchCase="'detalle'" class="ui-fluid">
+                        <p-cellEditor >
+                            <ng-template pTemplate="input">                            
+                                <textarea pInputTextarea style="width: 100%;" [rows]="5" [cols]="30"
+                                [(ngModel)]="rowData[col.field]" appendTo="body"></textarea>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                <span style="float: left;text-align: left;height: auto;">{{rowData[col.field] }}</span>                                                                                                                                                                                                                                                                                       
+                            </ng-template>
+                        </p-cellEditor>                
+                </div>                                                           
+               <div *ngSwitchCase="'fuente_id'" class="ui-fluid">
+                    <p-cellEditor >
+                        <ng-template pTemplate="input">
+                            <p-dropdown [options]="fuentes" [(ngModel)]="rowData[col.field]" appendTo="body" [style]="{'width':'100%'}">
+                                    <ng-template let-item pTemplate="selectedItem">
+                                            <span style="font-size:0.8em;float:left;">{{item.label}}</span>
+                                        </ng-template>
+                                        <ng-template let-car pTemplate="item">
+                                            <div class="ui-helper-clearfix" >
+                                                <div style="font-size:0.8em;float:left;">{{car.label}}</div>
+                                            </div>
+                                        </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <span *ngSwitchCase="'fuente_id'" style="float: center;text-align: center;" [style.color]="rowData['fuente_id']!=rowData['fuente_air'] ? 'white':''" [style.background-color]="rowData['fuente_id']!=rowData['fuente_air'] ? 'red' :'' " tooltipPosition="bottom" pTooltip="Base: {{rowData['fuente_id']==1 ? 'RO' : 'RDR' }} &#013; Air: {{rowData['fuente_air']==1 ? 'RO': (rowData['fuente_id']==2 ? 'RDR':'') }} ">{{rowData['fuente_id']==1 ? 'RO': (rowData['fuente_id']==2 ? 'RDR':'') }}</span>                               
+                        </ng-template>
+                    </p-cellEditor>                
+                </div>  
+                <div *ngSwitchCase="'sede'" class="ui-fluid">
+                        <p-cellEditor >
+                            <ng-template pTemplate="input">
+                                <p-dropdown [options]="sedes" [(ngModel)]="rowData[col.field]" appendTo="body" [style]="{'width':'100%'}">
+                                        <ng-template let-item pTemplate="selectedItem">
+                                                <span style="font-size:0.8em;float:left;">{{item.label}}</span>
+                                            </ng-template>
+                                            <ng-template let-car pTemplate="item">
+                                                <div class="ui-helper-clearfix" >
+                                                    <div style="font-size:0.8em;float:left;">{{car.label}}</div>
+                                                </div>
+                                            </ng-template>
+                                </p-dropdown>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                    <span *ngSwitchCase="'sede'" style="float: center;text-align: center;" >{{rowData[col.field]}}</span>                     
+                            </ng-template>
+                        </p-cellEditor>                
+                    </div> 
+                    <div *ngSwitchCase="'desc_unidad'" class="ui-fluid">         
+                        <p-cellEditor >
+                            <ng-template pTemplate="input">
+                                <p-dropdown [options]="unidades" name="rowData[col.field]" [(ngModel)]="rowData[col.field]" appendTo="body" [style]="{'width':'100%'}">
+                                        <ng-template let-item pTemplate="selectedItem">
+                                                <span style="font-size:0.8em;float:left;">{{item.label}}</span>
+                                            </ng-template>
+                                            <ng-template let-car pTemplate="item">
+                                                <div class="ui-helper-clearfix" >
+                                                    <div style="font-size:0.8em;float:left;">{{car.label}}</div>
+                                                </div>
+                                            </ng-template>
+                                </p-dropdown>
+                            </ng-template>
+                            <ng-template pTemplate="output">
+                                    <span *ngSwitchCase="'desc_unidad'" style="float: center;text-align: center;" >{{rowData[col.field]}}</span>                     
+                            </ng-template>
+                        </p-cellEditor>                
+                    </div>  
+                <div *ngSwitchCase="'meta'" class="ui-fluid">
+                    <p-cellEditor >
+                        <ng-template pTemplate="input">
+                            <p-dropdown #meta_id [options]="metas" id="float-meta" [autoDisplayFirst]="false" [(ngModel)]="rowData[col.field]"
+                            filter="true" appendTo="body" [style]="{'width':'100%'}" scrollHeight="400px"
+                            showClear="true" optionLabel="meta_2019">
+                            <ng-template let-item pTemplate="selectedItem">
+                                <span style="font-size:1.2em;Float:left;margin-top:3.5px">{{item.label}}</span>
+                            </ng-template>
+                            <ng-template let-car pTemplate="item">
+                                <div class="ui-helper-clearfix">  
+                                      <div style="font-size:1.2em;float:left;margin-top:3.5px">{{car.meta_2019}}</div>
+                                </div>
+                            </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                                <span *ngSwitchCase="'meta'" style="float: center;text-align: center;" [style.color]="rowData['revisar_meta']==0 ? 'white':''" [style.background-color]="rowData['revisar_meta']==0 ? 'red' :'' " tooltipPosition="bottom" pTooltip="Base: {{rowData['meta']}} &#013; Air: {{rowData['meta_air']}} &#013; Siga: {{rowData['meta_siga'] }}">{{rowData['meta']}}</span>                                                    
+                        </ng-template>
+                    </p-cellEditor>   
+                </div>
+               <span *ngSwitchDefault>{{rowData[col.field]}}</span>
+           </td> <!--
+           <td><i [ngClass]="'pi pi-plus-circle'" style="font-size: 1.0em;margin-left: -0.5em; text-align: center;color: green;" (click)="showNew(rowData)"></i></td>
+           <td><i [ngClass]="'pi pi-pencil'" style="font-size: 1.0em;margin-left: -0.5em;text-align: center;color: green;" (click)="showEdit(rowData)"></i></td>            
+           -->
+        </tr>
+   </ng-template> 
+
+</p-table>

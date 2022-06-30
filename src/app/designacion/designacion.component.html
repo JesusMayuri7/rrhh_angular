@@ -1,0 +1,44 @@
+<p-toast position="bottom-center"></p-toast>
+<p-table #dt [columns]="cols" [value]="designaciones" [resizableColumns]="true" [loading]="loading" 
+ selectionMode="multiple" loadingIcon="pi pi-spinner" 
+ tableStyleClass="prime-table" (onFilter)="handleFilter($event)">
+ <ng-template pTemplate="caption">                
+    <div class="ui-g">
+        <div class="ui-g-3">                        
+            <button pButton (click)="cargarDesignaciones()" type="button" label="Actualizar" class="ui-button-raised ui-button-info"></button>                               
+        </div>                        
+        <div class="ui-g-3">
+                <div class="ui-inputgroup">                                                                                     
+                        <input type="text" pInputText size="50" placeholder="Busqueda" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                        <span class="ui-inputgroup-addon"><i class="pi pi-search" style="margin:4px 4px 0 0;" ></i></span>
+                    </div>
+        </div>
+        <div class="ui-g-1">
+            <button pButton (click)="exportAsXLSX()" style="display: inline-block;text-align: right;" type="button" label="Exportar" class="ui-button-raised ui-button-info"></button>                                                                                            
+        </div>
+        <div class="ui-g-2">
+             Total: {{dt.totalRecords}}  -  Filtrados: {{filtrados}}
+        </div>
+    </div>                                                                                                           
+</ng-template>
+
+    <ng-template pTemplate="header" let-columns>            
+            <tr>
+                <th *ngFor="let col of columns" [style.width]="col.width" [ngStyle]="col.estilo" [ngSwitch]="col.field" [pSortableColumn]="col.field">             
+                    {{col.header}}
+                    <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th colspan="1" [style.width]="'1.5%'" style="text-align: center"><i [ngClass]="'pi pi-plus-circle'" style="font-size: 1.0em;margin-left:-0.5em;color: blue;" (click)="showNew(rowData)"></i></th>
+            </tr>            
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex" >
+        <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [ngClass]="rowIndex % 2 == 0 ? 'odd-row' : null" style="height:15px">
+            <td *ngFor="let col of columns" [ngStyle]="col.estilo" [ngSwitch]="col.field">                  
+                 <span *ngSwitchDefault>{{rowData[col.field] }}</span>
+            </td>
+            
+            <td><i [ngClass]="'pi pi-pencil'" style="font-size: 1.0em;margin-left:-0.5em;color: blue;" (click)="showEdit(rowData)"></i></td>
+           <!-- <td><i [ngClass]="'pi pi-list'" style="font-size: 1.0em;margin-left:-0.5em;color: blue;" (click)="showControl(rowData)"></i></td> -->
+        </tr>
+    </ng-template>
+</p-table>

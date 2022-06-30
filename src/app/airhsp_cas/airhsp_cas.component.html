@@ -1,0 +1,119 @@
+ <p-table #dt [columns]="cols" [value]="ordenes"  [loading]="loading"  loadingIcon="pi pi-spinner"  [rows]="rowCount" selectionMode="single" [(selection)]="selectedCar" 
+ [globalFilterFields]="['desc_cargo_funcional','codigo_plaza','numero_documento','desc_establecimiento','desc_unidad_organica','desc_unidad_conv','estado','resultado','nro_convocatoria','engine.type']"
+ tableStyleClass="prime-table" (onFilter)="handleFilter($event)" scrollHeight="calc(100vh - 235px)" [scrollable]="true" [style]="{padding:'15px 10px 0px 10px'}" 
+ [frozenColumns]="frozenCols">
+        <ng-template pTemplate="caption">                
+                <div class="ui-g">
+                    <div class="ui-g-3">                        
+                    
+                    </div>                        
+                    <div class="ui-g-3">
+                        <div class="ui-inputgroup">                                                                                         
+                            <input type="text" pInputText size="50" #valor (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Busqueda" style="width:auto">
+                            <span class="ui-inputgroup-addon"><i class="pi pi-search" style="margin:4px 4px 0 0;" ></i></span>
+                        </div>
+                    </div>
+                    <div class="ui-g-1">
+                            
+                    </div>                    
+                    <div class="ui-g-3">
+                         Total: {{dt.totalRecords}}  -  Filtrados: {{filtrados}}
+                    </div> 
+                    <div class="ui-g-1">
+                        <button pButton (click)="exportAsXLSX()" style="display: inline-block;text-align: right;" type="button" label="Exportar" class="ui-button-raised ui-button-info"></button>                                                                                            
+                    </div>                   
+                <!--    <div class="ui-g-1">
+                        <button pButton (click)="actualizarConvocatoria()" style="display: inline-block;text-align: right;" type="button" label="Actualizar" class="ui-button-raised ui-button-info"></button>                                                                                            
+                    </div>                   -->
+                </div>                                                                                                           
+        </ng-template>
+        <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>     
+                <col *ngFor="let col of columns" [style.width]="col.ancho">
+            </colgroup>
+            <col style="width: 0.7%">
+            <col style="width: 0.7%">            
+        </ng-template>
+        <ng-template pTemplate="header" let-columns let-rowData >       
+            <tr>
+                <th colspan="10" style="background-color:rgb(3, 41, 148); color:aliceblue !important;font-size:0.8em;">Datos</th>
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">23.28.11</th>                  
+                <th colspan="2" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.28.14</th>                
+                <th colspan="1" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">21.28.12</th>                
+                <th colspan="9" style="background-color:rgb(55, 145, 55); color:aliceblue !important;font-size:0.8em;">Seleccion</th>                
+            </tr>
+            <tr>
+                <th *ngFor="let col of columns" [ngStyle]="col.estilo_header" [ngSwitch]="col.field" [pSortableColumn]="col.field">     
+                    <span *ngSwitchCase="'escolaridad'" [ngClass]="'rotate'">{{col.header}}</span>           
+                    <span *ngSwitchCase="'estado'" >{{col.header}}</span>    
+                    <span *ngSwitchCase="'monto'" >{{col.header}}</span>                        
+                    <span *ngSwitchDefault>{{col.header}}</span>                    
+                </th>   
+                <th colspan="2">#</th>                   
+            </tr>
+            <tr>                
+                <th *ngFor="let col of columns" [ngStyle]="col.estilo_header" [ngSwitch]="col.field">
+                    <i [ngClass]="'pi pi-plus-circle'" *ngSwitchCase="'id'"  (click)="newPlaza()"></i>
+                    <div class="ui-fluid"><input *ngSwitchCase="'codigo_plaza'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>                        
+                    <div class="ui-fluid"><input *ngSwitchCase="'nro_convocatoria'" [style]="{'width':'100%'}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>                        
+                    <div class="ui-fluid"><input *ngSwitchCase="'estado'" [style]="{'width':'100%'}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>
+                    <div class="ui-fluid"><input *ngSwitchCase="'nombres'" [style]="{'width':'100%'}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>
+                    <div class="ui-fluid"><input *ngSwitchCase="'monto'" [style]="{'width':'100%'}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>
+                    <div class="ui-fluid"><input *ngSwitchCase="'cargo'"  [style]="{'width':'100%'}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>
+                    <p-multiSelect *ngSwitchCase="'bc_desc_unidad'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="unidades"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterUnidad(dt,$event)"></p-multiSelect>
+                    <p-multiSelect *ngSwitchCase="'fuente_id'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="fuentes"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterFuente(dt,$event)"></p-multiSelect>
+                    <p-multiSelect *ngSwitchCase="'sede'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="sedes"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterSede(dt,$event)"></p-multiSelect>
+                    <p-multiSelect *ngSwitchCase="'solicitante'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="unidades"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterSolicitante(dt,$event)"></p-multiSelect>
+                    <p-multiSelect *ngSwitchCase="'resultado'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="resultados"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilter(dt,$event)"></p-multiSelect>
+                    <p-multiSelect *ngSwitchCase="'fecha_fin_vigencia_cas'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="vigencias"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterVigencias(dt,$event)"></p-multiSelect>                    
+                </th>
+                <th colspan="2">
+                    <i [ngClass]="'pi pi-list'" style="font-size: 1.0em;text-align: center;color: green;" (click)="listConvocatoria(rowData)"></i>
+                </th>
+            </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex" let-expanded="expanded">
+        <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [ngClass]="rowIndex % 2 == 0 ? 'odd-row' : null" >           
+            <td *ngFor="let col of columns" [ngStyle]="col.estilo" [ngSwitch]="col.field">                                      
+                <span *ngSwitchCase="'id'" style="float: center;text-align: center;" (click)="editPlaza(rowData)"><a href="javascript:void(0);">{{rowData[col.field]}}</a></span>                                                                                            
+                <span *ngSwitchCase="'estado'" [style.color]="rowData['dni']!=rowData['numero_documento'] ? 'black':''">{{rowData[col.field]}}</span>  
+                <span *ngSwitchCase="'monto'"
+                tooltipPosition="bottom" pTooltip="Air: {{(rowData['remprinro']*1 +rowData['remprinrdr']*1 ) | number : '1.2-2'}}" style="float: right;text-align: right;">{{rowData[col.field] | number : '1.2-2' }}&nbsp;<i [ngClass]="(rowData['remprinro']*1+rowData['remprinrdr']*1)!=(rowData[col.field]*1) ? 'pi pi-bookmark':''" [ngStyle]="rowData[col.estilo]" style="background-color: black; font-size: 0.8em; color: yellow;"></i></span>   
+                <span *ngSwitchCase="'nombres'"><i [ngClass]="(rowData['dni']!=rowData['numero_documento']) ? 'pi pi-bookmark':''" [ngStyle]="rowData[col.estilo]" style="background-color: black; font-size: 0.8em; color: yellow;"></i>&nbsp;{{rowData[col.field]}}  </span>                                             
+                <span *ngSwitchCase="'solicitante'"><i [ngClass]="(rowData['org_unidad_id']!=rowData['bc_org_unidad_id']) ? 'pi pi-bookmark':''" [ngStyle]="rowData[col.estilo]" style="background-color: black; font-size: 0.8em; color: yellow;"></i>&nbsp;{{rowData[col.field]}}  </span>                                             
+                <span *ngSwitchCase="'remprinro'" style="float: right;text-align: right;">{{rowData[col.field] | number : '1.2-2' }}</span>                   
+                <span *ngSwitchCase="'fuente_id'" style="float: center;text-align: center;" tooltipPosition="bottom" pTooltip="Air: {{rowData['fuente_id']==1 ? 'RO': (rowData['fuente_id']==2 ? 'RDR':'') }} Base: {{rowData['fuente']==1 ? 'RO' : 'RDR' }}"><i [ngClass]="(rowData['fuente_id']!=rowData['fuente']) ? 'pi pi-bookmark':''" [ngStyle]="rowData[col.estilo]" style="background-color: black; font-size: 0.8em; color: yellow;"></i>&nbsp;{{rowData['fuente_id']==1 ? 'RO': (rowData['fuente_id']==2 ? 'RDR':'') }}</span>                   
+                <span *ngSwitchCase="'remprinrdr'" style="float: right;text-align: right;">{{rowData[col.field] | number : '1.2-2' }}</span>   
+                <span *ngSwitchCase="'bonipatrias'" style="float: right;text-align: right;">{{rowData[col.field] | number : '1.2-2' }}</span>   
+                <span *ngSwitchCase="'boninavidad'" style="float: right;text-align: right;">{{rowData[col.field] | number : '1.2-2' }}</span>   
+                <span *ngSwitchCase="'essalud'" style="float: right;text-align: right;">{{rowData[col.field] | number : '1.2-2' }}</span>                
+                <span *ngSwitchCase="'certificacion'" style="float: center;text-align: center;" (click)="open(rowData[col.field])"><a href="javascript:void(0);">{{rowData[col.field]}}</a></span>                                                                                            
+                 <span *ngSwitchCase="'activas'" > <i [ngClass]="rowData[col.field]==1? 'pi pi-bookmark':''" style="font-size: 1.3em;text-align: center;color: black;"></i></span>  
+                 <span *ngSwitchCase="'proceso'" ><i [ngClass]="rowData[col.field]==1? 'pi pi-bookmark':''" style="font-size: 1.3em;text-align: center;color: green;"></i></span>  
+                 <span *ngSwitchCase="'concluido'" ><i [ngClass]="rowData[col.field]==1? 'pi pi-bookmark':''" style="font-size: 1.3em;text-align: center;color: blue;"></i></span>  
+                 <span *ngSwitchCase="'resultado'" tooltipPosition="bottom" pTooltip="Inicio: {{rowData['inscripcion']}} &#013; Cierre: {{rowData['cierre']}}" [style.background-color]="rowData[col.field]=='PENDIENTE'? 'black':rowData[col.field]=='EN PROCESO' ? 'green':rowData[col.field]=='ACTIVO' ? 'orange' : rowData[col.field]=='CONCLUIDO'? 'blue': rowData[col.field]=='DESIERTO' ? 'red' :'' ">&nbsp;{{rowData[col.field] }}&nbsp;</span>                                                                                                                                                                                                                                                                                       
+                 <span *ngSwitchDefault>{{rowData[col.field]}}</span>
+            </td> 
+            <td><i [ngClass]="'pi pi-plus-circle'" style="font-size: 1.0em;text-align: center;color: green;" (click)="showNew(rowData)"></i></td>
+            <td><i [ngClass]="'pi pi-pencil'" style="font-size: 1.0em;text-align: center;color: green;" (click)="showEdit(rowData)"></i></td>            
+        </tr>
+    </ng-template> 
+    <ng-template pTemplate="footer">
+            <tr>
+                <td colspan="9">Totales</td>    
+                <td style='font-size:0.7em;text-align:right'>{{monto | number : '1.0-0' | millonPeople}}</td>                
+                <td style='font-size:0.7em;text-align:right'>{{BoniPatrias | number : '1.0-0' | millonPeople}}</td>
+                <td style='font-size:0.7em;text-align:right'>{{BoniNavidad | number : '1.0-0' | millonPeople}}</td>                
+                <td style='font-size:0.7em;text-align:right'>{{Essalud | number : '1.0-0' | millonPeople}}</td>                
+                <td style='font-size:0.7em;text-align:right'></td>                
+                <td style='font-size:0.7em;text-align:right'></td>                                            
+                <td style='font-size:0.7em;text-align:right'></td>                                            
+                <td style='font-size:0.7em;text-align:right'>{{activas}}</td>                
+                <td style='font-size:0.7em;text-align:right'>{{proceso}}</td>                
+                <td style='font-size:0.7em;text-align:right'>{{concluido}}</td>   
+                <td style='font-size:0.7em;text-align:right'></td>                             
+                <td style='font-size:0.7em;text-align:right'></td>                                            
+                <td style='font-size:0.7em;text-align:right'></td>                                            
+            </tr>
+        </ng-template>
+</p-table>

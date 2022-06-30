@@ -1,0 +1,43 @@
+.ui-tabview{
+    padding:0px 0px !important;
+    margin-right: 0px;
+    margin-top: 0px;
+}
+
+.ui-tabview-panel{
+    padding:0px 0px !important;
+    margin-right: 0px;
+    margin-top: 0px;
+}
+
+.ui-tabview-nav{
+    padding:0px 0px !important;
+    margin-right: 0px;
+    margin-top: 0px;
+}
+
+.ui-tabview-panels{
+    padding:0px 0px !important;
+    margin-right: 0px;
+    margin-top: 0px;
+}
+
+.ui-tabview{       
+    color:green !important; 
+    padding: 0px !important;
+    margin-right: 0px !important;
+    margin-top: 0px !important;
+}
+
+
+.ui-tabview.ui-tabview-top .ui-tabview-nav li.ui-tabview-selected a {  
+    padding: 2px !important;
+    margin-right: 5px !important;
+    margin-top: 2px !important;
+}
+
+.ui-tabview.ui-tabview-top .ui-tabview-nav li a{
+    padding: 2px !important;
+    margin-right: 5px !important;
+    margin-top: 2px !important;
+}

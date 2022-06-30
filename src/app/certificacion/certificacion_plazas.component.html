@@ -1,0 +1,278 @@
+<dx-popup  
+    [width]="700"
+    [height]="650"
+    [showTitle]="true"
+    title="Archivar"
+    [dragEnabled]="false"
+    [(visible)]="popupContratadoVisible">  
+    <div *dxTemplate="let data of 'content'">  
+        <zd-plaza-detalle [archivo]="rowData" ></zd-plaza-detalle>  
+    </div>  
+</dx-popup> 
+<dx-popup  
+    [width]="1200"
+    [height]="700"
+    [showTitle]="true"
+    title="Actualizar"
+    [dragEnabled]="false"
+    [(visible)]="popupConvocatoriaVisible">  
+    <div *dxTemplate="let data of 'content'">  
+        <zd-plaza-convocatoria [archivo]="rowData" ></zd-plaza-convocatoria>  
+    </div>  
+</dx-popup> 
+<div style="height:calc(100vh - 105px)">
+        <dx-data-grid id="gridContainer"   
+           keyExpr="id"
+           [columnAutoWidth]="true"
+           
+           [dataSource]="dataSource"
+           [showRowLines]="true"                        
+           [showColumnLines]="true"
+           [showBorders]="true"
+           [rowAlternationEnabled]="true"                      
+           [remoteOperations]="false"
+           [paging]="false"
+           (onCellClick)="open($event)"
+           (onToolbarPreparing)="onToolbarPreparing($event)"
+           (onEditorPreparing)="onEditorPreparing($event)"
+           (onContextMenuPreparing)="addMenuItems($event)">  
+           <dxo-selection mode="single"></dxo-selection>   
+           <dxo-editing 
+           mode="row"
+           [allowUpdating]="true"
+           [allowAdding]="true">
+           </dxo-editing>
+           <dxo-export [enabled]="true" fileName="Solicitud de Certificaciones CAS" [allowExportSelectedData]="true"></dxo-export>                        
+           <dxo-filter-row 
+               [visible]="true" 
+               >
+           </dxo-filter-row>
+           <dxo-header-filter 
+               [visible]="true">
+           </dxo-header-filter>
+           <dxo-scrolling
+               mode="standard"
+               showScrollbar="always"> <!-- or "virtual" | "infinite" -->                    
+           </dxo-scrolling>
+           <dxi-column                   
+           [width]="50"
+           caption="Año"
+           alignment="center"
+           dataField="anio"                            
+           dataType="string"                           
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">                                        
+       </dxi-column>   
+           <dxi-column                   
+               [width]="90"
+               caption="Exp."
+               alignment="center"
+               dataField="expediente"                            
+               dataType="string"                           
+               selectedFilterOperation="contains"
+               [filterOperations]="[]">                                        
+           </dxi-column>    
+           <dxi-column                   
+           [width]="200"
+           caption="Doc."
+           alignment="center"
+           dataField="solicitud"                            
+           dataType="string"                           
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">                                        
+           </dxi-column>     
+           <dxi-column                   
+           [width]="80"
+           caption="Fecha Doc."
+           alignment="center"
+           dataField="fecha_solicitud"                            
+           dataType="string"                           
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">                                        
+           </dxi-column>                    
+           <dxi-column
+           [width]="70"  
+           caption="Plaza"
+           dataField="codigo_plaza"
+           alignment="center"                        
+           dataType="string"
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">  
+           </dxi-column>
+           <dxi-column     
+           [width]="260"         
+           dataField="dependencia"
+           caption="Dependencia"
+           dataType="string"
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">  
+           </dxi-column> 
+           <dxi-column    
+           [width]="350"          
+           dataField="cargo"
+           caption="Cargo"
+           dataType="string"
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">  
+           </dxi-column>                                 
+           <dxi-column
+               [width]="80"  
+               dataField="monto"
+               dataType="number">
+                   <dxo-format
+                   type="fixedPoint"
+                   [precision]="2">
+                   </dxo-format>
+           </dxi-column>   
+           <dxi-column    
+                [width]="90"          
+                dataField="publicacion_id"
+                caption="Convocatoria"
+                dataType="string"
+                selectedFilterOperation="contains"
+                editCellTemplate="singleDropDownBoxEditor"
+                [filterOperations]="[]">        
+                <dxo-lookup
+                [dataSource]="publicacion"
+                displayExpr="convocatoria_nro"
+                valueExpr="id"
+                >
+                </dxo-lookup>     
+             </dxi-column>    
+
+             <div *dxTemplate="let cellInfo of 'singleDropDownBoxEditor'">
+                <dx-drop-down-box
+                    [dropDownOptions]="dropDownOptions"
+                    [dataSource]="publicacion"
+                    [(value)]="cellInfo.publicacion_id"
+                    displayExpr="convocatoria_nro"
+                    valueExpr="id"
+                    contentTemplate="contentTemplate">
+                    <div *dxTemplate="let e of 'contentTemplate'">
+                        <dx-data-grid       
+                            keyExpr="id"                    
+                            [dataSource]="publicacion"
+                            [remoteOperations]="false"
+                            [height]="400"
+                            [width]="700"
+                            [selectedRowKeys]="[cellInfo.publicacion_id]"
+                            [focusedRowEnabled]="true"
+                            [focusedRowKey]="convocatoria_nro"
+                            [hoverStateEnabled]="true"
+                            (onSelectionChanged)="onSelectionChanged($event.selectedRowKeys, cellInfo, e.component)"
+                        >
+                            <dxo-filter-row [visible]="true"></dxo-filter-row>
+                            <dxo-header-filter [visible]="true"></dxo-header-filter>
+                            <dxi-column dataField="convocatoria_nro"  [width]="90" ></dxi-column>
+                            <dxi-column dataField="cargo" [width]="430"></dxi-column>
+                            <dxi-column dataField="modalidad"  [width]="80"></dxi-column>                            
+                            <dxo-scrolling mode="virtual"></dxo-scrolling>
+                            <dxo-selection mode="single" ></dxo-selection>
+                        </dx-data-grid>
+                    </div>
+                </dx-drop-down-box>
+            </div>               
+           <dxi-column    
+               [width]="80"          
+               dataField="convocatoria_anio"
+               caption="Anio"
+               dataType="string"
+               selectedFilterOperation="contains"
+               [filterOperations]="[]">  
+               
+           </dxi-column>    
+           <dxi-column    
+               [width]="80"          
+               dataField="estado"
+               caption="Estado"
+               dataType="string"
+               selectedFilterOperation="contains"
+               [filterOperations]="[]">                 
+           </dxi-column> 
+           <dxi-column    
+           [width]="80"          
+           dataField="inscripcion"
+           caption="Inicio"
+           dataType="string"
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">                 
+            </dxi-column> 
+                <dxi-column    
+                [width]="80"          
+                dataField="cierre"
+                caption="Cierre"
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">                 
+                </dxi-column>    
+           <dxi-column    
+           [width]="70"          
+           dataField="modalidad"
+           caption="Modalidad"
+           dataType="string"
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">  
+           <dxo-lookup 
+               width="80"          
+               [dataSource]="['NINGUNO','CAS','CAP','FORMATIVA']"
+           >
+           </dxo-lookup>   
+           </dxi-column>
+           <dxi-column    
+           [width]="80"          
+           dataField="estado_final"
+           caption="Estado"
+           dataType="string"
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">  
+                <dxo-lookup 
+                    width="80"          
+                    [dataSource]="['PENDIENTE','GANADOR','CONTRATADO','NO_ADJUDICADO']"
+                >
+                </dxo-lookup>    
+           </dxi-column>  
+           <dxi-column    
+           [width]="80"          
+           dataField="dni"
+           caption="Dni"
+           dataType="string"
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">                 
+            </dxi-column>
+            <dxi-column    
+            [width]="200"          
+            dataField="nombres"
+            caption="Nombres"
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">                 
+            </dxi-column>  
+           <dxo-group-panel [visible]="true"></dxo-group-panel>
+           <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+           <dxo-search-panel
+               [width]="300"
+               [visible]="true"
+               [highlightCaseSensitive]="false">
+           </dxo-search-panel>
+            <dxo-summary>
+                <dxi-total-item
+                column="monto"
+                summaryType="sum"
+                valueFormat="#,##0.00"
+                displayFormat="{0}">
+                </dxi-total-item>
+                <dxi-group-item
+                column="monto"
+                summaryType="sum"                
+                displayFormat="{0}"
+                valueFormat= "#,##0.00"
+                [showInGroupFooter]="false"
+                [alignByColumn]="true">
+                    <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                    </dxo-format>
+                    </dxi-group-item>
+             </dxo-summary>
+          </dx-data-grid>
+</div>                 

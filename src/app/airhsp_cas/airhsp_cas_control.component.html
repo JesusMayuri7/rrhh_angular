@@ -1,0 +1,83 @@
+ <p-table #dt [columns]="cols" [value]="cap" [resizableColumns]="true" [loading]="loading"  [(selection)]="selectCap" loadingIcon="fa fa-spinner" 
+ tableStyleClass="prime-table" (onFilter)="handleFilter($event)" scrollHeight="calc(100vh - 200px)" [scrollable]="true" [style]="{padding:'5px 5px 0px 5px'}">
+    <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+            <ng-container *ngFor="let col of columns"> 
+            <col [style.width]="col.ancho">
+            </ng-container>
+        </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>     
+            <tr>  
+                    <th colspan="5" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Datos</th>                                        
+            </tr>  
+            <tr>
+                <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">                          
+                        <th *ngSwitchCase="'nro_convocatoria'" rowspan="2" style="font-size:0.8em;"><i [ngClass]="'pi pi-plus-circle'" style="font-size: 1.5em;text-align: center;color: green;" (click)="showDialogToAdd(rowData)"></i></th>   
+                        <th *ngSwitchCase="'detalle'" rowspan="2" style="font-size:0.8em;">{{col.header}}</th>                                                                           
+                        <th *ngSwitchDefault colspan="1" style="font-size:0.8em;">{{col.header}}</th>                                        
+                </ng-container>
+            </tr>
+
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex" >
+        <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [ngClass]="rowIndex % 2 == 0 ? 'odd-row' : null" >
+            <td *ngFor="let col of columns" style="font-size:0.7em;padding:3px" [ngSwitch]="col.field">         
+                 <span *ngSwitchCase="'nro_convocatoria'" style="float: right;text-align: right;padding-right: 1.5em;" (click)="showDialogToEdit(rowData)"><a href="javascript:void(0);">{{rowData[col.field]}}</a></span>                                                                               
+                 <span *ngSwitchDefault style="float: left;text-align: left;">{{rowData[col.field]}}</span>
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+
+<p-dialog header="Crear Convocatoria" [(visible)]="displayDialog" [responsive]="true" showEffect="fade" [modal]="true" appendTo="body" [style]="{width: '600px'}">
+    <div *ngIf="car">
+        <div class="p-grid" style="padding-top: 2.0em;">
+            <div class="p-col-4">
+                <label for="year">Solicitante</label>
+            </div>
+            <div class="p-col-8" >
+                <span class="ui-float-label">
+                    <p-dropdown #unidad_id [options]="unidades" id="float-unidad" [autoDisplayFirst]="false" appendTo="body"
+                        [(ngModel)]="car.unidad" filter="true" [style]="{'width':'100%'}" scrollHeight="400px"
+                        showClear="true" optionLabel="desc_unidad">
+                        <ng-template let-item pTemplate="selectedItem">
+                            <span style="font-size:1.2em;Float:left;margin-top:3.5px">{{item.label}}</span>
+                        </ng-template>
+                        <ng-template let-car pTemplate="item">
+                            <div class="ui-helper-clearfix">
+                                <div style="font-size:1.2em;float:left;margin-top:3.5px">{{car.label}}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>
+                    <label for="float-unidad" style="color: #000050">Unidad</label>
+                </span>
+                <div *ngIf="submitted && f.unidad.errors" class="invalid-feedback">
+                    <div *ngIf="f.unidad.errors.required">Unidad requerida</div>
+                </div>
+            </div>
+        </div>        
+        <div class="p-grid" style="padding-top: 2.0em;">
+            <div class="p-col-4">
+                <label for="year">Jurado</label>
+            </div>
+            <div class="p-col-8">
+                <span class="ui-float-label">
+                    <textarea pInputTextarea style="width: 100%;" [rows]="5" id="float-detalle" [cols]="30"
+                        [(ngModel)]="car.jurado" class="form-control"
+                        [ngClass]="{ 'is-invalid': submitted && f.detalle.errors }"></textarea>
+                    <label for="float-detalle" style="color: #000050">Jurado</label>
+                </span>
+                <div *ngIf="submitted && f.detalle.errors" class="invalid-feedback">
+                    <div *ngIf="f.detalle.errors.required">Jurado requerido</div>
+                </div>
+            </div>
+        </div>        
+    </div>
+    <p-footer>
+        <div class="ui-dialog-buttonpane ui-helper-clearfix">            
+            <button type="button" pButton icon="fa fa-check" (click)="save(car)" label="Crear"></button>
+        </div>
+    </p-footer>
+</p-dialog>

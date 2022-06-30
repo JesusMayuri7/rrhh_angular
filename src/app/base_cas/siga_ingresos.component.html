@@ -1,0 +1,229 @@
+<div style="height:calc(100vh - 105px)">
+            <dx-data-grid id="gridContainer"   
+            [columnMinWidth]="30"                
+            [dataSource]="cap"
+            [showRowLines]="true"
+            [showColumnLines]="true"
+            [showBorders]="true"
+            [rowAlternationEnabled]="true"
+            [remoteOperations]="false"
+            [paging]="false"
+            (onToolbarPreparing)="onToolbarPreparing($event)"
+            >
+            <dxo-grouping [autoExpandAll]="expanded"></dxo-grouping>
+            <dxo-load-panel [enabled]="true"></dxo-load-panel>
+            <dxo-export [enabled]="true" fileName="BaseCas" [allowExportSelectedData]="true"></dxo-export>                                                      
+            <dxo-filter-row 
+            [visible]="true"             
+            ></dxo-filter-row>
+            <dxo-header-filter 
+            [visible]="true"></dxo-header-filter>
+            <div *dxTemplate="let data of 'actualizado'">                
+                <span >Actualizado {{actualizado}}   </span>                
+        </div>
+            <dxi-column                   
+            [width]="80"
+            caption="Codigo Siga"
+            alignment="center"
+            dataField="id_personal"                    
+            dataType="string"            
+            [filterOperations]="[]">                                        
+            </dxi-column>
+            <dxi-column                   
+            [width]="80"
+            caption="Sede"
+            alignment="center"
+            dataField="sede"                    
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">                                        
+            </dxi-column>
+
+            <dxi-column
+            [width]="50"  
+            dataField="id_prestamo"
+            caption="Fuente"
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column>  
+            <dxi-column
+            [width]="50"  
+            dataField="id_mnemonico"
+            caption="Meta"
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column>   
+            <dxi-column
+            [width]="280"  
+            dataField="finalidad"
+            caption="Finalidad"
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">                  
+            </dxi-column>  
+            <dxi-column                   
+            [width]="60"
+            caption="Codigo_Air"
+            alignment="center"
+            dataField="codigo_plaza"                    
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">                                        
+            </dxi-column>
+            <dxi-column                   
+            [width]="80"
+            caption="AIRHSP"
+            alignment="center"
+            dataField="estado_air"                 
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">                                        
+            </dxi-column>
+            <dxi-column
+            [width]="80"  
+            dataField="nu_dociden"
+            caption="Dni"
+            alignment="center"                        
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column>
+            <dxi-column
+            [width]="250"  
+            dataField="nombres"
+            alignment="left"            
+            dataType="string"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column>
+            <dxi-column     
+                [width]="280"          
+                dataField="ds_servicio"
+                caption="Cargo">                
+            </dxi-column>                
+            
+            <dxi-column
+            [width]="270"  
+            dataField="ds_jerarquia"
+            dataType="string" 
+            caption="Ubicacion"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column>
+            <dxi-column
+            [width]="70"  
+            dataField="fe_ingreso"
+            dataType="date" 
+            [format] = "{type: 'yyyy-MM-dd'}"
+            caption="Ingreso"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+             </dxi-column>                    
+            <dxi-column
+            [width]="80"  
+            dataField="mt_contmn"
+            caption="Monto"
+            dataType="number">
+                <dxo-format
+                    type="fixedPoint"
+                    [precision]="2">
+                </dxo-format>
+            </dxi-column>
+            <dxi-column
+            [width]="250"  
+            dataField="nu_contrato"
+            dataType="string" 
+            caption="Contrato"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column>
+            <dxi-column
+            [width]="100"  
+            dataField="fe_inicont"
+            dataType="date" 
+            [format] = "{type: 'yyyy-MM-dd'}"
+            caption="Inicio Cont."            
+            >  
+            </dxi-column>
+            <dxo-summary>
+                <dxi-total-item
+                    column="codigo_plaza"
+                    summaryType="count"                    
+                    displayFormat="{0}"
+                    >
+                </dxi-total-item>
+                    <dxi-total-item
+                        column="mt_contmn"
+                        summaryType="sum"
+                        valueFormat="#,##0.00"
+                        displayFormat="{0}">
+                    </dxi-total-item>
+
+            </dxo-summary>                
+            <dxo-paging [enabled]="false"></dxo-paging>
+            <dxo-group-panel [visible]="true"></dxo-group-panel>
+            <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+            <dxo-search-panel
+            [width]="300"
+            [visible]="true"
+            [highlightCaseSensitive]="false">
+            </dxo-search-panel>
+        <dxo-summary>
+            <dxi-group-item
+                column="dni"
+                summaryType="count"
+                displayFormat="{0} registros">
+            </dxi-group-item>
+            <dxi-group-item
+            column="mt_contmn"
+            summaryType="sum"                
+            displayFormat="{0}"
+            valueFormat= "#,##0.00"
+            [showInGroupFooter]="false"
+            [alignByColumn]="true">
+                <dxo-format
+                type="fixedPoint"
+                [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+            <dxi-group-item
+            column="essalud"
+            summaryType="sum"                
+            displayFormat="{0}"
+            valueFormat= "#,##0.00"
+            [showInGroupFooter]="false"
+            [alignByColumn]="true">
+                <dxo-format
+                type="fixedPoint"
+                [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+            <dxi-group-item
+            column="sctr_salud"
+            summaryType="sum"                
+            displayFormat="{0}"
+            valueFormat= "#,##0.00"
+            [showInGroupFooter]="false"
+            [alignByColumn]="true">
+                <dxo-format
+                type="fixedPoint"
+                [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+            <dxi-group-item
+            column="sctr_pension"
+            summaryType="sum"                
+            displayFormat="{0}"
+            valueFormat= "#,##0.00"
+            [showInGroupFooter]="false"
+            [alignByColumn]="true">
+                <dxo-format
+                type="fixedPoint"
+                [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+           </dxo-summary>
+        </dx-data-grid>
+</div>

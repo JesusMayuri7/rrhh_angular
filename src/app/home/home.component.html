@@ -1,0 +1,78 @@
+<p-growl [value]="msgs"></p-growl>
+<p-dataGrid [value]="datos" emptyMessage="Sin datos para mostrar">
+   <p-header>
+    <div>
+            <div class="ui-grid-row espacio">
+                    <div class="ui-grid-col-1"> 
+                    <!-- <p-dropdown [options]="cities" [(ngModel)]="selectedCity" [style]="{'float': 'center'}"></p-dropdown> -->
+                    
+                    </div>
+                    <div class="ui-grid-col-10">Agenda</div>
+                    <div class="ui-grid-col-1"> <button pButton type="button" style="float: right;" icon="pi pi-file" (click)="newTodo()"></button></div>
+            </div>
+    </div>
+    </p-header>   
+   
+<ng-template let-car pTemplate="item">  
+            <div style="padding:3px" class="ui-g-12 ui-md-2">
+                <p-panel>
+                  <p-header>
+                        <div class="ui-helper-clearfix">
+                                <div [ngClass]="car.nivel=='ALTA' ?'ALTA' : car.nivel=='MEDIA' ?  'MEDIA' : 'BAJA'">.</div>   
+                                <span class="ui-panel-title" style="font-size:16px;display:inline-block;margin-top:2px">{{car.titulo}}</span>                    
+                                <i class="pi pi-trash" style="cursor:pointer; float: right;" (click)="deleteTodo(car.idtodo)"></i>                           
+                            </div>
+                 </p-header>
+                    <div class="car-detail" style="font-size:14px;word-wrap: break-word;
+                    overflow-wrap: break-word;white-space: pre-line;
+                    width: 100%" [innerHtml]="car.texto"></div>
+                    <div class="car-detail" style="font-size:10px">{{car.fecha}}</div>
+                    <hr class="ui-widget-content" style="border-top:0">
+                    <i class="pi pi-search" (click)="newTodo()" style="cursor:pointer"></i>
+                </p-panel>
+            </div>
+        </ng-template>
+</p-dataGrid>
+
+<p-dialog header="Agregar" [(visible)]="displayDialog" [responsive]="true" showEffect="pide" [modal]="true" width="400">
+        <form [formGroup]="rForm" (ngSubmit)="postTodo(rForm.value)">
+        
+        <div class="p-grid">
+            <div class="p-col-3">Prioridad</div>
+            <div class="p-col-9">
+                    <select formControlName="nivel" class="ui-dropdown">
+                            <option *ngFor="let hmo of cities" [value]="hmo.value.name">{{hmo.label}}</option>
+                    </select>
+            </div>
+        </div>
+        <div class="p-grid">
+            <div class="p-col-3">Titulo</div>
+            <div class="p-col-9"><input type="text" formControlName="titulo"></div>
+        </div>
+        <div class="p-grid">
+            <div class="p-col-3">Texto:</div>
+            <div class="p-col-9"> <textarea  formControlName="texto"></textarea></div>
+        </div>
+        <div class="p-grid">
+            <div class="p-col-3">Fecha </div>
+            <div class="p-col-9">
+                <p-calendar appendTo="body" formControlName="fecha" [locale]="es" dateFormat="yy/mm/dd">
+                    </p-calendar>
+            </div>
+        </div>
+        <div class="p-grid">
+            <div class="p-col-3">Tipo </div>
+            <div class="p-col-9">
+                <select formControlName="tipo" class="ui-dropdown">
+                    <option *ngFor="let item of tipos" [value]="item.value.name">{{item.label}}</option>
+                </select>
+            </div>
+        </div>
+        <div class="p-grid">
+                <div class="p-col-12">
+                <button type="submit" pButton class="button expanded" [style]="{'float': 'center'}" label="Guardar" [disabled]="!rForm.valid"></button>
+                </div>
+        </div>
+            </form>
+</p-dialog>
+

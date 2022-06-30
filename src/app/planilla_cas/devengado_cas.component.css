@@ -1,0 +1,62 @@
+
+.dx-pivotgrid table {  
+    font-size: 0.9em;
+    /*background-color: blanchedalmond;*/
+
+}
+
+.dx-button {
+    font-size: 13px;
+}
+
+.dx-button-has-text .dx-button-content {
+    padding: 4px 4px 4px;
+}
+
+.dx-checkbox-container{
+    height: 23px;
+}
+
+.dx-pivotgrid-vertical-headers{
+    font-weight: bold; 
+}
+
+.dx-pivotgrid .dx-area-fields {  
+    font-weight: bold; 
+}
+
+.dx-pivotgrid .dx-bottom-row .dx-area-column-cell {  
+    font-size: 0.7em;
+}
+
+
+
+.dx-pivotgrid .dx-pivotgrid-fields-area-head td {
+    padding: 4px 3px;
+}
+.dx-pivotgrid .dx-column-header .dx-pivotgrid-toolbar .dx-button {
+    margin-top: 4px;
+}
+.dx-pivotgrid-fields-container .dx-area-field.dx-area-box {
+    padding: 5px 8px;
+}
+/*
+
+
+.dx-pivotgrid .dx-bottom-row .dx-area-data-cell .dx-scrollable-content table tr {  
+    font-size: 0.7em;
+}
+*/
+.dx-pivotgrid .dx-bottom-row .dx-area-data-cell .dx-scrollable-content table tr:hover {  
+    background-color: #ffa300;  
+}  
+  
+.dx-pivotgrid .dx-bottom-row .dx-area-data-cell .dx-scrollable-content table tr:hover td {  
+    color: black;  
+    font-weight: bold;  
+}  
+
+
+.dx-pivotgrid .dx-bottom-row .dx-area-data-cell .dx-scrollable-content table{
+    font-size: 0.9em;
+}

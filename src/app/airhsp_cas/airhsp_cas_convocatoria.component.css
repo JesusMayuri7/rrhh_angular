@@ -1,0 +1,21 @@
+
+hr{
+    border: 1px solid #5687c0;
+}
+
+.ui-float-label{
+  font-size: 1.5em  
+}
+
+body .ui-inputtext{
+  font-size: 1.0em;
+  padding: 0.1em !important;   
+}
+
+body .ui-widget-header{
+  font-size: 1.2em;
+}
+
+
+
+

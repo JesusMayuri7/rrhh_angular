@@ -1,0 +1,33 @@
+
+.ALTA {
+    width: 100%;
+    font-size: 1px;
+    line-height: 3px;
+    background-color: #F70F0F;
+    margin-top: -6px;
+    margin-bottom: 5px;
+}
+
+.MEDIA {
+    width: 100%;
+    font-size: 1px;
+    line-height: 3px;
+    background-color: rgba(247, 244, 15, 0.93);
+    margin-top: -6px;
+    margin-bottom: 5px;
+}
+
+.BAJA {
+    width: 100%;
+    font-size: 1px;
+    line-height: 3px;
+    background-color: rgba(0, 255, 69, 0.47);
+    margin-top: -6px;
+    margin-bottom: 5px;
+}
+
+.espacio{
+    padding:2px;
+}
+
+

@@ -1,0 +1,37 @@
+            
+         <dx-pivot-grid id="pivotgrid"
+            [allowSorting]="true"      
+            [allowFiltering]="true"  
+            [allowSortingBySummary]="true"
+            [allowFiltering]="true"
+            height="100%"            
+            [showBorders]="true"
+            rowHeaderLayout="standard"
+            [showColumnGrandTotals]="true"
+            [showRowGrandTotals]="true"
+            [showColumnTotals]="false"
+            [showRowTotals]="true"
+            [allowExpandAll]="true"
+            [dataSource]="pivotGridDataSource"  
+            (onCellPrepared)="onCellPrepared($event)"          
+          >
+            <dxo-header-filter
+            [allowSearch]="false"
+            [showRelevantValues]="true"
+            [width]="400"
+            [height]="500">
+            </dxo-header-filter>
+            <dxo-export [enabled]="true" fileName="Sales"></dxo-export>
+            <dxo-field-panel
+            [showDataFields]="false"
+            [showRowFields]="true"
+            [showColumnFields]="true"
+            [showFilterFields]="true"
+            [allowFieldDragging]="true"
+            [visible]="true">
+        </dxo-field-panel>
+            <dxo-scrolling mode="virtual"></dxo-scrolling>
+        </dx-pivot-grid>
+
+
+

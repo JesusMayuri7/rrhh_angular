@@ -1,0 +1,90 @@
+<div style="height:calc(100% - 65px)">
+                <dx-data-grid
+                [columnMinWidth]="30"     
+                width="100%"             
+                height="98%"             
+                [dataSource]="dataSource"
+                [showRowLines]="true"
+                [showColumnLines]="true"
+                [showBorders]="true"
+                [remoteOperations]="false"
+                [paging]="false"
+                [selectedRowKeys]="[]"
+                (onToolbarPreparing)="onToolbarPreparing($event)"
+                >
+                <dxo-export [enabled]="true" fileName="Metas" [allowExportSelectedData]="true"></dxo-export>    
+                <dxo-selection mode="single"></dxo-selection>   
+                <dxo-load-panel [enabled]="true"></dxo-load-panel>    
+                <dxo-filter-row 
+                [visible]="true"             
+                ></dxo-filter-row>
+                <dxo-header-filter 
+                [visible]="true"></dxo-header-filter>
+                <dxo-scrolling
+                mode="standard" rowRenderingMode="standard" columnRenderingMode= "standard"
+                showScrollbar="always"> <!-- or "virtual" | "infinite" -->                    
+                </dxo-scrolling>
+                <dxi-column
+                [width]="50"  
+                dataField="anio"
+                caption="Año"
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>  
+                <dxi-column
+                [width]="30"  
+                dataField="idmeta_anual"
+                caption="ID"
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>  
+                <dxi-column
+                [width]="50"  
+                dataField="meta"
+                caption="Meta"
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>   
+                <dxi-column
+                [width]="80"  
+                dataField="presupuesto"
+                caption="Presupuesto"
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">                  
+                </dxi-column>  
+                <dxi-column                   
+                [width]="280"
+                caption="Finalidad"
+                alignment="left"
+                dataField="finalidad"                    
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">                                        
+                </dxi-column>
+                <dxi-column
+                [width]="380"  
+                dataField="producto"
+                caption="Producto"
+                alignment="left"            
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>
+                <dxi-column
+                [width]="250"  
+                dataField="actividad"
+                caption="Actividad"
+                alignment="left"            
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>
+                                              
+                <dxo-paging [enabled]="false"></dxo-paging>
+               
+            </dx-data-grid>
+</div>

@@ -1,0 +1,188 @@
+ <p-table #dt [columns]="cols" [value]="ordenes" [resizableColumns]="true" [loading]="loading"  [(selection)]="selectCap"  [loading]="loading"  loadingIcon="pi pi-spinner" [paginator]="true" [rows]="rowCount"
+ [lazy]="true" (onLazyLoad)="loadCarsLazy($event)" [totalRecords]="totalRecords" sortField="nro_ruc" dataKey="base_servicios_id" editMode="row" (onEditComplete)="onRowEditSave($event)"
+ tableStyleClass="prime-table" (onFilter)="handleFilter($event)" scrollHeight="calc(100vh - 190px)" [scrollable]="true" [style]="{padding:'15px 10px 0px 10px'}">
+        <ng-template pTemplate="caption">                
+                <div class="ui-g">
+                    <div class="ui-g-2">                        
+                            <p-dropdown #parametro [options]="criterios" [style]="{width:'50px'}" scrollHeight="400px" placeholder="Seleccione" showClear="true"
+                            optionLabel="label" (onChange)='changeParametro($event,valor)'>
+                            <ng-template let-item pTemplate="selectedItem">
+                                <span style="font-size:0.8em;float:left;">{{item.label}}</span>
+                            </ng-template>
+                            <ng-template let-car pTemplate="item">
+                                <div class="ui-helper-clearfix" >
+                                    <div style="font-size:0.8em;float:left;">{{car.label}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>                               
+                    </div>                        
+                    <div class="ui-g-2">
+                        <div class="ui-inputgroup">                                                             
+                            <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+                            <input type="text" pInputText size="30" #valor (keyup.enter)="filtros($event,parametro)" placeholder="Busqueda" style="width:auto">
+                        </div>
+                    </div>
+                    <div class="ui-g-1">
+                            <button pButton (click)="buscar(parametro?.value.value,valor.value)" style="display: inline-block;text-align: right;" type="button" label="Buscar" class="ui-button-raised ui-button-info"></button>                                                                                            
+                        </div>
+                    <div class="ui-g-2">
+                         Total: {{dt.totalRecords}}  -  Filtrados: {{filtrados}}
+                    </div>                    
+
+                    <div class="ui-g-1">
+
+                   </div>                    
+                    <div class="ui-g-1">
+
+                    </div>  
+
+                    <div class="ui-g-1">
+                        
+                    </div>  
+                    <div class="ui-g-1">
+                        
+                    </div>
+                    <div class="ui-g-1">
+                        <button pButton (click)="exportAsXLSX()" style="display: inline-block;text-align: right;" type="button" label="Exportar" class="ui-button-raised ui-button-info"></button>                                                                                            
+                    </div>                
+                </div>                                                                                                           
+        </ng-template>
+        <ng-template pTemplate="colgroup" let-columns>
+            <colgroup>
+     
+                <col *ngFor="let col of columns" [style.width]="col.ancho">
+
+            </colgroup>
+        </ng-template>
+        <ng-template pTemplate="header" let-columns>           
+            <tr>
+                <th *ngFor="let col of columns" style="font-size:0.8em;" [ngSwitch]="col.field" [pSortableColumn]="col.field">     
+                    <span *ngSwitchCase="'escolaridad'" [ngClass]="'rotate'">{{col.header}}</span>                               
+                    <span *ngSwitchDefault>{{col.header}}</span>                    
+                </th>                           
+            </tr>
+            <tr>
+                <th *ngFor="let col of columns" style="font-size:0.7em;" [ngSwitch]="col.field">     
+                    <div class="ui-fluid" *ngSwitchCase="'id'">
+                        <input  style="width:100%" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')">
+                    </div>                                            
+                    <div class="ui-fluid" *ngSwitchCase="'nombre_depend'">
+                        <p-dropdown #idzonales [options]="zonales" [style]="{'width':'100%'}" appendTo="body" scrollHeight="600px" placeholder="Areas" showClear="true" filter="true"
+                        optionLabel="label" (onChange)='filtroZonal(idzonales)' [autoWidth]="false">
+                            <ng-template let-item pTemplate="selectedItem">
+                                <span style="font-size:0.7em;float:left;margin-top:3.5px">{{item.label}}</span>
+                            </ng-template>
+                            <ng-template let-car pTemplate="item">
+                                <div class="ui-helper-clearfix" >
+                                    <div style="font-size:0.7em;float:left;margin-top:3.5px">{{car.label}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>  
+                    </div>
+                   
+                    <div class="ui-fluid" *ngSwitchCase="'condicion'">
+                            <p-dropdown #idcondicion [options]="condiciones" [style]="{'width':'100%'}" appendTo="body" scrollHeight="600px" placeholder="Condicion" showClear="true"
+                            optionLabel="label" (onChange)='filtroCondicion(idcondicion)' [autoWidth]="false">
+                                <ng-template let-item pTemplate="selectedItem">
+                                    <span style="font-size:0.7em;float:left;margin-top:3.5px">{{item.label}}</span>
+                                </ng-template>
+                                <ng-template let-car pTemplate="item">
+                                    <div class="ui-helper-clearfix" >
+                                        <div style="font-size:0.7em;float:left;margin-top:3.5px">{{car.label}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>  
+                    </div>
+
+                    <div class="ui-fluid" *ngSwitchCase="'estados'">
+                    <p-dropdown #idestadocontrol [options]="estadosControl" [style]="{'width':'70%'}" appendTo="body" scrollHeight="400px" placeholder="Estados" showClear="true"
+                    optionLabel="label" (onChange)='filtroEstado(idestadocontrol)'>
+                        <ng-template let-item pTemplate="selectedItem">
+                            <span style="font-size:0.7em;float:left;">{{item.label}}</span>
+                        </ng-template>
+                        <ng-template let-car pTemplate="item">
+                            <div class="ui-helper-clearfix" >
+                                <div style="font-size:0.7em;float:left;">{{car.label}}</div>
+                            </div>
+                        </ng-template>
+                    </p-dropdown>  
+                    </div>                    
+                    <div class="ui-fluid" *ngSwitchCase="'control'">
+                        <p-dropdown #idcontrol [options]="controles" scrollHeight="400px" appendTo="body" placeholder="Control" showClear="true"
+                        optionLabel="label" (onChange)='filtroControl(idcontrol)'>
+                            <ng-template let-item pTemplate="selectedItem">
+                                <span style="font-size:0.7em;float:left;">{{item.label}}</span>
+                            </ng-template>
+                            <ng-template let-car pTemplate="item">
+                                <div class="ui-helper-clearfix" >
+                                    <div style="font-size:0.7em;float:left;">{{car.label}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                </th>                           
+            </tr>
+           
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex" let-expanded="expanded">
+        <tr [pSelectableRow]="rowData" [pEditableRow]="rowData" [pSelectableRowIndex]="rowIndex" [ngClass]="rowIndex % 2 == 0 ? 'odd-row' : null" >                            
+            <td *ngFor="let col of columns" [ngStyle]="col.estilo" [ngSwitch]="col.field" pEditableColumn [pEditableColumnField]="false" [pEditableColumn]="rowData">
+                <span *ngSwitchCase="'orden'" style="float: right;text-align: right;">{{rowData[col.field] }}</span>                                                      
+                <span *ngSwitchCase="'pedido'" style="float: right;text-align: right;">{{rowData[col.field] }}</span>                                                      
+                 <span *ngSwitchCase="'servicio'" style="float: left;text-align: left;">{{rowData[col.field] }}</span>                                                      
+                 <span *ngSwitchCase="'fecha_orden'" style="float: center;text-align: center;">{{rowData[col.field] }}</span>                         
+                 <div *ngSwitchCase="'condicion'" class="ui-fluid">
+                    <p-cellEditor >
+                        <ng-template pTemplate="input">
+                            <p-dropdown [options]="condiciones" [(ngModel)]="rowData[col.field]" appendTo="body" [style]="{'width':'100%'}">
+                                    <ng-template let-item pTemplate="selectedItem">
+                                            <span style="font-size:0.8em;float:left;">{{item.label}}</span>
+                                        </ng-template>
+                                        <ng-template let-car pTemplate="item">
+                                            <div class="ui-helper-clearfix" >
+                                                <div style="font-size:0.8em;float:left;">{{car.label}}</div>
+                                            </div>
+                                        </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <span style="float: right;text-align: right;">{{rowData[col.field] }}</span>                                                      
+                        </ng-template>
+                    </p-cellEditor>                
+                </div>
+                 <div *ngSwitchCase="'plazos'" class="ui-fluid">
+                    <p-cellEditor >
+                        <ng-template pTemplate="input">
+                            <input pInputText type="text" [(ngModel)]="rowData[col.field]">
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <span style="float: right;text-align: right;" [style.color]="rowData['plazo']!=rowData['plazos'] ? 'white':''" [style.background-color]="rowData['plazo']!=rowData['plazos'] ? 'red' :'' ">&nbsp;{{rowData[col.field] }}&nbsp;</span>                                                                                                                                                                                                                                                                                       
+                        </ng-template>
+                    </p-cellEditor>                
+                </div>                                  
+                 <span *ngSwitchCase="'valor'" style="float: right;text-align: right;padding-right: 0.5em;">{{rowData[col.field] | number : '1.2-2'  }}</span>                                       
+                 <span *ngSwitchCase="'estados'" style="float: center;text-align: center;" [style.color]="rowData['estado']!=rowData['estados'] ? 'white':''" [style.background-color]="rowData['estado']!=rowData['estados'] ? 'red' :'' ">&nbsp;{{rowData[col.field] }}&nbsp;</span>                                                                                                                                                                                                                                                                                       
+                 <div *ngSwitchCase="'control'" class="ui-fluid">
+                    <p-cellEditor >
+                        <ng-template pTemplate="input">
+                            <p-dropdown [options]="controles2" [(ngModel)]="rowData[col.field]" appendTo="body" [style]="{'width':'100%'}">
+                                    <ng-template let-item pTemplate="selectedItem">
+                                            <span style="font-size:0.8em;float:left;">{{item.label}}</span>
+                                        </ng-template>
+                                        <ng-template let-car pTemplate="item">
+                                            <div class="ui-helper-clearfix" >
+                                                <div style="font-size:0.8em;float:left;">{{car.label}}</div>
+                                            </div>
+                                        </ng-template>
+                            </p-dropdown>
+                        </ng-template>
+                        <ng-template pTemplate="output">
+                            <span style="float: right;text-align: right;">{{rowData[col.field] }}</span>                                                      
+                        </ng-template>
+                    </p-cellEditor>                
+                </div>
+                 <span *ngSwitchDefault style="float: left;text-align: left;">{{rowData[col.field]}}</span>
+            </td>            
+        </tr>
+    </ng-template> 
+</p-table>

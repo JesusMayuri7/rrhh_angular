@@ -1,0 +1,26 @@
+.add-files-btn {
+  float: right;
+}
+
+:host {
+  height: 100%;
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+}
+
+.actions {
+  justify-content: flex-start;
+}
+
+.container {
+  height: 100%;
+}
+
+button {
+  margin-left: 0.8em;
+}
+
+.p-col-4{
+  padding: 0px;
+}

@@ -1,0 +1,115 @@
+<div style="height:calc(100% - 65px)">
+    
+                <dx-data-grid
+                [columnMinWidth]="30"     
+                width="80%"             
+                height="98%"             
+                [dataSource]="dataSource"
+                [showRowLines]="true"
+                [showColumnLines]="true"
+                [showBorders]="true"
+                [remoteOperations]="false"
+                [paging]="false"
+                [selectedRowKeys]="[]"
+                (onToolbarPreparing)="onToolbarPreparing($event)"
+                >
+                <dxo-selection mode="single"></dxo-selection>   
+                <dxo-load-panel [enabled]="true"></dxo-load-panel>    
+                <dxo-filter-row 
+                [visible]="true"             
+                ></dxo-filter-row>
+                <dxo-header-filter 
+                [visible]="true"></dxo-header-filter>
+                <dxo-scrolling
+                mode="standard" rowRenderingMode="standard" columnRenderingMode= "standard"
+                showScrollbar="always"> <!-- or "virtual" | "infinite" -->                    
+                </dxo-scrolling>
+                <dxi-column
+                [width]="50"  
+                dataField="anio"
+                caption="Año"
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>  
+                <dxi-column
+                [width]="100"  
+                dataField="modalidad"
+                caption="Modalidad"
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>   
+                <dxi-column
+                [width]="100"  
+                dataField="convocatoria_nro"
+                caption="N° Convocatoria"
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>   
+                <dxi-column
+                [width]="80"  
+                dataField="inscripcion"
+                caption="Inscripcion"
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">                  
+                </dxi-column>  
+                <dxi-column                   
+                [width]="80"
+                caption="Cierre"
+                alignment="left"
+                dataField="cierre"                    
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">                                        
+                </dxi-column>
+                <dxi-column
+                [width]="420"  
+                dataField="cargo"
+                caption="Cargo"
+                alignment="left"            
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>
+                <dxi-column
+                [width]="250"  
+                dataField="lugar_trabajo"
+                caption="Lugar de Trabajo"
+                alignment="left"            
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column> 
+
+                <dxi-column
+                [width]="80"  
+                dataField="tipo"
+                caption="Tipo"
+                alignment="left"            
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>
+                <dxi-column
+                [width]="80"  
+                dataField="estado"
+                caption="Estado"
+                alignment="left"            
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>                              
+                <dxo-paging [enabled]="false"></dxo-paging>
+               
+                <div *dxTemplate="let data of 'plazaTemplate'">
+                    <div class="p-grid">                            
+                        <div class="p-col-12"><span class="name" style="color: blue; padding-left: 0.5em;">Codigo Plaza:</span> {{ row[0].codigo_plaza}} </div>
+                        <div class="p-col-12"><span class="name" style="color: blue; padding-left: 0.5em;">Cargo: </span>{{ row[0].cargo}}</div>
+                    </div>
+                </div>
+            </dx-data-grid>
+        
+</div>

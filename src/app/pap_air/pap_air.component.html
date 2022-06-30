@@ -1,0 +1,272 @@
+<div style="height:calc(100vh - 70px)">
+    <dx-data-grid id="datagrid" [columnMinWidth]="30" height="100%" [dataSource]="cap" [showRowLines]="true"
+        [showColumnLines]="true" [showBorders]="true" [rowAlternationEnabled]="true" [remoteOperations]="false"
+        [paging]="false" (onToolbarPreparing)="onToolbarPreparing($event)" (onExporting)="onExporting($event)"
+        (onExported)="onExported($event)">
+        <dxo-grouping [autoExpandAll]="expanded"></dxo-grouping>
+        <dxo-load-panel [enabled]="true"></dxo-load-panel>
+        <dxo-export [enabled]="true" fileName="BaseCas"></dxo-export>
+        <dxo-filter-row [visible]="true"></dxo-filter-row>
+        <dxo-header-filter [visible]="true"></dxo-header-filter>        
+        <dxi-column [width]="50" dataField="idpap" caption="ID" dataType="string"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+        </dxi-column>        
+        <dxi-column [width]="50" dataField="plaza" caption="Plaza" dataType="string"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+        </dxi-column>        
+        <dxi-column [width]="50" dataField="fuente" caption="Fuente" dataType="string"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+        </dxi-column>       
+        <dxi-column [width]="250" dataField="producto" caption="Producto" dataType="string"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+        </dxi-column>              
+        <dxi-column [width]="200" caption="Area" alignment="center" dataField="desc_area" dataType="string"
+        selectedFilterOperation="contains" [filterOperations]="[]">
+    </dxi-column>        
+        <dxi-column [width]="230" dataField="cargocap" caption="Cargo" dataType="string"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+        </dxi-column>
+        <dxi-column [width]="50" dataField="grupo_ocupacional" caption="Nivel" dataType="string"
+        selectedFilterOperation="contains" [filterOperations]="[]">
+    </dxi-column>
+        <dxi-column [width]="25" dataField="desc_nivel" caption="Nivel" dataType="string"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+        </dxi-column>
+        <dxi-column [width]="10" dataField="cantidad" caption="#" dataType="number"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+        </dxi-column>
+        <dxi-column [width]="90" dataField="rem_basico" caption="Basico" dataType="number"
+        selectedFilterOperation="contains" [filterOperations]="">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="90" dataField="asig_familiar" caption="Asig. Fam." alignment="right" dataType="number"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="90" dataField="total_basico" caption="TotalBasico" alignment="right" dataType="number"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="90" caption="Essalud" alignment="right" dataField="essalud" dataType="number"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="90" dataField="sctr_salud" alignment="right" caption="Sctr Salud"dataType="number"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="90" dataField="vida_ley" alignment="right" caption="Vida Ley" dataType="number"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="90" dataField="sctr_pension" dataType="number" caption="Sctr Pension"
+            selectedFilterOperation="contains" [filterOperations]="[]">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>        
+        <dxi-column [width]="100" dataField="total_mensual" caption="TotalMensual" dataType="number">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="100" dataField="remuneracion" caption="Remuneracion" dataType="number">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+    
+    <dxi-column [width]="100" dataField="essalud_anual" caption="Essalud" dataType="number">
+        <dxo-format type="fixedPoint" [precision]="2">
+        </dxo-format>
+    </dxi-column>
+        <dxi-column [width]="100" dataField="escolaridad" caption="Escolaridad" dataType="number">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="100" dataField="gratificacion" caption="Gratificacion" dataType="number">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="100" dataField="bonificacion" caption="Bonificacion" dataType="number">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="100" dataField="cts_anual" caption="Cts" dataType="number">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        
+        <dxi-column [width]="100" dataField="sctr_salud_anual" caption="SctrSaludAnual" dataType="number">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="100" dataField="vida_ley_anual" caption="VidaLeyAnual" dataType="number">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="100" dataField="sctr_pension_anual" caption="SctrPensionAnual" dataType="number">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxi-column [width]="100" dataField="total_anual" caption="Total Anual" dataType="number">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-column>
+        <dxo-summary>
+            <dxi-total-item column="plaza" summaryType="count" displayFormat="{0}">
+            </dxi-total-item>
+            <dxi-total-item column="cantidad" summaryType="sum" displayFormat="{0}" valueFormat="#,##0">
+            </dxi-total-item>
+            <dxi-total-item column="rem_basico" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>
+            <dxi-total-item column="asig_familiar" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>
+            <dxi-total-item column="total_basico" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>
+            <dxi-total-item column="essalud" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>  
+            <dxi-total-item column="sctr_salud" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>  
+            <dxi-total-item column="sctr_pension" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>  
+            <dxi-total-item column="vida_ley" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>  
+            <dxi-total-item column="total_mensual" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>  
+            <dxi-total-item column="remuneracion" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>            
+            <dxi-total-item column="essalud_anual" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>            
+            <dxi-total-item column="cts_anual" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>    
+            <dxi-total-item column="escolaridad" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>    
+            <dxi-total-item column="vida_ley_anual" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>  
+            <dxi-total-item column="sctr_pension_anual" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>  
+            <dxi-total-item column="sctr_salud_anual" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>  
+            <dxi-total-item column="bonificacion" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>            
+            <dxi-total-item column="gratificacion" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>
+            <dxi-total-item column="total_anual" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
+            </dxi-total-item>
+        </dxo-summary>
+        <dxo-paging [enabled]="false"></dxo-paging>
+        <dxo-group-panel [visible]="true"></dxo-group-panel>
+        <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
+        <dxo-search-panel [width]="300" [visible]="true" [highlightCaseSensitive]="false">
+        </dxo-search-panel>
+        <dxo-summary>
+            <dxi-group-item column="plaza" summaryType="count" displayFormat="{0} registros">
+            </dxi-group-item>
+            <dxi-group-item column="rem_basico" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+                [showInGroupFooter]="true" [alignByColumn]="true">
+                <dxo-format type="fixedPoint" [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+            <dxi-group-item column="cantidad" summaryType="sum" displayFormat="{0}" valueFormat="#,000"
+            [showInGroupFooter]="true" [alignByColumn]="true">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-group-item>
+            <dxi-group-item column="asig_familiar" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+            [showInGroupFooter]="true" [alignByColumn]="true">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-group-item>
+            <dxi-group-item column="total_basico" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+            [showInGroupFooter]="true" [alignByColumn]="true">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-group-item>
+            <dxi-group-item column="essalud" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+                [showInGroupFooter]="true" [alignByColumn]="true">
+                <dxo-format type="fixedPoint" [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+            <dxi-group-item column="sctr_salud" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+                [showInGroupFooter]="true" [alignByColumn]="true">
+                <dxo-format type="fixedPoint" [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+            <dxi-group-item column="sctr_pension" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+                [showInGroupFooter]="true" [alignByColumn]="true">
+                <dxo-format type="fixedPoint" [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+            <dxi-group-item column="total_mensual" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+            [showInGroupFooter]="true" [alignByColumn]="true">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-group-item>
+        <dxi-group-item column="remuneracion" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+        [showInGroupFooter]="true" [alignByColumn]="true">
+        <dxo-format type="fixedPoint" [precision]="2">
+        </dxo-format>
+    </dxi-group-item>
+            <dxi-group-item column="vida_ley" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+                [showInGroupFooter]="true" [alignByColumn]="true">
+                <dxo-format type="fixedPoint" [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+            <dxi-group-item column="cts" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+                [showInGroupFooter]="true" [alignByColumn]="true">
+                <dxo-format type="fixedPoint" [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+            <dxi-group-item column="sctr_salud_anual" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+            [showInGroupFooter]="true" [alignByColumn]="true">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>            
+        </dxi-group-item>
+
+        <dxi-group-item column="essalud_anual" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+            [showInGroupFooter]="true" [alignByColumn]="true">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>            
+        </dxi-group-item>
+        <dxi-group-item column="cts_anual" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+            [showInGroupFooter]="true" [alignByColumn]="true">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>            
+        </dxi-group-item>
+        <dxi-group-item column="gratificacion" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+        [showInGroupFooter]="true" [alignByColumn]="true">
+        <dxo-format type="fixedPoint" [precision]="2">
+        </dxo-format>
+    </dxi-group-item>
+    <dxi-group-item column="escolaridad" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+    [showInGroupFooter]="true" [alignByColumn]="true">
+    <dxo-format type="fixedPoint" [precision]="2">
+    </dxo-format>
+</dxi-group-item>
+        <dxi-group-item column="vida_ley_anual" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+        [showInGroupFooter]="true" [alignByColumn]="true">
+        <dxo-format type="fixedPoint" [precision]="2">
+        </dxo-format>
+        </dxi-group-item>
+        <dxi-group-item column="bonificacion" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+        [showInGroupFooter]="true" [alignByColumn]="true">
+        <dxo-format type="fixedPoint" [precision]="2">
+        </dxo-format>
+    </dxi-group-item>
+            <dxi-group-item column="total_anual" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+            [showInGroupFooter]="true" [alignByColumn]="true">
+            <dxo-format type="fixedPoint" [precision]="2">
+            </dxo-format>
+        </dxi-group-item>
+            <dxi-group-item column="sctr_pension_anual" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
+                [showInGroupFooter]="true" [alignByColumn]="true">
+                <dxo-format type="fixedPoint" [precision]="2">
+                </dxo-format>
+            </dxi-group-item>
+        </dxo-summary>
+    </dx-data-grid>
+</div>

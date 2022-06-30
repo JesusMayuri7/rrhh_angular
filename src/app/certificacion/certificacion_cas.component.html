@@ -1,0 +1,172 @@
+<hr>{{
+    itemData
+}}
+<div class="p-grid">
+    <div class="p-col-3">
+        <form [formGroup]="formulario">
+            <div class="p-grid">
+                <div class="p-col-3">                       
+                    Expediente
+                </div>
+                <div class="p-col-9" >
+                    <input style="width: 30%;" formControlName="expediente" pInputText type="text">
+                </div>                                                                                    
+            </div>
+        </form>   
+        <form [formGroup]="item">
+                <div class="p-grid" >
+                        <div class="p-col-3">
+                            Codigo Plaza
+                        </div>
+                        <div class="p-col-9">                            
+                            <div class="p-grid">
+                                <div class="p-col-5">
+                                    <input formControlName="codigo_plaza" style="width: 50%;" pInputText type="text">
+                                </div>
+                                <div class="p-col-4">
+
+                                </div>
+                                <div class="p-col-1">
+                                        <button pButton (click)="certificacionCasValidar('001693')" style="display: inline-block;text-align: center;" type="button" label="Validar" class="ui-button-raised ui-button-info"></button>                              
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-col-3">
+                                Unidad
+                        </div>
+                        <div class="p-col-9">                                
+                                <dx-drop-down-button                                                                    
+                                (onSelectionChanged)="onItemClick($event)"   
+                                [(selectedItemKey)]="itemKey"
+                                [useSelectMode]="true"                 
+                                text="Unidad 2021"
+                                   [dropDownOptions]="{ width: 280 }"
+                                    [items]="unidades2"
+                                    keyExpr="id"
+                                    displayExpr="desc_unidad">
+                                </dx-drop-down-button>
+                             <!--   <input formControlName="desc_unidad" type="text" style="width: 100%;" pInputText type="text"> -->
+                        </div> 
+
+                        <div class="p-col-3">
+                            cargo
+                        </div>
+                        <div class="p-col-9">
+                            <div class="p-grid">
+                                <div class="p-col-9">
+                                    <textarea  formControlName="cargo" style="width: 100%;" pInputText type="text"></textarea>
+                                </div>
+                                   <div class="p-col-1">
+                                        <button pButton (click)="certificacionCargoUpdate()" style="text-align: left;" type="button" label="Actualizar" class="ui-button-raised ui-button-info"></button>                              
+                                    </div>
+                            </div>
+                        </div>
+                        <div class="p-col-3">
+                            Meta
+                        </div>
+                        <div class="p-col-9">
+                                <p-dropdown #meta_id [options]="metas" formControlName="meta" id="float-meta" [autoDisplayFirst]="false" 
+                                filter="true" appendTo="body" [style]="{'width':'100%'}" scrollHeight="400px"
+                                showClear="true" optionLabel="finalidad">
+                                    <ng-template let-item pTemplate="selectedItem">
+                                        <span style="font-size:0.8em;Float:left;margin-top:3.5px">{{item.label}}</span>
+                                    </ng-template>
+                                    <ng-template let-car pTemplate="item">
+                                        <div class="ui-helper-clearfix">  
+                                            <div style="font-size:0.8em;float:left;margin-top:3.5px">{{car.label}}</div>
+                                        </div>
+                                    </ng-template>
+                                </p-dropdown>
+                        </div> 
+                        <div class="p-col-3">
+                            Honorarios
+                        </div>
+                        <div class="p-col-9">
+                            <input formControlName="honorario_mensual" type="number" style="width: 50%;" pInputText type="text">
+                        </div>  
+                        <div class="p-col-3">
+                            Aguinaldo
+                        </div>
+                        <div class="p-col-9">
+                            <input formControlName="aguinaldo_total" style="width: 50%;" pInputText type="text">
+                        </div>   
+                        <div class="p-col-3">
+                            Meses
+                     </div>
+                     <div class="p-col-9">
+                                 <div class="p-grid">
+                                         <div class="p-col-6">
+                                             <input formControlName="meses" style="width: 100%;" pInputText type="text">
+                                         </div>
+                                         <div class="p-col-6">
+                                                 <button pButton (click)="addItem()" style="display: inline-block;text-align: center;" type="button" label="Agregar" class="ui-button-raised ui-button-info"></button>
+                                                 <button pButton (click)="createPdf()" style="display: inline-block;text-align: center;" type="button" label="Crear" class="ui-button-raised ui-button-info"></button>
+                                        </div>
+                                 </div>
+                     </div>       
+            </div>   
+        </form> 
+    </div>    
+    <div class="p-col-9">
+            <div class="p-grid" >
+                    <div class="p-col-12" >
+                        <p-table [columns]="cols_validar" [value]="plazas_validar" id="basic-table">
+                                <ng-template pTemplate="caption">    
+                                    Validacion
+                                </ng-template>
+                                <ng-template pTemplate="header" let-columns let-rowData >    
+                                    <tr>
+                                            <th *ngFor="let col of columns" [ngStyle]="col.estilo_header" [style.width]="col.ancho">
+                                                <span>{{col.header}}</span>   
+                                            </th>
+                                    </tr> 
+                                </ng-template>
+                                <ng-template pTemplate="body" let-item>
+                                        <tr>
+                                            <td *ngFor="let col of cols_validar" [ngStyle]="col.estilo">
+                                                    {{item[col.field]}}
+                                            </td>
+                                        </tr>
+                                </ng-template>
+                        </p-table>    
+                    </div>
+            </div> 
+            <br/>   
+            <br/>   
+            <br/>   
+            <br/> 
+                 
+    </div>
+</div>
+
+    <div class="p-grid" >
+            <div class="p-col-12" >
+                <p-table [columns]="cols_itemData" [value]="itemData" id="basic-table">
+                        <ng-template pTemplate="caption">    
+                            Solicitud de Certificacion
+                        </ng-template>
+                        <ng-template pTemplate="header" let-columns let-rowData >    
+                            <tr>
+                                    <th *ngFor="let col of columns" [ngStyle]="col.estilo_header" [style.width]="col.ancho">
+                                        <span>{{col.header}}</span>   
+                                    </th>
+                            </tr> 
+                        </ng-template>
+                        <ng-template pTemplate="body" let-item>
+                                <tr>
+                                    <td *ngFor="let col of cols_itemData" [ngStyle]="col.estilo" [ngSwitch]="col.field">
+                                        <span *ngSwitchCase="'meta'">{{item[col.field].meta }}</span>
+                                        <span *ngSwitchCase="'finalidad'">{{item.meta.finalidad }}</span>
+                                        <span *ngSwitchDefault>{{item[col.field]}}</span>                                            
+                                    </td>
+                                </tr>
+                        </ng-template>
+                </p-table>    
+            </div>
+    </div> 
+    <br/>   
+    <br/>   
+    <br/>   
+    <br/> 
+         
+

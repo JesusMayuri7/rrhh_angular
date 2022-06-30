@@ -1,0 +1,57 @@
+.odd-row {
+    background-color: #CEE3F6 !important;
+    color: #000000 !important;
+    width: 5% !important;
+}
+.even-row {
+    background-color: #2CA8B1 !important;
+    color: #ffffff !important;
+    width: 10%;
+}
+
+body .ui-table .ui-table-caption, body .ui-table .ui-table-summary{            
+    padding: 0.05em 0.05em !important;           
+}
+body .ui-table .ui-table-thead > tr > th {
+    padding: 0.2em 0.2em !important;           
+}
+
+body .ui-inputtext {
+    padding: 0.01em !important;   
+}
+
+body .ui-multiselect .ui-multiselect-label {
+    padding: 0.1em !important;    
+}
+
+body .ui-button.ui-button-text-only .ui-button-text{
+    padding: 0.1em 0.5em;
+}
+
+
+body .ui-table .ui-table-tbody >tr >td {
+    padding: .21em .21em  !important;
+}   
+
+body .ui-table .ui-editable-column input {
+    font-size: 10px;
+}
+
+body .ui-inputswitch {
+    width: 80px !important;
+}
+
+body .ui-inputswitch-checked{
+    width: 80px !important;
+}
+
+
+body .ui-inputswitch.ui-inputswitch-checked .ui-inputswitch-slider {
+    background-color: red !important;
+}
+
+.dx-datagrid-headers .dx-texteditor-input, .dx-datagrid-rowsview .dx-texteditor-input{
+    padding: 4px;
+    min-height: 20px;
+}
+

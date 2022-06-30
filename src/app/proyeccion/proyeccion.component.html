@@ -1,0 +1,77 @@
+<div class="p-grid">
+    <div class="p-col-10">
+        <wbr-pivot #pivot1 [toolbar]="true"
+        [global]="global"
+        [width]="'1000px'"
+        [height]="'600px'"
+        [customizeCell]="onCustomizeCell"
+        (ready)="onPivotReady($event)"
+        (reportcomplete)="cargarPap()">
+        </wbr-pivot>        
+    </div>
+    <div class="p-col-2">
+         Total Sostenible: {{ sostenibles}}
+         
+    </div>
+</div>
+
+ 
+ <p-table #dt [columns]="cols" [value]="cap" [resizableColumns]="true" [loading]="loading"  [(selection)]="selectCap" loadingIcon="pi pi-spinner" 
+ tableStyleClass="prime-table" (onFilter)="handleFilter($event)" scrollHeight="calc(100vh - 200px)" [scrollable]="true" [style]="{padding:'15px 100px 0px 100px'}">
+        <ng-template pTemplate="caption">                
+                <div class="ui-g">
+                    <div class="ui-g-3">                        
+                        <button pButton (click)="cargarCap()" type="button" label="Actualizar" class="ui-button-raised ui-button-info"></button>                               
+                    </div>                        
+                    <div class="ui-g-3">
+                        <div class="ui-inputgroup">                                                             
+                            <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                            <input type="text" pInputText size="50" placeholder="Busqueda" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                        </div>
+                    </div>
+                    <div class="ui-g-3">
+                        <button pButton (click)="exportAsXLSX()" style="display: inline-block;text-align: right;" type="button" label="Exportar" class="ui-button-raised ui-button-info"></button>                                                                                            
+                    </div>
+                    <div class="ui-g-3">
+                         Total: {{dt.totalRecords}}  -  Filtrados: {{filtrados}}
+                    </div>                    
+                </div>                                                                                                           
+        </ng-template>
+        <ng-template pTemplate="colgroup" let-columns>
+        <colgroup>
+            <col *ngFor="let col of columns" [style.width]="col.ancho">
+        </colgroup>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>           
+            <tr>
+                <th *ngFor="let col of columns" style="font-size:0.8em;" [ngSwitch]="col.field" [pSortableColumn]="col.field">     
+                    <span *ngSwitchCase="'escolaridad'" [ngClass]="'rotate'">{{col.header}}</span>        
+                    <span *ngSwitchCase="'fuente'" [ngClass]="'rotate'">{{col.header}}</span>        
+                    <span *ngSwitchCase="'nivelO'" [ngClass]="'rotate'">{{col.header}}</span> 
+                   
+                    <span *ngSwitchDefault>{{col.header}}</span>                    
+                </th>
+            </tr>
+            <tr>
+                <th *ngFor="let col of columns" style="font-size:0.8em;" [ngSwitch]="col.field">     
+                    <p-multiSelect *ngSwitchCase="'autorizacion'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="autorizaciones"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterAutorizacion(dt,$event)"></p-multiSelect>       
+                    <p-multiSelect *ngSwitchCase="'estado'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="estados"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterEstado(dt,$event)"></p-multiSelect>       
+                </th>
+            </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex" >
+        <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [ngClass]="rowIndex % 2 == 0 ? 'odd-row' : null" >
+            <td *ngFor="let col of columns" style="font-size:0.7em;padding:3px" [ngSwitch]="col.field">                  
+                 <span *ngSwitchCase="'servicio'" style="float: right;text-align: right;padding-right: 1.5em;">{{rowData[col.field]}}</span>                                                      
+                 <span *ngSwitchDefault style="float: left;text-align: left;">{{rowData[col.field]}}</span>
+            </td>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="footer">
+            <tr>
+                <td colspan="7">Totales</td>                                              
+                <td style='font-size:0.75em;text-align:right'>{{TotalServicios | number : '1.0-0' }}</td>
+            </tr>
+    </ng-template>
+</p-table>
+

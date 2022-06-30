@@ -1,0 +1,73 @@
+<div class="p-grid">
+    <div class="p-col-6">
+        <div class="p-grid">
+            <div class="p-col-12">
+                <span class="ui-float-label">
+                    <input id="float-codigo_plaza" type="text" size="10" pInputText [ngModel]="row[0].codigo_plaza"> 
+                    <label for="float-codigo_plaza">Codigo Plaza</label>
+                </span>
+            </div>
+            <div class="p-col-12">
+                <span class="ui-float-label">
+                    <input id="float-fuente_base" type="text" size="10" pInputText [ngModel]="row[0].fuente_base"> 
+                    <label for="float-fuente_base">Fuente</label>
+                </span>
+            </div>    
+            <div class="p-col-12">
+                <span class="ui-float-label">
+                    <input id="float-meta" type="text" size="50" pInputText [ngModel]="row[0].meta_2019"> 
+                    <label for="float-meta">Meta</label>
+                </span>
+            </div>   
+            <div class="p-col-12">    
+                    <label for="float-fe_ingreso">Fecha Ingreso</label>            
+                    <span class="ui-float-label">                   
+                        <dx-date-box id="float-fe_ingreso"
+                            [width]="250"
+                            [value]="row[0].fe_ingreso"
+                            displayFormat="dd-MM-yyyy">
+                        </dx-date-box>                        
+                    </span>
+            </div>                           
+        </div>
+    </div>
+    <div class="p-col-6">       
+        <div class="p-grid">
+            <div class="p-col-12">
+                <label for="float-estado_final">Estado</label>
+                <span class="ui-float-label">
+                    <dx-select-box id="float-estado_final"
+                    [dataSource]="tipo_salida" 
+                    (onValueChanged)="onValueChanged($event)"      
+                    [value]="row[0].tipo_salida"                    
+                    ></dx-select-box>                    
+                </span>
+            </div>  
+            <div class="p-col-12">
+                <label for="float-fe_ingreso">Fecha Salida</label>            
+                <span class="ui-float-label">       
+                        <dx-date-box
+                            [width]="250"
+                            [value]="row[0].fe_salida"
+                            displayFormat="dd-MM-yyyy"
+                            (onValueChanged)="changeFeSalida($event)"
+                            >
+                        </dx-date-box>
+                </span>
+            </div> 
+        </div>
+    </div>
+
+    <div class="p-col-11">
+        botones
+    </div>
+    <div class="p-col-1">
+        <dx-button
+                    stylingMode="contained"
+                    text="Baja"
+                    type="default"
+                    [width]="120"
+                    (onClick)="baja()">
+                </dx-button>
+    </div>
+</div>

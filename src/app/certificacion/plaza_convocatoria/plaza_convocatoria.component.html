@@ -1,0 +1,81 @@
+<div class="p-grid">    
+        <div class="p-col-5">            
+                <span class="ui-float-label">
+                    <label for="float-solicitud">Expediente</label>                    
+                </span>                                
+        </div>    
+        <div class="p-col-5">
+            <span class="ui-float-label">
+                <label for="float-solicitud">{{row[0].expediente}}</label>                    
+            </span>            
+        </div> 
+        <div class="p-col-5">            
+            <span class="ui-float-label">
+                <label for="float-solicitud">Codigo Plaza</label>                    
+            </span>                                
+    </div>    
+    <div class="p-col-5">
+        <span class="ui-float-label">
+            <label for="float-solicitud">{{row[0].codigo_plaza}}</label>                    
+        </span>            
+        </div>    
+        <div class="p-col-5">            
+            <span class="ui-float-label">
+                <label for="float-solicitud">Dependencia</label>                    
+            </span>                                
+        </div>    
+        <div class="p-col-5">
+            <span class="ui-float-label">
+                <label for="float-solicitud">{{row[0].dependencia}}</label>                    
+            </span>            
+        </div>   
+        <div class="p-col-5">            
+            <span class="ui-float-label">
+                <label for="float-solicitud">Cargo</label>                    
+            </span>                                
+        </div>    
+        <div class="p-col-5">
+        <span class="ui-float-label">
+            <label for="float-solicitud">{{row[0].cargo}}</label>                    
+        </span>            
+        </div>  
+        <div class="p-col-5">            
+            <span class="ui-float-label">
+                <label for="float-solicitud">Monto</label>                    
+            </span>                                
+        </div>    
+        <div class="p-col-5">
+        <span class="ui-float-label">
+            <label for="float-solicitud">{{row[0].monto}}</label>                    
+        </span>            
+        </div>  
+        <div class="p-col-5">                        
+                <label for="float-solicitud">Informe</label>                                
+        </div>    
+        <div class="p-col-5">        
+            <input id="float-solicitud" type="text" size="30" pInputText [(ngModel)]="row[0].solicitud">                     
+        </div>  
+        <div class="p-col-5">            
+            <span class="ui-float-label">
+                <label for="float-solicitud">Fecha Doc.</label>                    
+            </span>                                
+        </div>   
+        <div class="p-col-5">                
+                    <dx-date-box
+                        [width]="250"
+                        [value]="row[0].fecha_solicitud"
+                        displayFormat="dd-MM-yyyy"
+                        (onValueChanged)="changeFechaDoc($event)"
+                        >
+                    </dx-date-box>            
+        </div> 
+    <div class="p-col-12">
+        <dx-button
+        stylingMode="outlined"
+        text="Actualizar"
+        type="default"
+        [width]="'100%'"
+        (onClick)="actualizar($event)">
+        </dx-button>
+    </div>
+</div>
