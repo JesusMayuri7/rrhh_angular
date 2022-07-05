@@ -11,8 +11,8 @@ export class CertificacionCasService {
 
     }
     
-    getDependencias():Observable<any> {        
-      return this.http.get(this.API+'presupuestal/dependencias');        
+    getAreas():Observable<any> {        
+      return this.http.get(this.API+'configuracion/areas');        
     }
 
     postAdjudicarPlaza(data):Observable<any> {
@@ -36,7 +36,7 @@ export class CertificacionCasService {
     }
 
     getMetas() {        
-      return this.http.get(this.API+'cas/metas')     
+      return this.http.get(this.API+'presupuesto/get_metas/2022')     
     }
 
     getBaseCas() {        

@@ -35,8 +35,7 @@ export class CertificacionCasComponent implements OnInit {
  resultados:any[];
  estadosControl:any[];
  sedes:any[];
- fuentes:any[];
- unidades:any[];
+ fuentes:any[]; 
  vigencias:any[];
  selectCap:any;
  loading:boolean;
@@ -78,10 +77,9 @@ export class CertificacionCasComponent implements OnInit {
     applyFilterTypes: any;
     currentFilter: any;
     cols_itemData:any;
-    organos:[];
-    metas2:[];
-    unidades2:[];
-    selectedUnidad:any;
+    organos:[];        
+    areas:[];
+    selectedArea:any;
     itemKey:any;
 
   constructor(private certificacionCasService:CertificacionCasService,private _formBuilder: FormBuilder,private httpClient: HttpClient,
@@ -110,9 +108,10 @@ export class CertificacionCasComponent implements OnInit {
         aguinaldo_total:600,      
         total_general:0,
         periodo:'',
-        desc_unidad2:'',
-        org_unidad_id2:0,
-        meta: {},        
+        area:'',
+        org_area_id:0,
+        meta: {},   
+          
         meta_2019:'',        
     });
 
@@ -127,14 +126,13 @@ export class CertificacionCasComponent implements OnInit {
    //   { field: 'meta', header: 'Meta', ancho:'15px',estilo: { 'font-size':'0.67em','width':'10em'},estilo_header: {'font-size':'0.6em','width':'10em'},rowspan:'1',visible:true,numero:false},        
    
       { field: 'm_base', header: 'Meta', ancho:'2.5em',estilo: { 'font-size':'0.67em','text-align':'left'},estilo_header: {'font-size':'0.67em','width':'10em'},rowspan:'1',visible:true,numero:false},        
-      { field: 'finalidad', header: 'Meta Base',ancho:'18em',estilo: {'font-size':'0.67em','text-align':'left'} ,estilo_header:{'font-size':'0.67em','width':'10em'} },    
+      { field: 'meta_base', header: 'Meta Base',ancho:'18em',estilo: {'font-size':'0.67em','text-align':'left'} ,estilo_header:{'font-size':'0.67em','width':'10em'} },    
       { field: 'monto_base', header: 'Ingreso' ,ancho:'5.5em',estilo: {'font-size':'0.67em','text-align':'left'},estilo_header:{'font-size':'0.67em','width':'10em','background-color':'blue','color':'white'},rowspan:'1',visible:true,numero:false},          
-      { field: 'm_air', header: 'Meta', ancho:'3.5em',estilo: { 'font-size':'0.67em','text-align':'left'},estilo_header: {'font-size':'0.67em','width':'10em'},rowspan:'1',visible:true,numero:false},        
-      { field: 'meta_air', header: 'Nombres', ancho:'12em',estilo: { 'font-size':'0.67em','text-align':'left'},estilo_header: {'font-size':'0.67em','width':'10em'},rowspan:'1',visible:true,numero:false},        
-      { field: 'monto_air', header: 'Cargo ',ancho:'5.5em',estilo: {'font-size':'0.67em','text-align':'left'},estilo_header:{'font-size':'0.67em','width':'10em'},rowspan:'1',visible:true,numero:false },          
+      { field: 'nombres_air', header: 'Nombres AIR', ancho:'5.5em',estilo: { 'font-size':'0.67em','text-align':'left'},estilo_header: {'font-size':'0.67em','width':'10em'},rowspan:'1',visible:true,numero:false},        
+      { field: 'monto_air', header: 'Monto AIR ',ancho:'5.5em',estilo: {'font-size':'0.67em','text-align':'left'},estilo_header:{'font-size':'0.67em','width':'10em'},rowspan:'1',visible:true,numero:true },          
       { field: 'estados', header: 'Estado',ancho:'5em',estilo: {'font-size':'0.67em','width':'10em'},estilo_header:{'font-size':'0.67em','width':'10em','background-color':'green','color':'white'},rowspan:'1',visible:true,numero:false },          
-      { field: 'estado_air', header: 'Estado',ancho:'2em',estilo: {'font-size':'0.67em','width':'10em'},estilo_header:{'font-size':'0.67em','width':'10em','background-color':'blue','color':'white'},rowspan:'1',visible:true,numero:false },                
-      { field: 'fecha_fin_vigencia_cas', header: 'Vigencia',ancho:'8em',estilo: {'font-size':'0.67em','width':'10em'},estilo_header:{'font-size':'0.67em','width':'10em','background-color':'blue','color':'white'},rowspan:'1',visible:true,numero:false },                
+      { field: 'estado_air', header: 'Estado AIR',ancho:'4em',estilo: {'font-size':'0.67em','width':'10em'},estilo_header:{'font-size':'0.67em','width':'10em','background-color':'blue','color':'white'},rowspan:'1',visible:true,numero:false },                
+      { field: 'fecha_fin_vigencia_cas', header: 'Vigencia',ancho:'5em',estilo: {'font-size':'0.67em','width':'10em'},estilo_header:{'font-size':'0.67em','width':'10em','background-color':'blue','color':'white'},rowspan:'1',visible:true,numero:false },                
       { field: 'convoca', header: 'fase',ancho:'3em',estilo: {'font-size':'0.67em','width':'10em'},estilo_header:{'font-size':'0.67em','width':'10em','background-color':'yellow','color':'black'},rowspan:'1',visible:true,numero:false },          
       { field: 'convocatoria', header: 'Nro',ancho:'3em',estilo: {'font-size':'0.67em','width':'10em'},estilo_header:{'font-size':'0.67em','width':'10em','background-color':'yellow','color':'black'},rowspan:'1',visible:true,numero:false },          
       { field: 'inscripcion', header: 'Inicio',ancho:'5em',estilo: {'font-size':'0.67em','width':'10em'},estilo_header:{'font-size':'0.67em','width':'10em','background-color':'yellow','color':'black'},rowspan:'1',visible:true,numero:false },                
@@ -148,7 +146,7 @@ export class CertificacionCasComponent implements OnInit {
       
          { field: 'meta', header: 'Meta', ancho:'2.5em',estilo: { 'font-size':'0.67em','text-align':'left'},estilo_header: {'font-size':'0.67em','width':'10em'},rowspan:'1',visible:true,numero:false},        
          { field: 'finalidad', header: 'Meta Base',ancho:'18em',estilo: {'font-size':'0.67em','text-align':'left'} ,estilo_header:{'font-size':'0.67em','width':'10em'} },    
-         { field: 'desc_unidad', header: 'Unidad', ancho:'12em',estilo: { 'font-size':'0.67em','text-align':'left'},estilo_header: {'font-size':'0.67em','width':'10em'},rowspan:'1',visible:true,numero:false},        
+         { field: 'desc_area', header: 'Area', ancho:'12em',estilo: { 'font-size':'0.67em','text-align':'left'},estilo_header: {'font-size':'0.67em','width':'10em'},rowspan:'1',visible:true,numero:false},        
          { field: 'cargo', header: 'Cargo', ancho:'12em',estilo: { 'font-size':'0.67em','text-align':'left'},estilo_header: {'font-size':'0.67em','width':'10em'},rowspan:'1',visible:true,numero:false},        
          { field: 'honorario_mensual', header: 'Remuneracion' ,ancho:'5.5em',estilo: {'font-size':'0.67em','text-align':'left'},estilo_header:{'font-size':'0.67em','width':'10em','background-color':'blue','color':'white'},rowspan:'1',visible:true,numero:false},          
          { field: 'essalud_mensual', header: 'Essalud ',ancho:'5.5em',estilo: {'font-size':'0.67em','text-align':'left'},estilo_header:{'font-size':'0.67em','width':'10em'},rowspan:'1',visible:true,numero:false },          
@@ -203,29 +201,27 @@ export class CertificacionCasComponent implements OnInit {
     // this.buscar(null,null,1);
 
   // this.getMetas();
-  this.dependencias();
+  this.getAreas();
+  this.getMetas();
    this.cargaData(this);
   } // fin init
 
-  dependencias() {
+  getAreas() {
     this.loading = true; 
-    this.certificacionCasService.getDependencias().subscribe(
+    this.certificacionCasService.getAreas().subscribe(
       (result)=> {
-        this.organos = result['organos'];  
-        this.metas = result['metas'];  
-        this.metas2 = result['metas2'];  
-        this.unidades = result["unidades"];         
-        this.unidades2 = result["unidades2"]; 
         
-       // this.selectedUnidad = result["unidades2"][0];
-        console.log(this.unidades2);
+        console.log('areas ',result);
+        this.areas = result['data'];  
+
+               
         this.loading = false; 
       });
   }
 
   onItemClick(e) {   
-    this.item.patchValue({org_unidad_id2:e.item.id});
-    this.item.patchValue({desc_unidad2:e.item.desc_unidad});
+    this.item.patchValue({org_area_id:e.item.id});
+    this.item.patchValue({desc_area:e.item.desc_area});
 	   console.log(this.item);
 	}
 
@@ -345,15 +341,21 @@ cargarPap():Promise<any>{
   this.certificacionCasService.getMetas().pipe(
      
   ).subscribe(
-    (res)=> {                    
-      this.metas = res['metas'];            
+    (res)=> {     
+      console.log(res)               ;
+      this.metas = res['data'];            
        this.loading = false;
     }
   )}
- 
+
+  
+ newExpediente(){
+  this.crearExpediente({expediente:this.formulario.get("expediente").value,values:this.itemData}); 
+ }
+
   createPdf() {
   console.log("data",this.itemData);
-  this.crearExpediente({expediente:this.formulario.get("expediente").value,values:this.itemData});   
+   
    // totales
     let so:number=0;
     let eo:number=0;
@@ -392,7 +394,7 @@ cargarPap():Promise<any>{
       'essalud_total':this.formatear(et),
       'aguinaldo_total':this.formatear(at),
       'total_general':this.formatear(tg),
-      'desc_unidad':this.item.get('desc_unidad2').value
+      'area':this.item.get('area').value
       },
     );     
      console.log('suma',this.sumaOficina); 
@@ -444,7 +446,7 @@ cargarPap():Promise<any>{
                 { content: this.sumaOficina[0]['total_general'], styles: {halign: 'right',valign: 'middle',fontSize: 9} },    
               ] ,
               [
-                { content: this.sumaOficina[0]['desc_unidad'], styles: {halign: 'left',fontSize: 9} },                
+                { content: this.sumaOficina[0]['desc_area'], styles: {halign: 'left',fontSize: 9} },                
                 { content: this.sumaOficina[0]['cantidad'], styles: {halign: 'center', valign: 'middle',fontSize: 9} },
                 { content: this.sumaOficina[0]['honorario_mensual'],styles: {halign: 'right',valign: 'middle',fontSize: 9} },
                 { content: this.sumaOficina[0]['essalud_mensual'], styles: {halign: 'right',valign: 'middle',fontSize: 9} },                
@@ -490,7 +492,7 @@ cargarPap():Promise<any>{
             textColor: false,
             fontSize: 8, }
     });
-    doc.save("table.pdf");
+   // doc.save("table.pdf");
   }
   
 
@@ -502,11 +504,11 @@ cargarPap():Promise<any>{
       this.certificacionCasService.postCertificacionValidar(param).subscribe(
         (res)=> {              
           this.plazas_validar = res['data'];            
-          console.log(this.plazas_validar);
+          console.log('validar' ,this.plazas_validar);
           this.item.patchValue({cargo:this.plazas_validar[0]['cargo']});                  
-          this.itemKey = this.plazas_validar[0]['org_unidad_id2'];
-          this.item.patchValue({org_unidad_id2:this.plazas_validar[0]['org_unidad_id2']});
-          this.item.patchValue({desc_unidad2:this.plazas_validar[0]['desc_unidad2']});
+          this.itemKey = this.plazas_validar[0]['org_area_id'];
+          this.item.patchValue({org_area_id:this.plazas_validar[0]['org_area_id']});
+          this.item.patchValue({desc_area:this.plazas_validar[0]['desc_area']});
           let hm:number = this.plazas_validar[0]['monto_base'];
           this.item.patchValue({honorario_mensual:hm});
           var foundIndex = this.metas.findIndex(x => x.idmeta_anual == this.plazas_validar[0]['m_base']);                    

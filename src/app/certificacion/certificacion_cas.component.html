@@ -32,23 +32,6 @@
                             </div>
                         </div>
                         <div class="p-col-3">
-                                Unidad
-                        </div>
-                        <div class="p-col-9">                                
-                                <dx-drop-down-button                                                                    
-                                (onSelectionChanged)="onItemClick($event)"   
-                                [(selectedItemKey)]="itemKey"
-                                [useSelectMode]="true"                 
-                                text="Unidad 2021"
-                                   [dropDownOptions]="{ width: 280 }"
-                                    [items]="unidades2"
-                                    keyExpr="id"
-                                    displayExpr="desc_unidad">
-                                </dx-drop-down-button>
-                             <!--   <input formControlName="desc_unidad" type="text" style="width: 100%;" pInputText type="text"> -->
-                        </div> 
-
-                        <div class="p-col-3">
                             cargo
                         </div>
                         <div class="p-col-9">
@@ -61,6 +44,26 @@
                                     </div>
                             </div>
                         </div>
+                        <div class="p-col-3">
+                                Area
+                        </div>
+                        <div class="p-col-9">                                
+                            <p-dropdown #area_id [options]="areas" formControlName="area" id="float-area" [autoDisplayFirst]="false" 
+                            filter="true" appendTo="body" [style]="{'width':'100%'}" scrollHeight="400px"
+                            showClear="true" optionLabel="desc_area">
+                                <ng-template let-item pTemplate="selectedItem">
+                                    <span style="font-size:0.8em;Float:left;margin-top:3.5px">{{item.label}}</span>
+                                </ng-template>
+                                <ng-template let-car pTemplate="item">
+                                    <div class="ui-helper-clearfix">  
+                                        <div style="font-size:0.8em;float:left;margin-top:3.5px">{{car.label}}</div>
+                                    </div>
+                                </ng-template>
+                            </p-dropdown>
+                             <!--   <input formControlName="desc_unidad" type="text" style="width: 100%;" pInputText type="text"> -->
+                        </div> 
+
+
                         <div class="p-col-3">
                             Meta
                         </div>
@@ -100,7 +103,7 @@
                                          </div>
                                          <div class="p-col-6">
                                                  <button pButton (click)="addItem()" style="display: inline-block;text-align: center;" type="button" label="Agregar" class="ui-button-raised ui-button-info"></button>
-                                                 <button pButton (click)="createPdf()" style="display: inline-block;text-align: center;" type="button" label="Crear" class="ui-button-raised ui-button-info"></button>
+                                                 <button pButton (click)="newExpediente()" style="display: inline-block;text-align: center;" type="button" label="Crear" class="ui-button-raised ui-button-info"></button>
                                         </div>
                                  </div>
                      </div>       
@@ -157,6 +160,7 @@
                                     <td *ngFor="let col of cols_itemData" [ngStyle]="col.estilo" [ngSwitch]="col.field">
                                         <span *ngSwitchCase="'meta'">{{item[col.field].meta }}</span>
                                         <span *ngSwitchCase="'finalidad'">{{item.meta.finalidad }}</span>
+                                        <span *ngSwitchCase="'desc_area'">{{item.area.desc_area }}</span>
                                         <span *ngSwitchDefault>{{item[col.field]}}</span>                                            
                                     </td>
                                 </tr>
