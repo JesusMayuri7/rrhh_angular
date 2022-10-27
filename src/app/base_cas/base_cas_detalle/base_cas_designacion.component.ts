@@ -16,6 +16,9 @@ export class BaseCasDesignacionComponent implements OnInit {
     dataSource:any[];
     @Input('archivo') row:any[];
     @ViewChild(DxDataGridComponent) grid: DxDataGridComponent;
+    isVisible = false;
+    type = 'info';
+    message = '';
 
     constructor(private httpClient: HttpClient,private casService:BaseCasService) {
         let that = this;  
@@ -32,7 +35,15 @@ export class BaseCasDesignacionComponent implements OnInit {
             this.cargaData(this);
     }
 
+    toast(_type:string,_message:string) {
+        this.type = _type;
+        this.message = _message;
+        this.isVisible = true;
+      }
+
     alta(e){
+        if(this.row[0].estado_actual == 'VACANTE')
+        {
         let data_alta:any;
          data_alta = Object.assign({},this.grid.instance.getSelectedRowsData()[0]);        
          data_alta['org_unidad_id'] = this.row[0].org_unidad_id;
@@ -46,6 +57,10 @@ export class BaseCasDesignacionComponent implements OnInit {
         this.casService.postCasDesignacion(data_alta).subscribe((a) => {
             console.log(a);
         })
+        }
+        else{
+            this.toast('error','Error, el registro debe estar VACANTE')
+        }
        // console.log(this.grid.instance.getSelectedRowsData()[0]);
     }
 

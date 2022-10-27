@@ -78,7 +78,7 @@ import { DxTooltipComponent,DxDataGridComponent } from 'devextreme-angular';
   }
 
     open(e){       
-      if (e.columnIndex==7 && e.data.enlace.length>0) {     
+      if (e.columnIndex==8 && e.data.enlace && !e.data.anulado) {     
          var url = 'http://gis.proviasnac.gob.pe/convocatorias/';
          window.open(url+e.data.enlace, null);        
       }
@@ -103,8 +103,10 @@ import { DxTooltipComponent,DxDataGridComponent } from 'devextreme-angular';
       return this.httpClient.get("http://rrhh.pvn.gob.pe/api/tramite/certificacion_plazas").toPromise()
         .then(result => {
           this.publicacion= result['publicacion'];             
+          console.log(result['data']);
           return {          
-              data: result['data'],        
+              data: result['data'],  
+                    
              // groupCount: result.groupCount*/
           };
       });          
@@ -122,7 +124,7 @@ import { DxTooltipComponent,DxDataGridComponent } from 'devextreme-angular';
       a.dataSource = new CustomStore({
         key: "id",
         load: ()=>this.cargarPap(),     
-        remove: (key) => this.httpClient.delete('http://rrhh.pvn.gob.pe/api/tramite/certificacion/'+key),      
+        //remove: (key) => {return this.httpClient.delete('http://rrhh.pvn.gob.pe/api/tramite/certificacion/'+ encodeURIComponent(key)).toPromise(); },      
         update: (key, values) => this.httpClient.put("http://rrhh.pvn.gob.pe/api/tramite/certificacion", {
             id: key,
             values: values

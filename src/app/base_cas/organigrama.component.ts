@@ -47,6 +47,9 @@ export class OrganigramaComponent implements OnInit {
   popupAlta: boolean = false;
   rowData: any = {};
   anio:string= '2022';
+  isVisible = false;
+  type = 'info';
+  message = '';
 
   constructor(private casService: BaseCasService, private excelService: ExcelService, private httpClient: HttpClient) {
 
@@ -188,6 +191,12 @@ export class OrganigramaComponent implements OnInit {
     this.dataGrid.instance.filter([["error", "=", 1], ["presupuesto", "=", "ACTIVO"]]);
   }
 
+  toast(_type:string,_message:string) {
+    this.type = _type;
+    this.message = _message;
+    this.isVisible = true;
+}
+
   addMenuItems(e: any): void {
     let items = [];
     this.rowData = e.component.getSelectedRowsData();
@@ -202,7 +211,14 @@ export class OrganigramaComponent implements OnInit {
       {
         text: "Alta Concurso",
         onClick: () => {
-          this.popupConcurso = true;
+          if(this.rowData[0].estado_actual == 'VACANTE')
+          {
+            this.popupConcurso = true;          
+          }
+          else{
+              this.toast('error','Error, el registro debe estar VACANTE');
+          }
+         
           //e.component.cancelEditData();
         }
       },
@@ -214,7 +230,7 @@ export class OrganigramaComponent implements OnInit {
       },
       {
         text: "Alta por DNI",
-        onClick: () => {
+        onClick: () => {          
           this.popupAlta = true;
         }
       }
@@ -227,7 +243,7 @@ export class OrganigramaComponent implements OnInit {
     var self = this;
     if (e.rowType === "data") {
       if (e.column.dataField === 'monto') {
-        if (e.row.data.monto !== e.row.data.monto_air) {
+        if (e.row.data.monto !== e.row.data.monto_air || e.row.data.monto !== e.row.data.monto_cert) {
           e.cellElement.style.color = 'red';
           e.cellElement.style.fontWeight = 'bold';
           e.row.data.error = 1;
@@ -258,6 +274,22 @@ export class OrganigramaComponent implements OnInit {
           e.row.data.error = 1;
         }
       }
+
+      if (e.column.dataField=='estado_air' && e.row.data.estado_actual === 'OCUPADO' ) {
+        if (e.row.data.estado_air != 'OCUPADO') {
+          e.cellElement.style.color = 'red';
+          e.cellElement.style.fontWeight = 'bold';
+          e.row.data.error = 1;
+        }
+      }
+
+      if (e.column.dataField=='estado_licencia' && e.row.data.tipo_salida === 'LICENCIA_SG' ) {
+        if (e.row.data.estado_licencia == 'VENCIDA') {
+          e.cellElement.style.color = 'red';
+          e.cellElement.style.fontWeight = 'bold';
+          e.row.data.error = 1;
+        }
+      }
       
       if (e.column.dataField === 'nombres_air' )
       {
@@ -275,7 +307,7 @@ export class OrganigramaComponent implements OnInit {
               e.row.data.error = 1;
             }
 
-          }      
+      }      
 
       if ((e.column.dataField === 'dni_confianza') && (e.row.data.estado_actual === 'OCUPADO') && e.row.data.estado_confianza =='VIGENTE') {
         // console.log(e.row.data.estado_air,"-",e.row.data.dni,"-",e.row.data.dni);         

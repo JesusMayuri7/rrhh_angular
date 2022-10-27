@@ -55,13 +55,14 @@
                showScrollbar="always"> <!-- or "virtual" | "infinite" -->                    
            </dxo-scrolling>
            <dxi-column                   
-           [width]="50"
-           caption="Año"
-           alignment="center"
-           dataField="anio"                            
-           dataType="string"                           
-           selectedFilterOperation="contains"
-           [filterOperations]="[]">                                        
+            [width]="50"
+            caption="Año"
+            alignment="center"
+            dataField="anio"                            
+            dataType="string"                           
+            selectedFilterOperation="contains"
+            [filterOperations]="[]"
+            [filterValue]="['2022']">                                          
        </dxi-column>   
            <dxi-column                   
                [width]="90"
@@ -166,21 +167,14 @@
                             <dxi-column dataField="convocatoria_nro"  [width]="90" ></dxi-column>
                             <dxi-column dataField="cargo" [width]="430"></dxi-column>
                             <dxi-column dataField="modalidad"  [width]="80"></dxi-column>                            
+                            <dxi-column dataField="estado"  [width]="80"></dxi-column>                            
                             <dxo-scrolling mode="virtual"></dxo-scrolling>
                             <dxo-selection mode="single" ></dxo-selection>
                         </dx-data-grid>
                     </div>
                 </dx-drop-down-box>
             </div>               
-           <dxi-column    
-               [width]="80"          
-               dataField="convocatoria_anio"
-               caption="Anio"
-               dataType="string"
-               selectedFilterOperation="contains"
-               [filterOperations]="[]">  
-               
-           </dxi-column>    
+
            <dxi-column    
                [width]="80"          
                dataField="estado"
@@ -246,6 +240,14 @@
             dataType="string"
             selectedFilterOperation="contains"
             [filterOperations]="[]">                 
+            </dxi-column>  
+            <dxi-column    
+            [width]="50"          
+            dataField="anulado"
+            caption="Anulado"
+            dataType="boolean"
+            showEditorAlways="false"
+            >                 
             </dxi-column>  
            <dxo-group-panel [visible]="true"></dxo-group-panel>
            <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>

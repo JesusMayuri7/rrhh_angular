@@ -21,7 +21,7 @@ import {DialogModule} from 'primeng/dialog';
 
 
 import {InputSwitchModule} from 'primeng/inputswitch';
-import { DxDataGridModule,DxTabPanelModule,DxCheckBoxModule,DxButtonModule,DxDateBoxModule,DxDropDownButtonModule } from 'devextreme-angular';
+import { DxDataGridModule,DxTabPanelModule,DxCheckBoxModule,DxButtonModule,DxDateBoxModule,DxDropDownButtonModule,DxToastModule } from 'devextreme-angular';
 import { DxTemplateModule,DxDropDownBoxModule,DxPopupModule,DxSelectBoxModule,DxListModule,DxScrollViewModule } from 'devextreme-angular';
 import {TabViewModule} from 'primeng/tabview';
 
@@ -34,6 +34,7 @@ import { CertificacionCasService } from './certificacion_cas.service';
 import { PlazaDetalleComponent} from './plaza_detalle/plaza_detalle.component';
 import { PlazaConvocatoriaComponent} from './plaza_convocatoria/plaza_convocatoria.component';
 import {FieldsetModule} from 'primeng/fieldset';
+
 
 
 const routes:Routes = [
@@ -61,7 +62,7 @@ const routes:Routes = [
     NgPipesModule,
     CheckboxModule,
     CardModule,
-
+    DxToastModule,
     HelpersModule,
     TooltipModule,
     LightboxModule,

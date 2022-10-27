@@ -44,6 +44,16 @@
             caption="PLAZA">
             <dxi-column                   
             [width]="60"
+            caption="Modalidad"                    
+            dataField="modalidad"
+            [fixed]="true"
+            dataType="string"
+            alignment="center"
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column>
+            <dxi-column                   
+            [width]="60"
             caption="Plaza"                    
             dataField="plaza"
             [fixed]="true"
@@ -105,6 +115,13 @@
             <dxi-column
             alignment="center"
             caption="PRESUPUESTO">
+            <dxi-column
+            [width]="150"  
+            dataField="producto"
+            caption="Producto"
+            dataType="string"
+            [filterOperations]="[]">  
+            </dxi-column>  
                 <dxi-column     
                     [minWidth]="230"          
                     dataField="meta_id"
@@ -322,6 +339,20 @@
                 <dxi-column
                 [width]="270"  
                 dataField="nombres_air"
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>
+                <dxi-column
+                [width]="50"  
+                dataField="tipo_air"
+                dataType="string"
+                selectedFilterOperation="contains"
+                [filterOperations]="[]">  
+                </dxi-column>
+                <dxi-column
+                [width]="50"  
+                dataField="media_subvencion"
                 dataType="string"
                 selectedFilterOperation="contains"
                 [filterOperations]="[]">  

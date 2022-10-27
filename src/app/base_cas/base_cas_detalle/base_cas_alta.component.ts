@@ -1,3 +1,4 @@
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit,ViewEncapsulation,Input, Output } from '@angular/core';
 import * as moment from 'moment';
 import { BaseCasService } from '../base_cas.service';
@@ -14,9 +15,15 @@ export class BaseCasAltaComponent implements OnInit {
     fe_salida:Date;
     fe_ingreso:Date;
     myDate:any;
+    meta_selected:any;
+    @Input('metas') metas2:any[];
     @Input('archivo') row:any[];
+    isVisible = false;
+    type = 'info';
+    message = '';
 
     constructor(private casService:BaseCasService) {
+        console.log('alta x dni ',this.metas2);
     }
     
     ngOnInit(): void {
@@ -29,7 +36,7 @@ export class BaseCasAltaComponent implements OnInit {
         ];
         //console.log('antes',this.fe_salida);
 
-        this.fe_salida = this.row[0].fe_salida?? moment(Date()).format('YYYY-MM-DD');
+        //this.fe_salida = this.row[0].fe_salida ?? moment(Date()).format('YYYY-MM-DD');
       //  console.log('despues',this.fe_salida);
       //  this.fe_ingreso = this.row[0].fe_ingreso; 
        // moment.locale('es');
@@ -37,20 +44,33 @@ export class BaseCasAltaComponent implements OnInit {
        // this.myDate = moment(this.fe_ingreso).format('YYYY-MM-DD');                    
     }
 
-    ngAfterViewInit(){
-
-    }
+    toast(_type:string,_message:string) {
+        this.type = _type;
+        this.message = _message;
+        this.isVisible = true;
+      }
 
     alta(){
         console.log(this.row[0]);
-        this.casService.putCasAlta(this.row[0]).subscribe((a) => {
-            console.log(a);
-        })
+        if(this.row[0].estado_actual == 'VACANTE'){
+
+            this.casService.putCasAlta(this.row[0]).subscribe((a) => {
+                console.log(a);
+            })
+        }        
+            else{
+                this.toast('error','Error, el registro debe estar VACANTE')
+            }        
     }
 
     onValueChanged(evt: any): void {  
         //console.log(evt.value);
         this.row[0].tipo_salida = evt.value;  
+    } 
+
+    onTipoIngresoChanged(evt: any): void {  
+        //console.log(evt.value);
+        this.row[0].tipo_ingreso = evt.value;  
     } 
 
     changeFeIngreso(e){

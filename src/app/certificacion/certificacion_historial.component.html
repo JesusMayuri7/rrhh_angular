@@ -1,4 +1,4 @@
-              
+
            <dx-data-grid id="gridContainer"   
            keyExpr="id"
            [columnAutoWidth]="true"
@@ -48,7 +48,35 @@
                dataType="string"                           
                selectedFilterOperation="contains"
                [filterOperations]="[]">                                        
-           </dxi-column>                       
+           </dxi-column>  
+           <dxi-column                   
+           [width]="90"
+           caption="Tipo"
+           alignment="center"
+           dataField="modalidad_concurso"                            
+           dataType="string"                           
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">   
+           <dxo-lookup 
+           width="100"          
+           [dataSource]="['NINGUNO','INDETERMINADO','TEMPORAL']"
+       >
+  </dxo-lookup>                                     
+       </dxi-column>  
+       <dxi-column                   
+       [width]="90"
+       caption="Sustento"
+       alignment="center"
+       dataField="sustento_legal"                            
+       dataType="string"                           
+       selectedFilterOperation="contains"
+       [filterOperations]="[]"> 
+       <dxo-lookup 
+       width="100"          
+       [dataSource]="['NINGUNO','DU_034_2021','DU_083_2021','LEY_31365']"
+   >
+</dxo-lookup>                                         
+   </dxi-column>                       
            <dxi-column                   
            [width]="180"
            caption="Solicitud"
@@ -65,12 +93,12 @@
                alignment="center"                        
                dataType="date"
                selectedFilterOperation="contains"
-               format="dd-MM-yyyy"
+               format="yyyy-MM-dd"
                [filterOperations]="[]">  
             </dxi-column> 
 
            <dxi-column
-           [width]="70"  
+           [width]="60"  
            caption="Plaza"
            dataField="codigo_plaza"
            alignment="center"                        
@@ -79,7 +107,7 @@
            [filterOperations]="[]">  
            </dxi-column>
            <dxi-column     
-           [width]="260"         
+           [width]="220"         
            dataField="dependencia"
            caption="Dependencia"
            dataType="string"
@@ -87,15 +115,31 @@
            [filterOperations]="[]">  
            </dxi-column> 
            <dxi-column    
-           [width]="350"          
+           [width]="280"          
            dataField="cargo"
            caption="Cargo"
            dataType="string"
            selectedFilterOperation="contains"
            [filterOperations]="[]">  
-           </dxi-column>    
+           </dxi-column>   
            <dxi-column    
-           [width]="100"          
+           [width]="300"          
+           dataField="desc_motivo_creacion_registro"
+           caption="Creacion AIR"
+           dataType="string"
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">  
+           </dxi-column>   
+           <dxi-column    
+           [width]="50"          
+           dataField="cod_cargo_funcional"
+           caption="Codigo cargo"
+           dataType="string"
+           selectedFilterOperation="contains"
+           [filterOperations]="[]">  
+           </dxi-column>  
+           <dxi-column    
+           [width]="80"          
            dataField="cargo_air"
            caption="Cargo Air"
            dataType="string"
@@ -103,7 +147,7 @@
            [filterOperations]="[]">  
            </dxi-column>                               
            <dxi-column
-               [width]="80"  
+               [width]="60"  
                dataField="monto"
                dataType="number">
                    <dxo-format
@@ -111,7 +155,16 @@
                    [precision]="2">
                    </dxo-format>
            </dxi-column>   
-
+           <dxi-column
+               [width]="60"  
+               caption="Monto AIR"
+               dataField="monto_air"
+               dataType="number">
+                   <dxo-format
+                   type="fixedPoint"
+                   [precision]="2">
+                   </dxo-format>
+           </dxi-column> 
 
            <dxi-column    
                 [width]="90"          

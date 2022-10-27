@@ -17,8 +17,7 @@ import { AppComponent } from './app.component';
 import { SharedModule } from './shared.module';
 import { AppGuardLoad } from './app_guard_load';
 import { AppGuardCan } from './app_guard_can';
-
-
+//import { FlexLayoutModule } from '@angular/flex-layout';
 
 
 registerLocaleData(localeEs, 'es');
@@ -35,6 +34,7 @@ registerLocaleData(localeEs, 'es');
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
+    //FlexLayoutModule,
     ServiceModule.forRoot(),
 //    SharedModule.forRoot()
    // RouterModule.forRoot(routeConfig)

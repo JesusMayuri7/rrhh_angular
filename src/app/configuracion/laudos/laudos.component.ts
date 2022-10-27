@@ -113,6 +113,18 @@ export class LaudosComponent implements OnInit {
             precision: 2, // the precision of values        
           },
           area: "data"
+        },
+        {
+          width:20,
+          caption: "Incremento (%)",
+          dataField: "porcentaje_incremento",
+          dataType: "number",      
+          summaryType: "sum",
+          format: {
+            type: "fixedPoint", // one of the predefined formats
+            precision: 0, // the precision of values        
+          },
+          area: "data"
         }
       ],
         remoteOperations: false,

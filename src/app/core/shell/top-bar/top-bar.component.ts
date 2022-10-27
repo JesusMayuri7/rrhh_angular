@@ -100,7 +100,7 @@ export class TopBarComponent {
         routerLink: ['presupuesto']
       },
       {
-        label: 'Tramite',
+        label: 'Tramite CAS',
 
         routerLink: ['certificacion_cas']
       },

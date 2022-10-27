@@ -20,8 +20,8 @@ import {LightboxModule} from 'primeng/lightbox';
 import {DialogModule} from 'primeng/dialog';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {TabViewModule} from 'primeng/tabview';
-import { DxTabPanelModule,DxCheckBoxModule, DxTemplateModule,DxTooltipModule,DxPopupModule } from 'devextreme-angular';
-import { DxDataGridModule, DxButtonModule,DxSelectBoxModule,DxDateBoxModule } from 'devextreme-angular';
+import { DxTabPanelModule,DxCheckBoxModule, DxTemplateModule,DxTooltipModule,DxPopupModule,DxToastModule } from 'devextreme-angular';
+import { DxDataGridModule, DxButtonModule,DxSelectBoxModule,DxDateBoxModule,DxDropDownBoxModule } from 'devextreme-angular';
 import {HelpersModule} from '../helpers/helpers.module';
 
 import { BaseCasService } from './base_cas.service';
@@ -72,7 +72,7 @@ const routes:Routes = [
     DxDataGridModule,
     TabViewModule,
     DxTooltipModule,
-    DxPopupModule,DxButtonModule,DxSelectBoxModule,DxDateBoxModule,
+    DxPopupModule,DxButtonModule,DxSelectBoxModule,DxDateBoxModule,DxDropDownBoxModule,DxToastModule,
     RouterModule.forChild(routes)
   ],
   declarations: [BaseCasIndexComponent,OrganigramaComponent,SigaIngresosComponent,AirHspCasComponent,BaseCasDesignacionComponent,

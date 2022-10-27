@@ -272,14 +272,14 @@ export class BaseCapComponent implements OnInit {
         }
       }
        if (e.column.dataField ==='estado_actual' && e.row.data.modalidad==='CONCURSO' && e.row.data.tipo_salida == 'LICENCIA_SG') {          
-        if (e.row.data.estado_pap !== 'OCUPADO_LSG' || e.row.data.estado_opp !== 'OCUPADO' || e.row.data.estado_air !== 'TEMPORAL' ) {
+        if (e.row.data.estado_pap !== 'OCUPADO_LSG' || e.row.data.estado_opp !== 'RESERVADO' || e.row.data.estado_air !== 'TEMPORAL' ) {
           e.cellElement.style.color = 'red';
           e.cellElement.style.fontWeight = 'bold';
           e.row.data.error = 1;
         }
       }
       if (e.column.dataField ==='estado_actual' && e.row.data.modalidad==='CONCURSO' && e.row.data.tipo_salida == 'DESIGNACION') {          
-        if (e.row.data.estado_pap !== 'OCUPADO_PL_RES' || e.row.data.estado_opp !== 'OCUPADO' || e.row.data.estado_air !== 'TEMPORAL' ) {
+        if (e.row.data.estado_pap !== 'OCUPADO_PL_RES' || e.row.data.estado_opp !== 'RESERVADO' || e.row.data.estado_air !== 'TEMPORAL' ) {
           e.cellElement.style.color = 'red';
           e.cellElement.style.fontWeight = 'bold';
           e.row.data.error = 1;

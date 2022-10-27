@@ -48,7 +48,7 @@ import CustomStore from 'devextreme/data/custom_store';
 
 
     open(e){       
-      if (e.columnIndex==0) {
+      if (e.columnIndex==1) {
         var anio = e.value.substring(e.value.length - 4);
         console.log(anio);
          var url = e.value.substring(2,e.value.length - 5);
@@ -57,7 +57,7 @@ import CustomStore from 'devextreme/data/custom_store';
          url = "http://gis.proviasnac.gob.pe/intranet/TRAMITE_doc/tramite_exp_hoja_std.asp?nu_expedref="+url+"&s_id_periodo="+anio+"&tipo=I&opcion=5";
          window.open(url, null);        
       }
-      if (e.columnIndex==3) {     
+      if (e.columnIndex==4) {     
         console.log(e);
         //var doc = e.value.substring(0,13);      
         // window.open(e.data.informe_opp+doc+'.pdf', null);        
@@ -70,8 +70,8 @@ import CustomStore from 'devextreme/data/custom_store';
           console.log("get",result['data']);
           return {          
               data: result['data'],
-              totalCount: 588,
-              sumary:588            
+              totalCount: 630,
+              sumary:630            
              // groupCount: result.groupCount*/
           };
       });          
@@ -83,7 +83,7 @@ import CustomStore from 'devextreme/data/custom_store';
       a.dataSource = new CustomStore({
         key: "id",
         load: ()=>this.cargarPap(),     
-        remove: (key) => this.httpClient.delete('http://rrhh.pvn.gob.pe/api/tramite/certificacion/'+key),      
+        //remove: (key) => this.httpClient.delete('http://rrhh.pvn.gob.pe/api/tramite/certificacion/'+key),      
         update: (key, values) => this.httpClient.put("http://rrhh.pvn.gob.pe/api/tramite/certificacion", {
             id: key,
             values: values

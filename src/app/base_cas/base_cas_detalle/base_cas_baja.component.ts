@@ -15,6 +15,9 @@ export class BaseCasBajaComponent implements OnInit {
     fe_ingreso:Date;
     myDate:any;
     @Input('archivo') row:any[];
+    isVisible = false;
+    type = 'info';
+    message = '';
 
     constructor(private casService:BaseCasService) {
     }
@@ -27,7 +30,9 @@ export class BaseCasBajaComponent implements OnInit {
             "LICENCIA_SG",
             "LICENCIA_CG",
             "FALLECIMIENTO" ,
-            "DESPLAZAMIENTO"                       
+            "DESPLAZAMIENTO",
+            "DESTITUCION",
+            "LICENCIA_DE"                       
         ];
         //console.log('antes',this.fe_salida);
 
@@ -39,15 +44,27 @@ export class BaseCasBajaComponent implements OnInit {
        // this.myDate = moment(this.fe_ingreso).format('YYYY-MM-DD');                    
     }
 
+    toast(_type:string,_message:string) {
+        this.type = _type;
+        this.message = _message;
+        this.isVisible = true;
+      }
+
     ngAfterViewInit(){
 
     }
 
     baja(){
+        if(this.row[0].estado_actual=='OCUPADO')
+        {
         console.log(this.row[0]);
         this.casService.putCasBaja(this.row[0]).subscribe((a) => {
             console.log(a);
         })
+        }
+        else{
+            this.toast('error','El registro debe estar OCUPADO');
+        }
     }
 
     onValueChanged(evt: any): void {  

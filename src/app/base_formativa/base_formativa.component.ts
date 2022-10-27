@@ -187,14 +187,14 @@ getMetas(){
     a.dataSource = new CustomStore({
       key: "id",
       load: ()=>this.cargarPap(),
-      remove: (key) => this.httpClient.delete("http://rrhh.pvn.gob.pe/api/formativa/base_formativa_remove/"+encodeURIComponent(key))
+      /* remove: (key) => this.httpClient.delete("http://rrhh.pvn.gob.pe/api/formativa/base_formativa_remove/"+encodeURIComponent(key))
       .toPromise()
       .then(result => {        
         return {          
             data: result['data'],            
-          // groupCount: result.groupCount*/
+          // groupCount: result.groupCount
         };
-      }),
+      })*/
       update: (key, values) => this.httpClient.post("http://rrhh.pvn.gob.pe/api/formativa/base_formativa_update", {
         id: key,
         values: values

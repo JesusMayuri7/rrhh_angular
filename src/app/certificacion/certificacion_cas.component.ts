@@ -4,7 +4,8 @@ import { CertificacionCasService } from './certificacion_cas.service';
 import { ExcelService } from '../service/excel.service';
 import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
-import CustomStore from 'devextreme/data/custom_store';
+
+import CustomStore from "devextreme/data/custom_store";
 import {MillonPipe} from '../pipes/millon.pipe';
 
 
@@ -81,12 +82,25 @@ export class CertificacionCasComponent implements OnInit {
     areas:[];
     selectedArea:any;
     itemKey:any;
+    isVisible = false;
+    type = 'info';
+    message = '';
+    modalidades = [];
+    sustentos = [];
+    sustento_conv:string;
+    modalidad_conv:string;
 
   constructor(private certificacionCasService:CertificacionCasService,private _formBuilder: FormBuilder,private httpClient: HttpClient,
     private excelService:ExcelService,private messageService: MessageService,public dialogService: DialogService) { 
 
 
   }
+  toast(_type:string,_message:string) {
+    this.type = _type;
+    this.message = _message;
+    this.isVisible = true;
+  }
+
 
   ngOnInit() {
 
@@ -111,7 +125,8 @@ export class CertificacionCasComponent implements OnInit {
         area:'',
         org_area_id:0,
         meta: {},   
-          
+        sustento_conv:'',
+        modalidad_conv:'',
         meta_2019:'',        
     });
 
@@ -179,6 +194,17 @@ export class CertificacionCasComponent implements OnInit {
     { label: 'VACANTE', value: 'VACANTE' },
     ];
 
+    this.modalidades = [    
+      { label: 'TEMPORAL', value: 'TEMPORAL' },
+      { label: 'INDETERMINADO', value: 'INDETERMINADO' },
+      ];
+
+      this.sustentos = [    
+        { label: 'DU_034_2021', value: 'DU_034_2021' },
+        { label: 'DU_083_2021', value: 'DU_083_2021' },
+        { label: 'LEY_31365', value: 'LEY_31365' },
+        ];
+
     this.sedes = [    
       { label: 'SEDE', value: 'SEDE'},
       { label: 'ZONAL',value:'ZONAL'}            
@@ -212,9 +238,7 @@ export class CertificacionCasComponent implements OnInit {
       (result)=> {
         
         console.log('areas ',result);
-        this.areas = result['data'];  
-
-               
+        this.areas = result['data'];                 
         this.loading = false; 
       });
   }
@@ -230,7 +254,7 @@ export class CertificacionCasComponent implements OnInit {
     a.dataSource = new CustomStore({
       key: "id",
       load: ()=>this.cargarPap(),     
-      remove: (key) => this.httpClient.delete('http://rrhh.pvn.gob.pe/api/tramite/certificacion/'+key),      
+      //remove: (key) => { return this.httpClient.delete('http://rrhh.pvn.gob.pe/api/tramite/certificacion/'+key).toPromise();},      
       update: (key, values) => this.httpClient.put("http://rrhh.pvn.gob.pe/api/tramite/certificacion", {
           id: key,
           values: values
@@ -263,14 +287,16 @@ export class CertificacionCasComponent implements OnInit {
   }
 
   crearExpediente(values){    
-      this.httpClient.post("http://rrhh.pvn.gob.pe/api/tramite/certificacion", values)
-          .toPromise()
-          .then(result => {
-            console.log("get",result);  
-           // this.dataSource.refresh(true);               ERROR 
-           //  data: result['data'],                                
-               // groupCount: result.groupCount*/            
-          });    
+      this.httpClient.post("http://rrhh.pvn.gob.pe/api/tramite/certificacion", values).subscribe(
+        res=> { 
+          if(res["status"])
+          {
+            this.toast('success','Se guardo exitosamente');
+          }
+        },
+        err=> this.toast('error','Error al guardar'),
+      );
+          
   }
 
 
@@ -522,18 +548,19 @@ cargarPap():Promise<any>{
   }
 
   certificacionCargoUpdate(){             
-    //console.log(this.item.get('meta').value.meta);
+    console.log(this.item.value);
     let param={
                 codigo_plaza : this.item.get('codigo_plaza').value,
                 cargo : this.item.get('cargo').value,
-                meta : this.item.get('meta').value.meta,
-                meta_id : this.item.get('meta').value.idmeta_anual,
+                //meta : this.item.get('meta').value.meta,
+                //meta_id : this.item.get('meta').value.idmeta_anual,
                 monto : this.item.get('honorario_mensual').value,
               };  
     this.loading = true;  
     console.log(param);
     this.certificacionCasService.putCertificacionCargoUpdate(param).subscribe(
-      (res)=> {              
+      (res)=> {        
+        this.toast('success','Se guardo exitosamente');      
         console.log(res);
         //this.plazas_validar = res['data'];            
 
@@ -546,8 +573,9 @@ cargarPap():Promise<any>{
         }, 0);
         //this.createPdf();
         this.loading = false;
-      }
-    )
+      },
+      (err)=> {this.toast('error','Error, al grabar')}
+    );
 }
 
 

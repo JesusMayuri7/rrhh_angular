@@ -41,7 +41,7 @@
     (onHidden)='closeAlta()'
     [(visible)]="popupAlta">  
     <div *dxTemplate="let data of 'content'">  
-        <zd-base-cas-alta [archivo]="rowData" ></zd-base-cas-alta>  
+        <zd-base-cas-alta [archivo]="rowData" [metas]="metas2" ></zd-base-cas-alta>  
     </div>  
 </dx-popup> 
 
@@ -56,8 +56,7 @@
                 [paging]="false"
                 [columnWidth]="40"
                 (onToolbarPreparing)="onToolbarPreparing($event)"
-                (onCellPrepared)="onCellPrepared($event)"
-                
+                (onCellPrepared)="onCellPrepared($event)"                
                 (onContextMenuPreparing)="addMenuItems($event)"
                 >          
                 <dxo-selection mode="single"></dxo-selection>    
@@ -74,10 +73,7 @@
                 <dxo-scrolling
                     mode="standard" rowRenderingMode="standard" columnRenderingMode= "standard"
                     showScrollbar="always"> <!-- or "virtual" | "infinite" -->                    
-                </dxo-scrolling>
-                                      
-            
-   
+                </dxo-scrolling>                                      
                         <dxi-column                   
                         [minWidth]="60"
                         caption="Airhsp"                    
@@ -87,8 +83,7 @@
                         dataType="string"
                         alignment="left"
                         selectedFilterOperation="contains"
-                        [filterOperations]="[]">                                        
-                  
+                        [filterOperations]="[]">                                                          
                 </dxi-column>
                         <dxi-column
                         caption='Datos de la Plaza'
@@ -113,7 +108,7 @@
                                 [filterValues]="['ACTIVO']"                         
                                 >
                                     <dxo-lookup 
-                                    [dataSource]="['ACTIVO','INACTIVO','PROYECCION']"
+                                    [dataSource]="['ACTIVO','PROYECCION']"
                                     >
                                     </dxo-lookup>
                                 </dxi-column>
@@ -224,9 +219,11 @@
                                 [filterOperations]="[]">    
                                 </dxi-column>
                         </dxi-column>
-                        <dxi-column
-                        caption='Convocatoria'
-                        alignment="center">
+
+
+                            <dxi-column
+                            caption='Convocatoria'
+                            alignment="center">
                             <dxi-column
                             [minWidth]="80"  
                             caption="Fase"
@@ -235,6 +232,61 @@
                             dataType="string"
                             selectedFilterOperation="contains"
                             [filterOperations]="[]">    
+                            </dxi-column>
+                            <dxi-column                   
+                            [width]="90"
+                            caption="Tipo"
+                            alignment="center"
+                            dataField="modalidad_conv"                            
+                            dataType="string"                           
+                            selectedFilterOperation="contains"
+                            [filterOperations]="[]">   
+                            <dxo-lookup 
+                            width="100"          
+                            [dataSource]="['NINGUNO','INDETERMINADO','TEMPORAL']"
+                        >
+                   </dxo-lookup>                                     
+                        </dxi-column>  
+                        <dxi-column                   
+                        [width]="90"
+                        caption="Sustento"
+                        alignment="center"
+                        dataField="sustento_conv"                            
+                        dataType="string"                           
+                        selectedFilterOperation="contains"
+                        [filterOperations]="[]"> 
+                        <dxo-lookup 
+                        width="100"          
+                        [dataSource]="['NINGUNO','DU_034_2021','DU_083_2021','LEY_31365']"
+                    >
+                 </dxo-lookup>                                         
+                    </dxi-column>       
+                            <dxi-column
+                            [minWidth]="200"  
+                            caption="Area Certficada"
+                            alignment="left"
+                            dataField="desc_area_cert"
+                            dataType="string"
+                            selectedFilterOperation="contains"
+                            [filterOperations]="[]">    
+                            </dxi-column>
+                            <dxi-column
+                            [minWidth]="200"  
+                            caption="Cargo"
+                            alignment="left"
+                            dataField="cargo_cert"
+                            dataType="string"
+                            selectedFilterOperation="contains"
+                            [filterOperations]="[]">    
+                            </dxi-column>
+                            <dxi-column
+                            [minWidth]="80"  
+                            dataField="monto_cert"
+                            dataType="number">
+                                <dxo-format
+                                    type="fixedPoint"
+                                    [precision]="2">
+                                </dxo-format>
                             </dxi-column>
                             <dxi-column
                             [minWidth]="200"  
@@ -358,6 +410,10 @@
                         dataType="string"
                         selectedFilterOperation="contains"
                         [filterOperations]="[]">  
+                        <dxo-lookup 
+                        [dataSource]="['LEY_31131','DU_034_2021','DU_083_2021','LEY_1057_CF','LEY_31365']"
+                        >
+                        </dxo-lookup>
                         </dxi-column>
                         <dxi-column                                                                     
                         dataField="base_cas_detalle_id"
@@ -382,7 +438,8 @@
                            dataType="string"
                            selectedFilterOperation="contains"
                            [filterOperations]="[]">  
-                           </dxi-column>                
+                           </dxi-column>    
+           
                 </dxi-column>     
                 
                 <dxi-column
@@ -405,12 +462,24 @@
                         [filterOperations]="[]">  
                         </dxi-column>
                         <dxi-column
-                        [minWidth]="80"  
+                        [minWidth]="100"  
                         caption="Fin Licencia"
                         dataField="fin_licencia"
                         dataType="string">  
                         </dxi-column>
-
+                        <dxi-column                   
+                        [minWidth]="80"
+                        caption="Estado Lic."
+                        alignment="center"
+                        dataField="estado_licencia"                               
+                        dataType="string"
+                        selectedFilterOperation="contains"
+                        [filterOperations]="[]"                                                
+                        >
+                            <dxo-lookup 
+                            [dataSource]="['VIGENTE','VENCIDA']">
+                            </dxo-lookup>
+                        </dxi-column>      
                 </dxi-column>
                 <dxi-column
                  caption='AirHsp'
@@ -461,6 +530,22 @@
                         [minWidth]="80"  
                         caption="Estado Air"
                         dataField="estado_air"
+                        dataType="string"
+                        selectedFilterOperation="contains"
+                        [filterOperations]="[]">  
+                        </dxi-column>
+                        <dxi-column
+                        [minWidth]="60"  
+                        caption="Cod. Tipo Emp."
+                        dataField="codigo_tipo_empleado_publico_air"
+                        dataType="string"
+                        selectedFilterOperation="contains"
+                        [filterOperations]="[]">  
+                        </dxi-column>
+                        <dxi-column
+                        [minWidth]="150"  
+                        caption="Desc.Tipo Emp."
+                        dataField="desc_tipo_empleado_publico_air"
                         dataType="string"
                         selectedFilterOperation="contains"
                         [filterOperations]="[]">  

@@ -23,9 +23,17 @@
                     <span >Actualizado {{actualizado}}   </span>                
             </div>
             <dxi-column
-            [width]="100"  
+            [width]="60"  
             dataField="presupuesto"
             caption="Presu."
+            dataType="string"            
+            selectedFilterOperation="contains"
+            [filterOperations]="[]">  
+            </dxi-column>   
+            <dxi-column
+            [width]="90"  
+            dataField="modalidad"
+            caption="Modalidad"
             dataType="string"            
             selectedFilterOperation="contains"
             [filterOperations]="[]">  

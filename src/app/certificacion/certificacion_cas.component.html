@@ -1,53 +1,107 @@
-<hr>{{
-    itemData
-}}
-<div class="p-grid">
-    <div class="p-col-3">
+<dx-toast [(visible)]="isVisible" [type]="type" [message]="message">
+</dx-toast>
+<div class="container">
+    <h2>Normal</h2>
+    <div class="flex-container" fxLayout="row">
+      <div class="child-1">1. One</div> 
+      <div class="child-2">2. Two</div> 
+      <div class="child-3">3. Three</div>
+    </div>
+
+    <h2>Default</h2>
+    <div class="flex-container" fxLayout="row">
+      <div class="child-1" fxFlex>1. One</div> 
+      <div class="child-2" fxFlex>2. Two</div> 
+      <div class="child-3" fxFlex>3. Three</div>
+    </div>
+
+    <h2>fxFlex with grow shrink values</h2>
+    <div class="flex-container" fxLayout="row">
+      <div class="child-1" fxFlex="2 1 0">1. One</div> 
+      <div class="child-2" fxFlex>2. Two</div> 
+      <div class="child-3" fxFlex>3. Three</div>
+    </div>
+
+
+ <!--    <div>
         <form [formGroup]="formulario">
-            <div class="p-grid">
-                <div class="p-col-3">                       
+            
+                <div >                       
                     Expediente
                 </div>
-                <div class="p-col-9" >
+                <div>
                     <input style="width: 30%;" formControlName="expediente" pInputText type="text">
-                </div>                                                                                    
-            </div>
+                </div>                                                                                                
         </form>   
         <form [formGroup]="item">
-                <div class="p-grid" >
-                        <div class="p-col-3">
+                <div  >
+                    <div >
+                        Modalidad
+                    </div>
+                    <div >                                
+                        <p-dropdown #modalidad_conv [options]="modalidades" formControlName="modalidad_conv" id="float-modalidad" [autoDisplayFirst]="false" 
+                        filter="true" appendTo="body" [style]="{'width':'100%'}" scrollHeight="400px"
+                        showClear="true" optionLabel="label">
+                            <ng-template let-item pTemplate="selectedItem">
+                                <span style="font-size:0.8em;Float:left;margin-top:3.5px">{{item.label}}</span>
+                            </ng-template>
+                            <ng-template let-car pTemplate="item">
+                                <div class="ui-helper-clearfix">  
+                                    <div style="font-size:0.8em;float:left;margin-top:3.5px">{{car.label}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                        
+                    </div> 
+                    <div >
+                        Sustento
+                    </div>
+                    <div >                                
+                        <p-dropdown #modalidad_conv [options]="sustentos" formControlName="sustento_conv" id="float-sustento" [autoDisplayFirst]="false" 
+                        filter="true" appendTo="body" [style]="{'width':'100%'}" scrollHeight="400px"
+                        showClear="true" optionLabel="label">
+                            <ng-template let-item pTemplate="selectedItem">
+                                <span style="font-size:0.8em;Float:left;margin-top:3.5px">{{item.label}}</span>
+                            </ng-template>
+                            <ng-template let-car pTemplate="item">
+                                <div class="ui-helper-clearfix">  
+                                    <div style="font-size:0.8em;float:left;margin-top:3.5px">{{car.label}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                         
+                    </div> 
+                        <div >
                             Codigo Plaza
                         </div>
-                        <div class="p-col-9">                            
-                            <div class="p-grid">
-                                <div class="p-col-5">
-                                    <input formControlName="codigo_plaza" style="width: 50%;" pInputText type="text">
+                        <div >                            
+                           
+                                <div >
+                                    <input formControlName="codigo_plaza" style="width: 80%;" pInputText type="text">
                                 </div>
-                                <div class="p-col-4">
-
-                                </div>
-                                <div class="p-col-1">
+                                
+                                <div >
                                         <button pButton (click)="certificacionCasValidar('001693')" style="display: inline-block;text-align: center;" type="button" label="Validar" class="ui-button-raised ui-button-info"></button>                              
                                 </div>
-                            </div>
+                           
                         </div>
-                        <div class="p-col-3">
+                        <div >
                             cargo
                         </div>
-                        <div class="p-col-9">
-                            <div class="p-grid">
-                                <div class="p-col-9">
+                        <div >
+                            
+                                <div >
                                     <textarea  formControlName="cargo" style="width: 100%;" pInputText type="text"></textarea>
                                 </div>
-                                   <div class="p-col-1">
+                                   <div >
                                         <button pButton (click)="certificacionCargoUpdate()" style="text-align: left;" type="button" label="Actualizar" class="ui-button-raised ui-button-info"></button>                              
                                     </div>
-                            </div>
+                            
                         </div>
-                        <div class="p-col-3">
+                        <div >
                                 Area
                         </div>
-                        <div class="p-col-9">                                
+                        <div>                                
                             <p-dropdown #area_id [options]="areas" formControlName="area" id="float-area" [autoDisplayFirst]="false" 
                             filter="true" appendTo="body" [style]="{'width':'100%'}" scrollHeight="400px"
                             showClear="true" optionLabel="desc_area">
@@ -60,14 +114,14 @@
                                     </div>
                                 </ng-template>
                             </p-dropdown>
-                             <!--   <input formControlName="desc_unidad" type="text" style="width: 100%;" pInputText type="text"> -->
+                            
                         </div> 
 
 
-                        <div class="p-col-3">
+                        <div >
                             Meta
                         </div>
-                        <div class="p-col-9">
+                        <div>
                                 <p-dropdown #meta_id [options]="metas" formControlName="meta" id="float-meta" [autoDisplayFirst]="false" 
                                 filter="true" appendTo="body" [style]="{'width':'100%'}" scrollHeight="400px"
                                 showClear="true" optionLabel="finalidad">
@@ -81,38 +135,37 @@
                                     </ng-template>
                                 </p-dropdown>
                         </div> 
-                        <div class="p-col-3">
+                        <div >
                             Honorarios
                         </div>
-                        <div class="p-col-9">
+                        <div >
                             <input formControlName="honorario_mensual" type="number" style="width: 50%;" pInputText type="text">
                         </div>  
-                        <div class="p-col-3">
+                        <div >
                             Aguinaldo
                         </div>
-                        <div class="p-col-9">
+                        <div >
                             <input formControlName="aguinaldo_total" style="width: 50%;" pInputText type="text">
                         </div>   
-                        <div class="p-col-3">
+                        <div >
                             Meses
                      </div>
-                     <div class="p-col-9">
-                                 <div class="p-grid">
-                                         <div class="p-col-6">
+                     <div >
+                                
                                              <input formControlName="meses" style="width: 100%;" pInputText type="text">
                                          </div>
-                                         <div class="p-col-6">
+                                         <div >
                                                  <button pButton (click)="addItem()" style="display: inline-block;text-align: center;" type="button" label="Agregar" class="ui-button-raised ui-button-info"></button>
                                                  <button pButton (click)="newExpediente()" style="display: inline-block;text-align: center;" type="button" label="Crear" class="ui-button-raised ui-button-info"></button>
-                                        </div>
-                                 </div>
+                                
                      </div>       
             </div>   
         </form> 
-    </div>    
-    <div class="p-col-9">
-            <div class="p-grid" >
-                    <div class="p-col-12" >
+    </div> 
+  
+    <div>
+            
+                    
                         <p-table [columns]="cols_validar" [value]="plazas_validar" id="basic-table">
                                 <ng-template pTemplate="caption">    
                                     Validacion
@@ -131,18 +184,11 @@
                                             </td>
                                         </tr>
                                 </ng-template>
-                        </p-table>    
-                    </div>
-            </div> 
-            <br/>   
-            <br/>   
-            <br/>   
-            <br/> 
-                 
-    </div>
+                        </p-table>                
+    </div> -->
 </div>
 
-    <div class="p-grid" >
+<!--     <div  >
             <div class="p-col-12" >
                 <p-table [columns]="cols_itemData" [value]="itemData" id="basic-table">
                         <ng-template pTemplate="caption">    
@@ -167,10 +213,10 @@
                         </ng-template>
                 </p-table>    
             </div>
-    </div> 
-    <br/>   
-    <br/>   
-    <br/>   
-    <br/> 
+    </div>  -->
+
+    
+
+
          
 

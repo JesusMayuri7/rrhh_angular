@@ -12,7 +12,7 @@ export class CertificacionCasService {
     }
     
     getAreas():Observable<any> {        
-      return this.http.get(this.API+'configuracion/areas');        
+      return this.http.get(this.API+'configuracion/get_areas');        
     }
 
     postAdjudicarPlaza(data):Observable<any> {
