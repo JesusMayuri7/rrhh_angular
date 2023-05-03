@@ -1,13 +1,11 @@
 <div style="height:calc(100vh - 70px)">
-    <dx-data-grid id="datagrid" [columnMinWidth]="30" height="100%" [dataSource]="cap" [showRowLines]="true"
-        [showColumnLines]="true" [showBorders]="true" [rowAlternationEnabled]="true" [remoteOperations]="false"
-        [paging]="false" (onToolbarPreparing)="onToolbarPreparing($event)" (onExporting)="onExporting($event)"
+    <dx-data-grid id="datagrid" [columnMinWidth]="30" height="100%" [dataSource]="cap" (onToolbarPreparing)="onToolbarPreparing($event)" (onExporting)="onExporting($event)"
         (onExported)="onExported($event)">
         <dxo-grouping [autoExpandAll]="expanded"></dxo-grouping>
         <dxo-load-panel [enabled]="true"></dxo-load-panel>
         <dxo-export [enabled]="true" fileName="BaseCas"></dxo-export>
         <dxo-filter-row [visible]="true"></dxo-filter-row>
-        <dxo-header-filter [visible]="true"></dxo-header-filter>        
+        <dxo-header-filter visible="true"></dxo-header-filter>        
         <dxi-column [width]="50" dataField="idpap" caption="ID" dataType="string"
             selectedFilterOperation="contains" [filterOperations]="[]">
         </dxi-column>        

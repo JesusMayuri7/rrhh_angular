@@ -1,5 +1,5 @@
-<div class="p-grid">
-  <div class="p-col-12">
+<div class="grid">
+  <div>
     <dx-drop-down-button
     text="Planilla"
     [dropDownOptions]="{width: 100}"  
@@ -12,6 +12,8 @@
     [selectedItemKey]="0"
     (onItemClick)="onPlanillaClick($event)"        
     ></dx-drop-down-button> 
+  </div>
+  <div>
     <dx-drop-down-button
     text="Mes"
     [dropDownOptions]="{width: 100}"  
@@ -25,19 +27,14 @@
     [selectedItemKey]="0"
     (onItemClick)="onMesClick($event)"        
     ></dx-drop-down-button>  
+  </div>
+  <div>
     <dx-button
     stylingMode="outlined"
     text="Actualizar"
     type="default"
     [width]="90"
     (onClick)="onClickme($event)">
-    </dx-button>
-    <dx-button
-    stylingMode="outlined"
-    text="Expandir"
-    type="default"
-    [width]="90"
-    (onClick)="onExpandir()">
     </dx-button>
   </div>
 </div>

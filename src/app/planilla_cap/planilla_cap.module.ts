@@ -13,7 +13,6 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
-import { NgPipesModule } from 'ngx-pipes';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CardModule } from 'primeng/card';
 import {TooltipModule} from 'primeng/tooltip';
@@ -29,7 +28,7 @@ import { PlanillaCapIndexComponent } from './planilla_cap_index.component';
 import { PlanillaCapService } from './planilla_cap.service';
 import { DevengadoCapComponent } from './devengado_cap.component';
 import { PlanillaCapComponent} from './planilla_cap.component';
-import { ProyeccionDosCapComponent } from "./proyeccion_dos_cap.component";
+
 
 
 const routes:Routes = [
@@ -42,7 +41,7 @@ const routes:Routes = [
   providers:[PlanillaCapService],
   imports: [
     CommonModule,
-    NgPipesModule,
+    
     ReactiveFormsModule,
     HelpersModule,
     FormsModule,
@@ -71,7 +70,7 @@ const routes:Routes = [
     DxDropDownBoxModule,DxDropDownButtonModule,DxNumberBoxModule,DxSelectBoxModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DevengadoCapComponent,PlanillaCapIndexComponent,PlanillaCapComponent,ProyeccionDosCapComponent]
+  declarations: [DevengadoCapComponent,PlanillaCapIndexComponent,PlanillaCapComponent]
 })
 
 export class PlanillaCapModule { }

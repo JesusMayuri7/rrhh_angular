@@ -12,7 +12,7 @@ import { DialogComponent } from './dialog/dialog.component';
 //import { FlexLayoutModule } from '@angular/flex-layout';
 import { UploadService } from './upload.service';
 
-import {DialogService} from 'primeng/api';
+import {DialogService} from 'primeng/dynamicdialog';
 import {DynamicDialogModule} from 'primeng/dynamicdialog';
 import {MessageService} from 'primeng/api';
 import {DropdownModule} from 'primeng/dropdown';

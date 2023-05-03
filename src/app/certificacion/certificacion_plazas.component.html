@@ -6,7 +6,9 @@
     [dragEnabled]="false"
     [(visible)]="popupContratadoVisible">  
     <div *dxTemplate="let data of 'content'">  
+        <dx-scroll-view width="100%" height="100%">
         <zd-plaza-detalle [archivo]="rowData" ></zd-plaza-detalle>  
+    </dx-scroll-view>
     </div>  
 </dx-popup> 
 <dx-popup  
@@ -17,7 +19,9 @@
     [dragEnabled]="false"
     [(visible)]="popupConvocatoriaVisible">  
     <div *dxTemplate="let data of 'content'">  
+        <dx-scroll-view width="100%" height="100%">
         <zd-plaza-convocatoria [archivo]="rowData" ></zd-plaza-convocatoria>  
+    </dx-scroll-view>
     </div>  
 </dx-popup> 
 <div style="height:calc(100vh - 105px)">
@@ -26,12 +30,7 @@
            [columnAutoWidth]="true"
            
            [dataSource]="dataSource"
-           [showRowLines]="true"                        
-           [showColumnLines]="true"
-           [showBorders]="true"
-           [rowAlternationEnabled]="true"                      
-           [remoteOperations]="false"
-           [paging]="false"
+
            (onCellClick)="open($event)"
            (onToolbarPreparing)="onToolbarPreparing($event)"
            (onEditorPreparing)="onEditorPreparing($event)"
@@ -62,7 +61,7 @@
             dataType="string"                           
             selectedFilterOperation="contains"
             [filterOperations]="[]"
-            [filterValue]="['2022']">                                          
+            [filterValue]="['2023']">                                          
        </dxi-column>   
            <dxi-column                   
                [width]="90"
@@ -157,8 +156,7 @@
                             [height]="400"
                             [width]="700"
                             [selectedRowKeys]="[cellInfo.publicacion_id]"
-                            [focusedRowEnabled]="true"
-                            [focusedRowKey]="convocatoria_nro"
+                            [focusedRowEnabled]="true"                            
                             [hoverStateEnabled]="true"
                             (onSelectionChanged)="onSelectionChanged($event.selectedRowKeys, cellInfo, e.component)"
                         >

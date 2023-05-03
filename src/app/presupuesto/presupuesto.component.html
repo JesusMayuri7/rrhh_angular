@@ -1,6 +1,6 @@
 <div class="p-grid" style="margin:0.5em;">
     <div class="p-col">
-        Mes de Proyeccion: <p-dropdown autoWidth="true" [scrollHeight]="500" #Mes (onChange)='onOptionsSelected($event)' [options]="meses" optionLabel="label"></p-dropdown>
+        Mes de Proyeccion: <p-dropdown autoWidth="true"  #Mes (onChange)='onOptionsSelected($event)' [options]="meses" optionLabel="label"></p-dropdown>
     </div>
     <div class="p-col">Proyeccion desde el mes de: {{Mes.label=='Seleccione'? '': Mes.label}}</div>
     <div class="p-col"><p-button label="Descargar" (onClick)="onDescargar(Mes)" [disabled]="!habilitado"></p-button></div>

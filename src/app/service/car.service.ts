@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpHeaders,  HttpParams  } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Car,Trabajador} from '../interface';
+import { throwError } from 'rxjs';
+import { Trabajador} from '../interface';
 //import {Trabajador} from './../interface/trabajador';
 import { environment } from '../../environments/environment';
 
@@ -16,18 +17,9 @@ export class CarService {
     postTodo(post) {
         const headers = new HttpHeaders();
         headers.append('Content-Type', 'application/json');
-
-
         return <Observable<any>>this.http.post(this.API+'todo',post , {headers} );
       
     }
-
-   
-    private onError(error: Response | any) {
-      console.error(error.message || error);
-      return Observable.throw(error.message || error);
-    }
-
 
      deleteTodo(id) {        
          return <Observable<any>> this.http
@@ -35,14 +27,10 @@ export class CarService {
              
      }
 
-    getTodo():Observable<any[]> {        
-         return <Observable<any>> this.http
-             .get(this.API+'todo');   
+    getTodo(anio:string):Observable<any[]> {        
+         return <Observable<any[]>> this.http
+             .get(this.API+'todo_anio/'+anio);   
             
-     }
- 
-     private handleError(error: HttpResponse<any>) {
-         return Observable.throw(error.statusText);
      }
 
 }

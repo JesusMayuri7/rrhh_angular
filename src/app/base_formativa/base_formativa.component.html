@@ -3,11 +3,7 @@
                 [columnMinWidth]="30"                
                 height="100%" 
                 [dataSource]="dataSource"
-                [showRowLines]="true"
-                [showColumnLines]="true"
-                [showBorders]="true"
-                [rowAlternationEnabled]="true"
-                [remoteOperations]="false"
+
                 [filterValue]="filterValue"
                 (onToolbarPreparing)="onToolbarPreparing($event)"
                 (onCellPrepared)="onCellPrepared($event)"
@@ -18,13 +14,21 @@
                 [allowUpdating]="true"
                 [allowDeleting]="true">                
                 </dxo-editing>
-                <dxo-export [enabled]="true" fileName="BasePrac" [allowExportSelectedData]="true"></dxo-export>                                                      
+                <dxo-paging [enabled]="false"></dxo-paging>
+                <dxo-export [enabled]="true" fileName="BaseCas" [allowExportSelectedData]="true"></dxo-export>                                                      
                 <dxo-column-fixing [enabled]="true"></dxo-column-fixing>
-                <dxo-filter-row [visible]="true" ></dxo-filter-row>
+                <dxo-search-panel
+                [width]="300"
+                [visible]="true"
+                [highlightCaseSensitive]="false">
+        </dxo-search-panel>
+                <dxo-filter-row 
+                [visible]="true"                 
+                ></dxo-filter-row>
                 <dxo-header-filter 
                 [visible]="true"></dxo-header-filter>
                 <dxo-scrolling
-                    mode="standard"
+                    mode="standard" rowRenderingMode="standard" columnRenderingMode= "standard"
                     showScrollbar="always"> <!-- or "virtual" | "infinite" -->                    
                 </dxo-scrolling>
                 <dxi-column                   
@@ -35,7 +39,7 @@
                     dataType="string"
                     alignment="center"
                     selectedFilterOperation="contains"
-                    [filterOperations]="[]">                                        
+                    >                                        
                 </dxi-column>
                                       
             
@@ -43,14 +47,14 @@
             alignment="center"
             caption="PLAZA">
             <dxi-column                   
-            [width]="60"
+            [width]="100"
             caption="Modalidad"                    
             dataField="modalidad"
             [fixed]="true"
             dataType="string"
             alignment="center"
             selectedFilterOperation="contains"
-            [filterOperations]="[]">  
+            >  
             </dxi-column>
             <dxi-column                   
             [width]="60"
@@ -60,7 +64,7 @@
             dataType="string"
             alignment="center"
             selectedFilterOperation="contains"
-            [filterOperations]="[]">  
+            >  
             </dxi-column>
                 <dxi-column                   
                 [width]="55"
@@ -70,7 +74,7 @@
                 [fixed]="true"                
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">                                        
+                >                                        
                 </dxi-column>
                 <dxi-column
                 [width]="40"  
@@ -80,7 +84,7 @@
                 [fixed]="true"                
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>
                 <dxi-column
                 [width]="50"  
@@ -89,7 +93,7 @@
                 [fixed]="true"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>
                 <dxi-column
                 caption="Tipo"
@@ -99,7 +103,7 @@
                 [fixed]="true"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>
                 <dxi-column
                 caption="Tipo"
@@ -109,7 +113,7 @@
                 [fixed]="true"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>
             </dxi-column>
             <dxi-column
@@ -120,7 +124,7 @@
             dataField="producto"
             caption="Producto"
             dataType="string"
-            [filterOperations]="[]">  
+            >  
             </dxi-column>  
                 <dxi-column     
                     [minWidth]="230"          
@@ -137,7 +141,7 @@
                 dataField="desc_unidad"
                 caption="Unidad"
                 dataType="string"
-                [filterOperations]="[]">  
+                >  
 
                 </dxi-column>  
                 <dxi-column
@@ -145,7 +149,7 @@
                 dataField="org_area_id"
                 caption="Area"
                 dataType="string"
-                [filterOperations]="[]">  
+                >  
                     <dxo-lookup
                     [dataSource]="areas"
                     displayExpr="desc_area"
@@ -159,7 +163,7 @@
                 caption="Area"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>     
                 <dxi-column
                 [width]="200"  
@@ -167,7 +171,7 @@
                 caption="Ubicacion"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>  
                 <dxi-column
                 [width]="200"  
@@ -175,7 +179,7 @@
                 caption="Contrato"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>      
                 <dxi-column
                 [width]="100"  
@@ -183,7 +187,7 @@
                 caption="Tramite"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 <dxo-lookup 
                 [dataSource]="['ACTIVA','DISPONIBLE','TRAMITE','CERTIFICADA','CONVOCADA','PRESUPUESTADA']"
             >
@@ -195,28 +199,28 @@
                 caption="N° Tramite"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>        
                 <dxi-column
                 [width]="200"  
                 dataField="cargo"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>                
                 <dxi-column
                 [width]="70"  
                 dataField="dni"
                 dataType="string" 
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>
                 <dxi-column
                 [width]="230"  
                 dataField="nombres"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>  
                 <dxi-column
                 [width]="100"  
@@ -225,7 +229,7 @@
                 alignment="center"                
                 dataType="string"
                 selectedFilterOperation="contains"                
-                [filterOperations]="[]">     
+                >     
                 <dxo-lookup 
                      [dataSource]="['ACTIVO','INACTIVO']"
                  >
@@ -251,7 +255,7 @@
                 dataField="fecha_alta"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>
                 <dxi-column
                 [width]="80"  
@@ -259,153 +263,168 @@
                 dataField="fecha_baja"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>
                 </dxi-column>
                 <dxi-column
                 alignment="center"
                 caption="ESTADOS">
-                <dxi-column
-                [width]="80"  
-                caption="Estadod Air"
-                dataField="estado_air"
-                dataType="string"
-                selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                    <dxi-column
+                    [width]="80"  
+                    caption="Estadod Air"
+                    dataField="estado_air"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >  
+                    </dxi-column>
+    
+                    <dxi-column
+                    [width]="90"  
+                    caption="Estado OPP"
+                    dataField="estado_opp"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >                  
+                    </dxi-column>
+                    <dxi-column
+                    [width]="100"  
+                    caption="Estado PAP"
+                    dataField="estado_pap"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >  
+                    </dxi-column>
+                    <dxi-column
+                    [width]="90"  
+                    caption="Estado Actual"
+                    dataField="estado"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >                  
+                    </dxi-column>
+                    <dxi-column
+                    [width]="90"  
+                    caption="Estado Siga"
+                    dataField="estados"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >  
+                    </dxi-column>
                 </dxi-column>
- 
-                <dxi-column
-                [width]="90"  
-                caption="Estado OPP"
-                dataField="estado_opp"
-                dataType="string"
-                selectedFilterOperation="contains"
-                [filterOperations]="[]">                  
-                </dxi-column>
-                <dxi-column
-                [width]="100"  
-                caption="Estado PAP"
-                dataField="estado_pap"
-                dataType="string"
-                selectedFilterOperation="contains"
-                [filterOperations]="[]">  
-                </dxi-column>
-                <dxi-column
-                [width]="90"  
-                caption="Estado Actual"
-                dataField="estado"
-                dataType="string"
-                selectedFilterOperation="contains"
-                [filterOperations]="[]">                  
-                </dxi-column>
-                <dxi-column
-                [width]="90"  
-                caption="Estado Siga"
-                dataField="estados"
-                dataType="string"
-                selectedFilterOperation="contains"
-                [filterOperations]="[]">  
-                </dxi-column>
-                </dxi-column>
+
                 <dxi-column
                     alignment="center"
-                    caption="AIRHSP">
-                
-                
-                <dxi-column
-                [width]="100"  
-                caption="Fuente Air"
-                dataField="fuente_air"
-                dataType="string"
-                selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                    caption="AIRHSP">                                
+                    <dxi-column
+                    [width]="100"  
+                    caption="Fuente Air"
+                    dataField="fuente_air"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >  
+                    </dxi-column>
+                    
+                    <dxi-column
+                    [width]="100"  
+                    caption="Inicio"
+                    dataField="fecha_inicio_vigencia_reg"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >  
+                    </dxi-column>
+                    <dxi-column
+                    [width]="100"  
+                    caption="Fin"
+                    dataField="fecha_fin_vigencia_reg"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >  
+                    </dxi-column>
+                    <dxi-column
+                    [width]="80"  
+                    dataField="monto_air"
+                    dataType="number">
+                        <dxo-format
+                            type="fixedPoint"
+                            [precision]="2">
+                        </dxo-format>
+                    </dxi-column>
+                    <dxi-column
+                    [width]="90"  
+                    dataField="dni_air"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >  
+                    </dxi-column>
+                    <dxi-column
+                    [width]="270"  
+                    dataField="nombres_air"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >  
+                    </dxi-column>
+                    <dxi-column
+                    [width]="50"  
+                    dataField="tipo_air"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >  
+                    </dxi-column>
+                    <dxi-column
+                    [width]="50"  
+                    dataField="media_subvencion"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    >  
+                    </dxi-column>
                 </dxi-column>
-                <dxi-column
-                [width]="80"  
-                dataField="monto_air"
-                dataType="number">
-                    <dxo-format
-                        type="fixedPoint"
-                        [precision]="2">
-                    </dxo-format>
-                </dxi-column>
-                <dxi-column
-                [width]="90"  
-                dataField="dni_air"
-                dataType="string"
-                selectedFilterOperation="contains"
-                [filterOperations]="[]">  
-                </dxi-column>
-                <dxi-column
-                [width]="270"  
-                dataField="nombres_air"
-                dataType="string"
-                selectedFilterOperation="contains"
-                [filterOperations]="[]">  
-                </dxi-column>
-                <dxi-column
-                [width]="50"  
-                dataField="tipo_air"
-                dataType="string"
-                selectedFilterOperation="contains"
-                [filterOperations]="[]">  
-                </dxi-column>
-                <dxi-column
-                [width]="50"  
-                dataField="media_subvencion"
-                dataType="string"
-                selectedFilterOperation="contains"
-                [filterOperations]="[]">  
-                </dxi-column>
-            </dxi-column>
 
-            <dxi-column
-            alignment="center"
-            caption="SIGANET">
+                <dxi-column
+                alignment="center"
+                caption="SIGANET">
                 <dxi-column
                 [width]="70"  
                 dataField="fuente_siga"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>  
                 <dxi-column
                 [width]="70"  
                 dataField="meta_siga"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>   
                 <dxi-column
                 [width]="270"  
                 dataField="unidad_siga"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>  
                 <dxi-column
                 [width]="70"  
                 dataField="dni_siga"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
+                >  
                 </dxi-column>             
                 <dxi-column
                 [width]="270"  
                 dataField="nombres_siga"
                 dataType="string"
                 selectedFilterOperation="contains"
-                [filterOperations]="[]">  
-                </dxi-column>
-                </dxi-column>
+                >  
+                </dxi-column>                
                 <dxi-column
                     [width]="380"  
                     dataField="detalle"
                     dataType="string"
                     selectedFilterOperation="contains"
-                    [filterOperations]="[]">  
+                    >  
                 </dxi-column>
-
+              </dxi-column>
                 <dxo-summary>
                     <dxi-total-item
                         column="codigo_plaza"
@@ -430,41 +449,7 @@
                 <dxo-paging [enabled]="false"></dxo-paging>
                 <dxo-group-panel [visible]="true"></dxo-group-panel>
                 <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
-                <dxo-search-panel
-                [width]="300"
-                [visible]="true"
-                [highlightCaseSensitive]="false">
-        </dxo-search-panel>
-            <dxo-summary>
-                <dxi-group-item
-                    column="codigo_plaza"
-                    summaryType="count"
-                    displayFormat="{0} registros">
-                </dxi-group-item>
-                <dxi-group-item
-                column="monto_base"
-                summaryType="sum"                
-                displayFormat="{0}"
-                valueFormat= "#,##0.00"
-                [showInGroupFooter]="false"
-                [alignByColumn]="true">
-                    <dxo-format
-                    type="fixedPoint"
-                    [precision]="2">
-                    </dxo-format>
-                </dxi-group-item>
-                <dxi-group-item
-                column="monto"
-                summaryType="sum"                
-                displayFormat="{0}"
-                valueFormat= "#,##0.00"
-                [showInGroupFooter]="false"
-                [alignByColumn]="true">
-                    <dxo-format
-                    type="fixedPoint"
-                    [precision]="2">
-                    </dxo-format>
-                </dxi-group-item>
-               </dxo-summary>
+
+
             </dx-data-grid>
 </div>

@@ -8,10 +8,10 @@
             <button pButton (click)="cargarCap()" type="button" label="Actualizar" class="ui-button-raised ui-button-info"></button>                               
         </div>                        
         <div class="ui-g-3">
-                <div class="ui-inputgroup">                                                             
+                <!-- <div class="ui-inputgroup">                                                             
                         <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
                         <input type="text" pInputText size="50" placeholder="Busqueda" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
-                    </div>
+                </div> -->
         </div>
         <div class="ui-g-1">
             <button pButton (click)="exportAsXLSX()" style="display: inline-block;text-align: right;" type="button" label="Exportar" class="ui-button-raised ui-button-info"></button>                                                                                            
@@ -40,13 +40,13 @@
                 </tr>
             <tr>
             <tr>
-                <th *ngFor="let col of columns" style="font-size:0.8em;padding-left:0.5em" [ngSwitch]="col.field" [pSortableColumn]="col.field">             
+                <th *ngFor="let col of columns" style="font-size:0.8em;padding-left:0.5em" ngSwitch="col.field" pSortableColumn="col.field">             
                     {{col.header}}
-                    <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon>
+                   <!--  <p-sortIcon [field]="col.field" ariaLabel="Activate to sort" ariaLabelDesc="Activate to sort in descending order" ariaLabelAsc="Activate to sort in ascending order"></p-sortIcon> -->
                 </th>
                 <th colspan="3">#</th>                
             </tr>
-            <tr>
+<!--             <tr>
                 <th *ngFor="let col of columns" [ngSwitch]="col.field" [pSortableColumn]="col.field">
                     <input *ngSwitchCase="'nroCap'" style="font-size:0.7em;margin: -1.0em;" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                        
                     <input *ngSwitchCase="'CapSituacion'" style="font-size:0.7em;margin: -1.0em;" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                                           
@@ -54,21 +54,21 @@
                     <input *ngSwitchCase="'meta'" style="font-size:0.7em;margin: -1.0em;" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
                     <input *ngSwitchCase="'plaza'" style="font-size:0.7em;margin: -1.0em;" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                        
                     <input *ngSwitchCase="'estado'" style="font-size:0.7em;margin: -1.0em;" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                        
-                    <input *ngSwitchCase="'MatrizSituacion'" style="font-size:0.7em;margin: -1.0em;" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                        
+                   <input *ngSwitchCase="'MatrizSituacion'" style="font-size:0.7em;margin: -1.0em;" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">                         
                 </th>
                 <th colspan="3" style="font-size:0.6em;"></th>
-            </tr>
+            </tr> -->
     </ng-template>
     <ng-template pTemplate="body" let-rowData let-columns="columns" let-rowIndex="rowIndex" >
-        <tr [pSelectableRow]="rowData" [pSelectableRowIndex]="rowIndex" [ngClass]="rowIndex % 2 == 0 ? 'odd-row' : null" >
+        <tr [pSelectableRow]="rowData"  [ngClass]="rowIndex % 2 == 0 ? 'odd-row' : null" >
             <td *ngFor="let col of columns" style="font-size:0.7em;padding-left:0.5em" [ngSwitch]="col.field"> 
-                 <span *ngSwitchCase="'nroCap'" style="float: right;text-align: left;">{{ rowData[col.field]+'' | lpad: 4: '0' }}</span>     
+                 <span *ngSwitchCase="'nroCap'" style="float: right;text-align: left;">{{ rowData[col.field]+''  }}</span>     
                  <span *ngSwitchCase="'monto'" style="float: right;text-align: left;">{{rowData[col.field] | number : '1.2-2' }}</span>                                     
                  <span *ngSwitchDefault>{{rowData[col.field] }}</span>
             </td>
-            <td><i [ngClass]="'pi pi-plus-circle'" style="font-size: 1.0em;margin-left:-0.5em;color: blue;" (click)="showNew(rowData)"></i></td>
-            <td><i [ngClass]="'pi pi-pencil'" style="font-size: 1.0em;margin-left:-0.5em;color: blue;" (click)="showEdit(rowData)"></i></td>
-            <td><i [ngClass]="'pi pi-list'" style="font-size: 1.0em;margin-left:-0.5em;color: blue;" (click)="showControl(rowData)"></i></td>
+           <!--  <td><i [ngClass]="'pi pi-plus-circle'" style="font-size: 1.0em;margin-left:-0.5em;color: blue;" (click)="showNew(rowData)"></i></td> -->
+<!--             <td><i [ngClass]="'pi pi-pencil'" style="font-size: 1.0em;margin-left:-0.5em;color: blue;" (click)="showEdit(rowData)"></i></td>
+            <td><i [ngClass]="'pi pi-list'" style="font-size: 1.0em;margin-left:-0.5em;color: blue;" (click)="showControl(rowData)"></i></td> -->
         </tr>
     </ng-template>
 </p-table>

@@ -1,8 +1,7 @@
 import { Injectable, ɵConsole } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable, pipe, of } from 'rxjs';
+import { Observable, throwError  , of } from 'rxjs';
 import { environment } from '../../environments/environment';
-
 import {  Router } from '@angular/router';
 import { first, map, catchError, tap, concatMap, mapTo } from 'rxjs/operators';
 import { LoginResponse } from '../shared/model/login-response';
@@ -41,17 +40,16 @@ export class AuthService {
   autenticated(): Observable<LoginResponse> {
     return this.http.post<LoginResponse>(environment.API + 'auth/autenticated',[]).pipe(
       map(response  => {        
-      if (response.status) {          
+
         return response;
-      }                  
-      })
-      ,
+               
+      }),
       catchError((error)=>{
         console.log('autenticate error '+JSON.stringify(error));
          localStorage.removeItem('token');
          this.isLogged = false;
          //this.router.navigate(['/login']);
-         return Observable.throw(error.message || "server error.");
+         return throwError(error.message || "server error.");
       }));
   }
 
@@ -83,13 +81,16 @@ export class AuthService {
   let options = { headers: headers };
     return this.http.post<LoginResponse>(environment.API + 'auth/refresh',[],options).pipe(
       tap(response  => {        
-      if (response.status) { 
-        localStorage.setItem('token',response.token);
+      if (response['status']) { 
+        localStorage.setItem('token',response['token']);
         return response;
-      }            
+      }  
+      return throwError
+      ("server error.");          
       }),catchError((error) => {          
           // this.authService.refresh().          
-          return Observable.throw(error.message || "server error.");
+          return throwError
+          (error.message || "server error.");
       }));
   }
 

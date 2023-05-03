@@ -2,7 +2,8 @@ import { Component, OnInit,ViewEncapsulation, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { BaseFormativaService } from './base_formativa.service';
 import { ExcelService } from '../service/excel.service';
-import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
+import { DialogService} from 'primeng/dynamicdialog';
+import { MessageService} from 'primeng/api';
 import CustomStore from 'devextreme/data/custom_store';
 //import DataSource from "devextreme/ui/pivot_grid/data_source";
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
@@ -53,7 +54,7 @@ export class ResumenFormativaComponent implements OnInit,OnDestroy {
   ngOnInit() {      
     this.vigencias= [    
       { label: 'SOSTENIBLE', value: 'SOSTENIBLE' },
-      { label: '31/12/2019', value: '31/12/2019' }   
+      { label: '31/12/2023', value: '31/12/2023' }   
     ];
       
     this.meses = [    
@@ -249,7 +250,14 @@ export class ResumenFormativaComponent implements OnInit,OnDestroy {
       dataField: "estado_air",
       dataType: "string",
       area: "filter",
-    },   
+    },  
+    {
+      caption: "Estado OPP",
+      width:15,
+      dataField: "estado_opp",
+      dataType: "string",
+      area: "column",
+    },  
     {
       caption: "Estados",
       width:15,
@@ -302,7 +310,7 @@ export class ResumenFormativaComponent implements OnInit,OnDestroy {
     remoteOperations: false,
     store: new CustomStore({
       load: function(loadOptions) {        
-        return a.httpClient.get("http://rrhh.pvn.gob.pe/api/formativa/base_formativa_anio/2022",
+        return a.httpClient.get("http://rrhh.pvn.gob.pe/api/formativa/base_formativa_anio/2023",
         {headers :header})
         .toPromise()
         .then(result => {              
@@ -313,10 +321,6 @@ export class ResumenFormativaComponent implements OnInit,OnDestroy {
           })
         }
       }),
-
-
-
-
     });
   }
 

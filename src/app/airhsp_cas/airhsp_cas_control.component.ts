@@ -2,9 +2,8 @@ import { Component, OnInit,OnDestroy, ViewEncapsulation } from '@angular/core';
 import { AirhspCasService } from './airhsp_cas.service';
 import { ExcelService } from '../service/excel.service';
 import {MessageService} from 'primeng/api';
-import {DynamicDialogConfig} from 'primeng/api';
-import {DynamicDialogRef} from 'primeng/api';
-import { identifierModuleUrl } from '@angular/compiler';
+import {DynamicDialogConfig} from 'primeng/dynamicdialog';
+import {DynamicDialogRef} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'zd-airhsp_cas-control',

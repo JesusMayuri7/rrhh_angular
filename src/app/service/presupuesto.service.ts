@@ -1,14 +1,15 @@
 
-import {throwError as observableThrowError, Observable, forkJoin,from } from 'rxjs';
+//import {throwError as observableThrowError, Observable, forkJoin,from } from 'rxjs';
 
 import {catchError,map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse,  HttpHeaders,  HttpParams  } from '@angular/common/http';
-import { Car,Trabajador, Presupuesto} from '../interface';
+import { Presupuesto} from '../interface';
 import { environment } from '../../environments/environment';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';
 import { saveAs } from 'file-saver';
+import { Observable } from 'rxjs';
 
 //import {Trabajador} from './../interface/trabajador';
 
@@ -94,16 +95,16 @@ export class PresupuestoService {
         );
     }  
     
-    join(cabecera, detalle){
-      return cabecera.map(cab => {  // itera cada item array cab       
-        let paso = detalle.filter(det => (det.id2 == cab.id));  // filtra cada item , y devuelve solo los que cumplen                           
-        let completo = Object.assign([], cab); // crea una copia 
+    join(cabecera:any, detalle:any){
+      return cabecera.map((cab: { id: any; }) => {  // itera cada item array cab       
+        let paso = detalle.filter((det: { id2: any; }) => (det.id2 == cab.id));  // filtra cada item , y devuelve solo los que cumplen                           
+        let completo:any = Object.assign([], cab); // crea una copia 
         completo['pea']=paso;  // crea un nuevo argumento 'det' y asigna un nuevo valor 'paso'
         return completo;       
       })
   } 
 
-    getDescarga(mes){
+    getDescarga(mes: string){
       return this.http.get(this.API+'presupuesto_export/'+mes, { headers: new HttpHeaders({
         'Authorization': '{data}',
         'Content-Type': 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',
@@ -111,11 +112,11 @@ export class PresupuestoService {
       map(
         
           // Log the result or error
-          data => {
-          var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+          (data:Blob) => {
+          //var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
           saveAs(data);
           },
-          error => console.log(error)
+          (error: any) => console.log(error)
        ));
     }
     
@@ -125,11 +126,11 @@ export class PresupuestoService {
     }
 
 
-    join2(cabecera, detalle){
-        return cabecera.map(cab => {
+    join2(cabecera:any, detalle:any){
+        return cabecera.map((cab: { Id: any; Id2: any; enero: any; febrero: any; }) => {
           return detalle
-          .filter(det => det.Id2 == cab.Id)
-          .map(det => {
+          .filter((det: { Id2: any; }) => det.Id2 == cab.Id)
+          .map((det: any) => {
             return {
               Id: cab.Id2,
               dni: cab.enero,              
@@ -137,21 +138,13 @@ export class PresupuestoService {
               det :det
             }
           })
-        }).reduce((a,b) =>{
+        }).reduce((a:any,b:any) =>{
           return a.concat(b);
         }, []);    
       }
 
        
-    private onError(error: Response | any) {
-      console.error(error.message || error);
-      return observableThrowError(error.message || error);
-    }
 
-       
-     private handleError(error: HttpResponse<any>) {
-         return observableThrowError(error.statusText);
-     }
 
     
     

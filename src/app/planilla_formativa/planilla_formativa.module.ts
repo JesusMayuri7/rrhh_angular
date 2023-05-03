@@ -9,11 +9,14 @@ import { ButtonModule } from 'primeng/button';
 import { DropdownModule } from 'primeng/dropdown';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
-import { NgPipesModule } from 'ngx-pipes';
+
 import { CheckboxModule } from 'primeng/checkbox';
 import { CardModule } from 'primeng/card';
 import {TooltipModule} from 'primeng/tooltip';
@@ -41,7 +44,7 @@ const routes:Routes = [
   providers:[PlanillaFormativaService],
   imports: [
     CommonModule,
-    NgPipesModule,
+    
     ReactiveFormsModule,
     HelpersModule,
     FormsModule,

@@ -12,7 +12,6 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
-import { NgPipesModule } from 'ngx-pipes';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CardModule } from 'primeng/card';
 import {TooltipModule} from 'primeng/tooltip';
@@ -32,8 +31,7 @@ import { ResumenFormativaComponent } from './resumen_formativa.component';
 import { AirHspFormativaComponent } from './airhsp_formativa.component';
 import { SigaFormativaComponent } from './siga_formativa.component';
 import { BaseFormativaIndexComponent } from './base_formativa_index.component';
-import { BaseFormativaProyeccionComponent } from './base_formativa_proyec.component';
-import { BaseFormativaSctrPensionComponent } from './base_formativa_sctr_pension.component';
+
 
 const routes:Routes = [
   { path:'',
@@ -45,8 +43,7 @@ const routes:Routes = [
 @NgModule({
   providers:[BaseFormativaService],
   imports: [
-    CommonModule,
-    NgPipesModule,
+    CommonModule,    
     ReactiveFormsModule,    
     HelpersModule,
     FormsModule,
@@ -73,8 +70,8 @@ const routes:Routes = [
     TabViewModule,DxDataGridModule, DxButtonModule,DxSelectBoxModule,DxDateBoxModule,DxTooltipModule,DxPopupModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [SigaFormativaComponent,BaseFormativaComponent,BaseFormativaIndexComponent,BaseFormativaProyeccionComponent,
-    BaseFormativaSctrPensionComponent,AirHspFormativaComponent,ResumenFormativaComponent]
+  declarations: [SigaFormativaComponent,BaseFormativaComponent,BaseFormativaIndexComponent,
+    AirHspFormativaComponent,ResumenFormativaComponent]
 })
 
 export class BaseFormativaModule { }

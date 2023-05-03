@@ -79,7 +79,7 @@ export class MetasComponent implements OnInit {
         let header = new HttpHeaders({'content-type':'application/json'});  
         a.dataSource = new CustomStore({          
           key: "idmeta_anual",
-          load: ()=>this.httpClient.get("http://rrhh.pvn.gob.pe/api/presupuesto/get_metas/2022").toPromise().
+          load: ()=>this.httpClient.get("http://rrhh.pvn.gob.pe/api/presupuesto/get_metas/2023").toPromise().
            then(result => {        
             console.log(result);            
             return {

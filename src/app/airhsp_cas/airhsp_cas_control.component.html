@@ -12,11 +12,11 @@
                     <th colspan="5" style="background-color:rgb(3, 136, 189); color:aliceblue !important;font-size:0.8em;">Datos</th>                                        
             </tr>  
             <tr>
-                <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">                          
+<!--                 <ng-container *ngFor="let col of columns" [ngSwitch]="col.field">                          
                         <th *ngSwitchCase="'nro_convocatoria'" rowspan="2" style="font-size:0.8em;"><i [ngClass]="'pi pi-plus-circle'" style="font-size: 1.5em;text-align: center;color: green;" (click)="showDialogToAdd(rowData)"></i></th>   
                         <th *ngSwitchCase="'detalle'" rowspan="2" style="font-size:0.8em;">{{col.header}}</th>                                                                           
                         <th *ngSwitchDefault colspan="1" style="font-size:0.8em;">{{col.header}}</th>                                        
-                </ng-container>
+                </ng-container> -->
             </tr>
 
     </ng-template>
@@ -40,8 +40,8 @@
             <div class="p-col-8" >
                 <span class="ui-float-label">
                     <p-dropdown #unidad_id [options]="unidades" id="float-unidad" [autoDisplayFirst]="false" appendTo="body"
-                        [(ngModel)]="car.unidad" filter="true" [style]="{'width':'100%'}" scrollHeight="400px"
-                        showClear="true" optionLabel="desc_unidad">
+                        [(ngModel)]="car.unidad"  [style]="{'width':'100%'}" scrollHeight="400px"
+                       optionLabel="desc_unidad">
                         <ng-template let-item pTemplate="selectedItem">
                             <span style="font-size:1.2em;Float:left;margin-top:3.5px">{{item.label}}</span>
                         </ng-template>
@@ -53,9 +53,9 @@
                     </p-dropdown>
                     <label for="float-unidad" style="color: #000050">Unidad</label>
                 </span>
-                <div *ngIf="submitted && f.unidad.errors" class="invalid-feedback">
-                    <div *ngIf="f.unidad.errors.required">Unidad requerida</div>
-                </div>
+                <!-- <div *ngIf="submitted && f.unidad.errors" class="invalid-feedback">
+                     <div *ngIf="f.unidad.errors.required">Unidad requerida</div>
+                </div> --> 
             </div>
         </div>        
         <div class="p-grid" style="padding-top: 2.0em;">
@@ -63,15 +63,15 @@
                 <label for="year">Jurado</label>
             </div>
             <div class="p-col-8">
-                <span class="ui-float-label">
+<!--                 <span class="ui-float-label">
                     <textarea pInputTextarea style="width: 100%;" [rows]="5" id="float-detalle" [cols]="30"
                         [(ngModel)]="car.jurado" class="form-control"
                         [ngClass]="{ 'is-invalid': submitted && f.detalle.errors }"></textarea>
                     <label for="float-detalle" style="color: #000050">Jurado</label>
-                </span>
-                <div *ngIf="submitted && f.detalle.errors" class="invalid-feedback">
+                </span> -->
+<!--                 <div *ngIf="submitted && f.detalle.errors" class="invalid-feedback">
                     <div *ngIf="f.detalle.errors.required">Jurado requerido</div>
-                </div>
+                </div> -->
             </div>
         </div>        
     </div>

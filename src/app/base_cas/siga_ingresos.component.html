@@ -2,12 +2,7 @@
             <dx-data-grid id="gridContainer"   
             [columnMinWidth]="30"                
             [dataSource]="cap"
-            [showRowLines]="true"
-            [showColumnLines]="true"
-            [showBorders]="true"
-            [rowAlternationEnabled]="true"
-            [remoteOperations]="false"
-            [paging]="false"
+
             (onToolbarPreparing)="onToolbarPreparing($event)"
             >
             <dxo-grouping [autoExpandAll]="expanded"></dxo-grouping>
@@ -20,7 +15,7 @@
             [visible]="true"></dxo-header-filter>
             <div *dxTemplate="let data of 'actualizado'">                
                 <span >Actualizado {{actualizado}}   </span>                
-        </div>
+            </div>
             <dxi-column                   
             [width]="80"
             caption="Codigo Siga"

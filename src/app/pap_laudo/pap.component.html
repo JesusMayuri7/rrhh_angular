@@ -6,12 +6,12 @@
                             <p-multiSelect defaultLabel="Todos" [options]="estados" [style]="{'font-size':'0.8em','width':'100%','overflow':'visible',margin: '-0.5em'}" styleClass="ui-column-filter" appendTo="body" (onChange)="addFilter(dt,$event)"></p-multiSelect>
                     </div>
                     <div class="ui-g-2">                        
-                        <button pButton (click)="cargarCap()" type="button" label="Actualizar" class="ui-button-raised ui-button-info"></button>                               
+                        <button pButton (click)="cargarPap()" type="button" label="Actualizar" class="ui-button-raised ui-button-info"></button>                               
                     </div>                        
                     <div class="ui-g-3">
                         <div class="ui-inputgroup">                                                             
                             <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-                            <input type="text" pInputText size="50" placeholder="Busqueda" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+                       <!--      <input type="text" pInputText size="50" placeholder="Busqueda" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto"> -->
                         </div>
                     </div>
                     <div class="ui-g-3">

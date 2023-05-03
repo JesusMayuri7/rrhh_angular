@@ -2,7 +2,8 @@ import { Component, OnInit,ViewEncapsulation, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { PlanillaCapService } from './planilla_cap.service';
 import { ExcelService } from '../service/excel.service';
-import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
+import { DialogService} from 'primeng/dynamicdialog';
+import { MessageService} from 'primeng/api';
 import CustomStore from 'devextreme/data/custom_store';
 //import DataSource from "devextreme/ui/pivot_grid/data_source";
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
@@ -30,7 +31,7 @@ export class PlanillaCapComponent implements OnInit,OnDestroy {
   showColumnFields: boolean = true;
   showFilterFields: boolean = true;
   uniqueValues = [];
-  anio:String = '2022';
+  anio:String = '2023';
   anios:any[];
 
   constructor(private planillaCapService:PlanillaCapService,private httpClient:HttpClient) { 
@@ -67,9 +68,10 @@ onValueChanged(e)
     ];
 
     this.anios= [    
-      '2020',
+      '2023',   
+      '2022',
       '2021',
-      '2022'   
+      '2020'
     ];
       
     this.meses = [    
@@ -206,6 +208,12 @@ onValueChanged(e)
         {
           caption: "Meta",
           dataField: "cod_mnemonico",
+          dataType: "string",
+          area: "row",                  
+        }, 
+        {
+          caption: "Finalidad",
+          dataField: "desc_meta",
           dataType: "string",
           area: "row",                  
         }, 

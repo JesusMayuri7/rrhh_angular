@@ -26,8 +26,7 @@
         <div class="p-col">
             <span class="ui-float-label">
                 <p-dropdown #unidad_id [options]="unidades" id="float-unidad" [autoDisplayFirst]="false"
-                    formControlName="unidad" filter="true" [style]="{'width':'100%'}" scrollHeight="400px"
-                    showClear="true" optionLabel="desc_unidad">
+                    formControlName="unidad"  optionLabel="desc_unidad">
                     <ng-template let-item pTemplate="selectedItem">
                         <span style="font-size:1.2em;Float:left;margin-top:3.5px">{{item.label}}</span>
                     </ng-template>

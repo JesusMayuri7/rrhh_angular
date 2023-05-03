@@ -2,7 +2,8 @@ import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 
 import { AirhspCasService } from './airhsp_cas.service';
 import { ExcelService } from '../service/excel.service';
-import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
+import {DialogService} from 'primeng/dynamicdialog';
+import { MessageService } from 'primeng/api';
 //import { AirhspCasNuevoComponent } from './airhsp_cas_nuevo.component';
 //import { AirhspCasPlazaComponent } from './airhsp_cas_plaza.component';
 //import { AirhspCasControlComponent } from './airhsp_cas_control.component';

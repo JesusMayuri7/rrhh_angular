@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators,ReactiveFormsModule } from '@angular/forms';
+import { FormGroup, FormControl, Validators  } from '@angular/forms'
+import { FormBuilder } from '@angular/forms'
 import { Router } from '@angular/router';
-import { first } from 'rxjs/operators';
 import { AuthService } from '../service/auth.service';
 
 @Component({
@@ -33,13 +33,14 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  onSubmit(values) {
+  onSubmit(values:any) {
+    console.log('componente submit');
    // debugger;
 
-    if (this.formLogin.email.status === 'INVALID' ||
+/*     if (this.formLogin.email.status === 'INVALID' ||
         this.formLogin.password.status === 'INVALID') {
       return;
-    }
+    } */
 
         this.auth.login(values.email, values.password)              
               .subscribe(response => {  

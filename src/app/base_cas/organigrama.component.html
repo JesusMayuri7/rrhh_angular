@@ -7,7 +7,9 @@
     (onHidden)='closeBaja()'
     [(visible)]="popupBaja">  
     <div *dxTemplate="let data of 'content'">  
+        <dx-scroll-view width="100%" height="100%">
         <zd-base-cas-baja [archivo]="rowData" ></zd-base-cas-baja>  
+        </dx-scroll-view>
     </div>  
     </dx-popup> 
 <dx-popup #popup     
@@ -17,7 +19,9 @@
     [dragEnabled]="false"    
     [(visible)]="popupDesignacion">  
     <div *dxTemplate="let data of 'content'">  
+        <dx-scroll-view width="100%" height="100%">
         <zd-base-cas-designacion [archivo]="rowData" ></zd-base-cas-designacion>  
+        </dx-scroll-view>
     </div>  
 </dx-popup>  
 
@@ -29,7 +33,9 @@
     (onHidden)='closeBaja()'
     [(visible)]="popupConcurso">  
     <div *dxTemplate="let data of 'content'">  
+        <dx-scroll-view width="100%" height="100%">
         <zd-base-cas-concurso [archivo]="rowData" ></zd-base-cas-concurso>  
+        </dx-scroll-view>
     </div>  
 </dx-popup> 
 
@@ -41,19 +47,16 @@
     (onHidden)='closeAlta()'
     [(visible)]="popupAlta">  
     <div *dxTemplate="let data of 'content'">  
+        <dx-scroll-view width="100%" height="100%">
         <zd-base-cas-alta [archivo]="rowData" [metas]="metas2" ></zd-base-cas-alta>  
+        </dx-scroll-view>
     </div>  
 </dx-popup> 
 
             <dx-data-grid id="gridContainer"     
                 keyExpr="id"                             
                 [dataSource]="dataSource"
-                [showRowLines]="true"
-                [showColumnLines]="true"
-                [showBorders]="true"
-                [rowAlternationEnabled]="true"
-                [remoteOperations]="false"
-                [paging]="false"
+
                 [columnWidth]="40"
                 (onToolbarPreparing)="onToolbarPreparing($event)"
                 (onCellPrepared)="onCellPrepared($event)"                
@@ -112,6 +115,37 @@
                                     >
                                     </dxo-lookup>
                                 </dxi-column>
+
+
+                                <dxi-column                   
+                                [minWidth]="60"
+                                caption="Certificado"
+                                alignment="center"
+                                dataField="certificado"                                         
+                                dataType="string"
+                                selectedFilterOperation="contains"
+                                [filterOperations]="[]">                                        
+                                </dxi-column>
+                                <dxi-column                   
+                                [minWidth]="40"
+                                caption="Inicio"
+                                alignment="center"
+                                dataField="mes_inicio"                                         
+                                dataType="string"
+                                selectedFilterOperation="contains"
+                                [filterOperations]="[]">                                        
+                                </dxi-column>
+                                <dxi-column                   
+                                [minWidth]="40"
+                                caption="Fin"
+                                alignment="center"
+                                dataField="mes_fin"                                         
+                                dataType="string"
+                                selectedFilterOperation="contains"
+                                [filterOperations]="[]">                                        
+                                </dxi-column>
+
+
                                 <dxi-column                   
                                 [minWidth]="60"
                                 caption="Sede"
@@ -218,6 +252,15 @@
                                 selectedFilterOperation="contains"
                                 [filterOperations]="[]">    
                                 </dxi-column>
+                                <dxi-column
+                                [minWidth]="80"  
+                                caption="Meses"
+                                alignment="center"
+                                dataField="meses"
+                                dataType="string"
+                                selectedFilterOperation="contains"
+                                [filterOperations]="[]">    
+                                </dxi-column>
                         </dxi-column>
 
 
@@ -248,7 +291,7 @@
                    </dxo-lookup>                                     
                         </dxi-column>  
                         <dxi-column                   
-                        [width]="90"
+                        [width]="150"
                         caption="Sustento"
                         alignment="center"
                         dataField="sustento_conv"                            
@@ -260,7 +303,16 @@
                         [dataSource]="['NINGUNO','DU_034_2021','DU_083_2021','LEY_31365']"
                     >
                  </dxo-lookup>                                         
-                    </dxi-column>       
+                    </dxi-column>    
+                    <dxi-column
+                    [minWidth]="200"  
+                    caption="Meta Certficada"
+                    alignment="left"
+                    dataField="desc_meta_cert"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    [filterOperations]="[]">    
+                    </dxi-column>   
                             <dxi-column
                             [minWidth]="200"  
                             caption="Area Certficada"
@@ -360,7 +412,11 @@
                         dataField="modalidad"
                         dataType="string"
                         selectedFilterOperation="contains"
-                        [filterOperations]="[]">                            
+                        [filterOperations]="[]">  
+                        <dxo-lookup 
+                        [dataSource]="['CONTRATO','CONFIANZA','TEMPORAL']"
+                        >
+                        </dxo-lookup>                          
                         </dxi-column>
                         <dxi-column
                         caption='Confianza'
@@ -403,7 +459,7 @@
                             </dxi-column>
                         </dxi-column>
                         <dxi-column
-                        [minWidth]="100"  
+                        [minWidth]="120"  
                         caption="Sustento"
                         alignment="center"
                         dataField="sustento_legal"
@@ -411,10 +467,11 @@
                         selectedFilterOperation="contains"
                         [filterOperations]="[]">  
                         <dxo-lookup 
-                        [dataSource]="['LEY_31131','DU_034_2021','DU_083_2021','LEY_1057_CF','LEY_31365']"
+                        [dataSource]="['LEY_31131','DU_034_2021','DU_083_2021','DL_1057_CF','LEY_PRESUPUESTO']"
                         >
                         </dxo-lookup>
                         </dxi-column>
+
                         <dxi-column                                                                     
                         dataField="base_cas_detalle_id"
                         dataType="string"
@@ -424,7 +481,7 @@
                     caption='Alta'
                     alignment="center">
                            <dxi-column
-                           [minWidth]="80"  
+                           [minWidth]="120"  
                            caption="Tipo"
                            dataField="tipo_ingreso"
                            dataType="string"
@@ -439,14 +496,19 @@
                            selectedFilterOperation="contains"
                            [filterOperations]="[]">  
                            </dxi-column>    
-           
+                           <dxi-column dataField="doc_ingreso" cellTemplate="cellDocIngreso"></dxi-column>
+                           <div *dxTemplate="let cellInfo of 'cellDocIngreso'">
+                               <div *ngIf="cellInfo.data.doc_ingreso">
+                                   <a href="{{cellInfo.data.doc_ingreso}}" target="_blank">Doc</a>
+                               </div>                            
+                           </div>
                 </dxi-column>     
                 
                 <dxi-column
                  caption='Baja'
                  alignment="center">
                         <dxi-column
-                        [minWidth]="80"  
+                        [minWidth]="120"  
                         caption="Tipo"
                         dataField="tipo_salida"
                         dataType="string"
@@ -457,10 +519,15 @@
                         [minWidth]="80"  
                         caption="Fecha"
                         dataField="fe_salida"
-                        dataType="string"
-                        selectedFilterOperation="contains"
+                        dataType="string"                        
                         [filterOperations]="[]">  
                         </dxi-column>
+                        <dxi-column dataField="doc_salida" cellTemplate="cellDocSalida"></dxi-column>
+                        <div *dxTemplate="let cellInfo of 'cellDocSalida'">
+                            <div *ngIf="cellInfo.data.doc_salida">
+                                <a href="{{cellInfo.data.doc_salida}}" target="_blank">Doc</a>
+                            </div>                            
+                        </div>
                         <dxi-column
                         [minWidth]="100"  
                         caption="Fin Licencia"
@@ -479,7 +546,13 @@
                             <dxo-lookup 
                             [dataSource]="['VIGENTE','VENCIDA']">
                             </dxo-lookup>
-                        </dxi-column>      
+                        </dxi-column>  
+                        <dxi-column dataField="doc_licencia" cellTemplate="cellDocLicencia"></dxi-column>
+                        <div *dxTemplate="let cellInfo of 'cellDocLicencia'">
+                            <div *ngIf="cellInfo.data.doc_licencia">
+                                <a href="{{cellInfo.data.doc_licencia}}" target="_blank">Doc</a>
+                            </div>                            
+                        </div>   
                 </dxi-column>
                 <dxi-column
                  caption='AirHsp'

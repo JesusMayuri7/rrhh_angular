@@ -2,7 +2,8 @@ import { Component, OnInit,ViewEncapsulation, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { PlanillaFormativaService } from './planilla_formativa.service';
 import { ExcelService } from '../service/excel.service';
-import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
+import {MessageService} from 'primeng/api';
+import {DialogService} from 'primeng/dynamicdialog';
 import CustomStore from 'devextreme/data/custom_store';
 //import DataSource from "devextreme/ui/pivot_grid/data_source";
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
@@ -179,6 +180,12 @@ export class PlanillaFormativaComponent implements OnInit,OnDestroy {
         dataField: "anio",
         dataType: "string",
         area: "column",                  
+      },  
+      {
+        caption:"Planilla",
+        dataField: "desc_planilla",
+        dataType: "string",
+        area: "filter",                  
       },  
       {
         caption:"Mes",

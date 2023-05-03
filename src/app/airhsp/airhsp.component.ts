@@ -2,7 +2,7 @@ import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 
 import { AirHspService } from './airhsp.service';
 import { ExcelService } from '../service/excel.service';
-import {LazyLoadEvent} from 'primeng/primeng';
+import { LazyLoadEvent } from 'primeng/api';
 
 @Component({
   selector: 'zd-airhsp',

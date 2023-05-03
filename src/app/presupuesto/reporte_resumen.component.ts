@@ -2,7 +2,8 @@ import { Component, OnInit,ViewEncapsulation, OnDestroy,ViewChild } from '@angul
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { ReportePlanillaService } from './reporte_planilla.service';
 import { ExcelService } from '../service/excel.service';
-import { MessageService, DialogService} from 'primeng/primeng';
+import { MessageService} from 'primeng/api';
+import {  DialogService} from 'primeng/dynamicdialog';
 import CustomStore from 'devextreme/data/custom_store';
 //import DataSource from "devextreme/ui/pivot_grid/data_source";
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';

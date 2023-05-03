@@ -11,6 +11,7 @@ import { CertificacionCasService } from '../certificacion_cas.service';
 })
 export class PlazaDetalleComponent implements OnInit {
     estados: string[];
+    estado_final: any[];
     formulario:any;
     @Input('archivo') row:any[];
 
@@ -26,6 +27,19 @@ export class PlazaDetalleComponent implements OnInit {
             "NO_CUBIERTA"
             
         ];
+
+        this.estado_final = [
+          {estado:"PENDIENTE" },
+          {estado:"GANADOR" },
+          {estado:"CONTRATADO" },
+          {estado:"NO_ADJUDICO" },
+          {estado:"NO_CUBIERTA" }
+          
+      ];
+
+
+
+
       //      console.log('detalle',this.row);
        // this.formulario = this.createFormGroupWithBuilder(this.formBuilder);
     }

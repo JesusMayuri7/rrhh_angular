@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {RouterModule,Routes, } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import {RouterModule,Routes } from '@angular/router';
 
 import { AuthComponent } from './auth.component';
-import { ReactiveFormsModule,FormsModule } from '@angular/forms';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 //import { CoreModule } from '../core/core.module';
 
 const routes:Routes = [
@@ -18,8 +19,9 @@ const routes:Routes = [
 
 @NgModule({
   imports: [
-    CommonModule,    
-    ReactiveFormsModule,FormsModule,
+    CommonModule,   
+    BrowserModule, 
+    FormsModule,    ReactiveFormsModule,
     RouterModule.forChild(routes)
   ],
   declarations: [AuthComponent],

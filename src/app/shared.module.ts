@@ -3,7 +3,7 @@ import { ModuleWithProviders } from '@angular/core';
 import { HttpConfigInterceptor } from './service/http.config.interceptor';
 
 export class SharedModule {
-    static forRoot(): ModuleWithProviders {
+    static forRoot(): ModuleWithProviders<SharedModule> {
       return {
         ngModule: SharedModule,
         providers: [

@@ -1,11 +1,9 @@
 import { Component, OnInit,OnDestroy, ViewChild,ViewEncapsulation } from '@angular/core';
 
 import { BaseFormativaService } from './base_formativa.service';
-import { ExcelService } from '../service/excel.service';
 import {MessageService} from 'primeng/api';
-import {DynamicDialogConfig} from 'primeng/api';
-import {DynamicDialogRef} from 'primeng/api';
-import { identifierModuleUrl } from '@angular/compiler';
+
+
 import { DxDataGridComponent } from 'devextreme-angular';
 
 @Component({
@@ -16,7 +14,7 @@ import { DxDataGridComponent } from 'devextreme-angular';
   providers: [MessageService]
 })
 export class SigaFormativaComponent implements OnInit {
- cap:any[];
+ formativas:any[];
  cols: any[];
  frozenCols: any[];
  estados:any[];
@@ -34,8 +32,11 @@ export class SigaFormativaComponent implements OnInit {
  expanded = true;
  actualizado = '';
 
-  constructor(private formativaService:BaseFormativaService,private excelService:ExcelService) { }
+  constructor(private formativaService:BaseFormativaService) 
+  { }
+
   @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
+
   ngOnInit() {
     console.log('cargando siga');
     this.meses = [    
@@ -56,7 +57,7 @@ export class SigaFormativaComponent implements OnInit {
    this.cargarSigaNet();
   }
 
-  onToolbarPreparing(e) {
+/*   onToolbarPreparing(e) {
     e.toolbarOptions.items.unshift(
       {
         location: 'after',
@@ -90,12 +91,12 @@ export class SigaFormativaComponent implements OnInit {
             widget: 'dxButton',
             options: {
                 icon: 'refresh',
-                //onClick: this.refreshDataGrid.bind(this)
+                //onClick: this.dataGrid.bind
             }
         });
-}
+} */
 
-groupChanged(e) {
+/* groupChanged(e) {
   this.dataGrid.instance.clearGrouping();
   if (e.value ==='Fuente')
   {
@@ -114,16 +115,16 @@ collapseAllClick(e) {
   e.component.option({
       text: this.expanded ? 'Contraer' : 'Expandir'
   });
-}
+} */
 
   cargarSigaNet(){
-    this.loading = true;
-   // let parametro = {idpap:id}
+    //this.loading = true;   
     this.formativaService.getSigaFormtiva().subscribe(
       (data)=> {
-        this.cap = data['data']; 
-        this.actualizado = this.cap[0]['actualizado'];
-        this.cap.map(x => {
+        this.formativas = data['data']; 
+        //console.log('pract',this.formativas);
+        this.actualizado = this.formativas[0]['actualizado'];
+         this.formativas.map(x => {
           switch(x['mes_id']) { 
             case 1: { x['mes']='ENERO'; break; } 
             case 2: { x['mes']='FEBRERO'; break; } 
@@ -139,11 +140,11 @@ collapseAllClick(e) {
             case 12: { x['mes']='DICIEMBRE'; break; }              
          } 
         });      
-        this.loading = false;
-       // this.calcularFooterTotal(this.cap);
+        this.loading = false; 
+       // this.calcularFooterTotal(this.formativas);
         }
     );
-  }
+  } 
 
  
   

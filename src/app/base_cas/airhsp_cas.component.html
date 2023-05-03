@@ -2,12 +2,7 @@
             <dx-data-grid id="gridContainer"   
             [columnMinWidth]="30"                
             [dataSource]="ordenes"
-            [showRowLines]="true"
-            [showColumnLines]="true"
-            [showBorders]="true"
-            [rowAlternationEnabled]="true"
-            [remoteOperations]="false"
-            [paging]="false"
+
             (onToolbarPreparing)="onToolbarPreparing($event)"
             >
             <dxo-export [enabled]="true" fileName="BaseCas" [allowExportSelectedData]="true"></dxo-export>                                                      

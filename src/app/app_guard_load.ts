@@ -16,13 +16,13 @@ export class AppGuardLoad implements CanLoad {
   canLoad(route: import("@angular/router").Route, segments: import("@angular/router").UrlSegment[]): boolean | Observable<boolean> | Promise<boolean> {
     console.log('can load');
     return this.authService.autenticated().pipe(
-      map((response: { status: boolean}) => {     
+      map((response ) => {     
         console.log('can load '+JSON.stringify(response));
-      if (response.status) {          
+      if (response) {          
         return true;
       }
       //this.router.navigate(['/login']);
-      //return false;
+      return false;
       }), catchError((error) => {
         //console.log(error);
           this.router.navigate(['/login']);

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthComponent } from './auth/auth.component';
 import { AppGuardLoad } from './app_guard_load';
 import { AppGuardCan } from './app_guard_can';
+import { CoreModule } from './core/core.module';
 
 
 export const routes: Routes = [
@@ -13,7 +14,7 @@ export const routes: Routes = [
 	},
 	{
 		path: 'v1',
-		loadChildren: () => import('./core/core.module').then((m) => m.CoreModule),
+		loadChildren: () => CoreModule,
 		canLoad: [AppGuardLoad]
 	},
 

@@ -12,12 +12,11 @@ import {InputTextareaModule} from 'primeng/inputtextarea';
 import {InputTextModule} from 'primeng/inputtext';
 import {ToastModule} from 'primeng/toast';
 import {CalendarModule} from 'primeng/calendar';
-import {NgPipesModule} from 'ngx-pipes';
+
 import {CheckboxModule} from 'primeng/checkbox';
 import {CardModule} from 'primeng/card';
 
 import { CapComponent } from './cap.component';
-import { NuevoMatrizComponent } from './nuevo_matriz.component';
 import { ControlComponent } from './control.component';
 
 
@@ -41,14 +40,14 @@ const routes:Routes = [
     ToastModule,
     CalendarModule,
     InputTextModule,
-    NgPipesModule,
+    
     CheckboxModule,
     CardModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [CapComponent,NuevoMatrizComponent,ControlComponent],
+  declarations: [CapComponent,ControlComponent],
   entryComponents: [
-    NuevoMatrizComponent,ControlComponent
+    ControlComponent
 ],
 
 })

@@ -2,7 +2,8 @@ import { Component, OnInit,ViewEncapsulation, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { ReportePlanillaService } from './reporte_planilla.service';
 import { ExcelService } from '../service/excel.service';
-import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
+import { DialogService} from 'primeng/dynamicdialog';
+import { MessageService, } from 'primeng/api';
 import CustomStore from 'devextreme/data/custom_store';
 //import DataSource from "devextreme/ui/pivot_grid/data_source";
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
@@ -124,16 +125,6 @@ export class ReportePlanillaComponent implements OnInit,OnDestroy {
         area: "filter",                  
       }, 
       {
-        width:280,
-        caption: "Unidad",
-        dataField: "unidad",
-        area: "filter",    
-        allowFiltering: true,
-                  headerFilter: {
-                      allowSearch: true
-                  },      
-      }, 
-      {
         caption:"Tipo",
         dataField: "tipo_escala",
         dataType: "string",
@@ -143,7 +134,7 @@ export class ReportePlanillaComponent implements OnInit,OnDestroy {
         width:280,
         caption: "Area",
         dataField: "desc_area",
-        area: "row",    
+        area: "filter",    
         allowFiltering: true,
                   headerFilter: {
                       allowSearch: true
@@ -174,6 +165,12 @@ export class ReportePlanillaComponent implements OnInit,OnDestroy {
         dataType: "string",
         area: "column",                  
       },  
+      {
+        caption:"Tipo Contrato",
+        dataField: "tipo_contrato",
+        dataType: "string",
+        area: "row",                  
+      }, 
       {
         caption: "Plaza",
         width:10,

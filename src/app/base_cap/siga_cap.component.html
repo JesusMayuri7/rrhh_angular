@@ -1,110 +1,105 @@
 <div style="height:calc(100vh - 105px)">
-    <dx-data-grid id="datagrid" [columnMinWidth]="30" height="100%" [dataSource]="cap" [showRowLines]="true"
-        [showColumnLines]="true" [showBorders]="true" [rowAlternationEnabled]="true" [remoteOperations]="false"
-        [paging]="false" (onToolbarPreparing)="onToolbarPreparing($event)" (onExporting)="onExporting($event)"
+    <dx-data-grid id="datagrid" [columnMinWidth]="30" height="100%" [dataSource]="cap" 
+        (onToolbarPreparing)="onToolbarPreparing($event)" (onExporting)="onExporting($event)"
         (onExported)="onExported($event)">
-        <dxo-grouping [autoExpandAll]="expanded"></dxo-grouping>
-        <dxo-load-panel [enabled]="true"></dxo-load-panel>
-        <dxo-export [enabled]="true" fileName="BaseCas"></dxo-export>
-        <dxo-filter-row [visible]="true"></dxo-filter-row>
-        <dxo-header-filter [visible]="true"></dxo-header-filter>
-        <div *dxTemplate="let data of 'actualizado'">                
+        <dxo-paging [enabled]="false"></dxo-paging>
+        <dxo-export [enabled]="true" fileName="BaseCap" [allowExportSelectedData]="true"></dxo-export> 
+        <dxo-search-panel
+        [width]="300"
+        [visible]="true"
+        [highlightCaseSensitive]="false">
+        </dxo-search-panel>
+        <dxo-filter-row 
+        [visible]="true"                 
+        ></dxo-filter-row>
+        <dxo-header-filter 
+        [visible]="true"></dxo-header-filter>
+        <div *dxTemplate="let data of 'actualizado'">   
+
             <span >Actualizado {{actualizado}}   </span>                
-    </div>
+        </div>
         <dxi-column dataType="string" [width]="60" caption="Codigo Siga" dataField="id_personal">
         </dxi-column>
         <dxi-column [width]="60" dataField="id_plaza" caption="Plaza" dataType="string"
-            selectedFilterOperation="contains" [filterOperations]="[]">
+             >
         </dxi-column>        
         <dxi-column [width]="80" caption="Sede" alignment="center" dataField="sede" dataType="string"
-            selectedFilterOperation="contains" [filterOperations]="[]">
+             >
         </dxi-column>
         <dxi-column [width]="50" dataField="id_prestamo" caption="Fuente" dataType="string"
-            selectedFilterOperation="contains" [filterOperations]="[]">
+             >
         </dxi-column>
         <dxi-column [width]="50" dataField="id_mnemonico" caption="Meta" dataType="string"
-            selectedFilterOperation="contains" [filterOperations]="[]">
+             >
         </dxi-column>
         <dxi-column [width]="250" dataField="finalidad" caption="Finalidad" dataType="string"
-            selectedFilterOperation="contains" [filterOperations]="[]">
+             >
         </dxi-column>
         <dxi-column [width]="130" dataField="estado_pap" caption="Estado Pap" dataType="string"
-        selectedFilterOperation="contains" [filterOperations]="">
+         >
     </dxi-column>
         <dxi-column [width]="100" dataField="estado_air" caption="Estado AIR" dataType="string"
-        selectedFilterOperation="contains" [filterOperations]="">
+         >
     </dxi-column>
         <dxi-column [width]="80" dataField="codigo_plaza" caption="Codigo_Air" alignment="center" dataType="string"
-            selectedFilterOperation="contains" [filterOperations]="[]">
+             >
         </dxi-column>
         <dxi-column [width]="80" dataField="nu_dociden" caption="Dni" alignment="center" dataType="string"
-            selectedFilterOperation="contains" [filterOperations]="[]">
+             >
         </dxi-column>
         <dxi-column [width]="80" caption="Ingreso" alignment="center" dataField="fe_ingreso" dataType="string"
-            selectedFilterOperation="contains" [filterOperations]="[]">
+             >
         </dxi-column>
 
         <dxi-column [width]="250" dataField="nombres" alignment="left" dataType="string"
-            selectedFilterOperation="contains" [filterOperations]="[]">
+             >
         </dxi-column>
 
         <dxi-column [width]="280" dataField="nu_contrato" caption="Contrato" dataType="string"
-            selectedFilterOperation="contains" [filterOperations]="[]">
+             >
         </dxi-column>
         <dxi-column [width]="220" dataField="ds_jerarquia" dataType="string" caption="Ubicacion"
-            selectedFilterOperation="contains" [filterOperations]="[]">
+             >
         </dxi-column>
-        <dxi-column [width]="20" dataField="nivel" dataType="string" caption="Nivel" selectedFilterOperation="contains"
-            [filterOperations]="[]">
+        <dxi-column [width]="20" dataField="nivel" dataType="string" caption="Nivel" 
+            >
         </dxi-column>
         <dxi-column [width]="100" dataField="monto_bruto" caption="M. Bruto" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         <dxi-column [width]="100" dataField="mt_contmn" caption="Monto" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         <dxi-column [width]="80" dataField="essalud" caption="Essalud" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         <dxi-column [width]="80" dataField="sctr_salud" caption="Sctr-Salud" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         <dxi-column [width]="80" dataField="sctr_pension" caption="Sctr-Pension" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         <dxi-column [width]="80" dataField="vida_ley" caption="Vida Ley" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         <dxi-column [width]="80" dataField="cts" caption="Cts" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         <dxi-column [width]="80" dataField="escolaridad" caption="Escolaridad" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         <dxi-column [width]="80" dataField="gratificacion" caption="gratificacion" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         <dxi-column [width]="80" dataField="bonificacion_extraordinaria" caption="Bonificacion" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         
         <dxi-column [width]="100" dataField="eps_aporte" caption="Eps Aporte" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         <dxi-column [width]="150" dataField="eps_aporte_grati" caption="Eps Aporte Grati" dataType="number">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-column>
         <dxo-summary>
             <dxi-total-item column="nu_dociden" summaryType="count" displayFormat="{0}">
@@ -118,11 +113,7 @@
             <dxi-total-item column="eps_aporte_grati" summaryType="sum" valueFormat="#,##0.00" displayFormat="{0}">
             </dxi-total-item>
         </dxo-summary>
-        <dxo-paging [enabled]="false"></dxo-paging>
-        <dxo-group-panel [visible]="true"></dxo-group-panel>
-        <dxo-grouping #expand [autoExpandAll]="true"></dxo-grouping>
-        <dxo-search-panel [width]="300" [visible]="true" [highlightCaseSensitive]="false">
-        </dxo-search-panel>
+
         <dxo-summary>
             <dxi-group-item column="codigo_plaza" summaryType="count" displayFormat="{0} registros">
             </dxi-group-item>
@@ -158,14 +149,14 @@
             </dxi-group-item>
             <dxi-group-item column="eps_aporte" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
             [showInGroupFooter]="false" [alignByColumn]="true">
-            <dxo-format type="fixedPoint" [precision]="2">
-            </dxo-format>
+       
         </dxi-group-item>
             <dxi-group-item column="eps_aporte_grati" summaryType="sum" displayFormat="{0}" valueFormat="#,##0.00"
                 [showInGroupFooter]="false" [alignByColumn]="true">
                 <dxo-format type="fixedPoint" [precision]="2">
                 </dxo-format>
             </dxi-group-item>
-        </dxo-summary>
+        </dxo-summary> 
     </dx-data-grid>
 </div>
+

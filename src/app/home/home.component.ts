@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import {SelectItem} from 'primeng/primeng';
+import {SelectItem} from 'primeng/api';
 import {Message} from '../interface';
 import { FormBuilder, FormGroup, Validators,FormControl } from '@angular/forms';
 import { CarService } from '../service/car.service';
-import { AngularPage } from '../../../e2e/app.po';
+
 
 @Component({
   selector: 'zd-home',
@@ -67,6 +67,7 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('init home');
     this.es = {
       firstDayOfWeek: 1,
       dayNames: [ "domingo","lunes","martes","miércoles","jueves","viernes","sábado" ],
@@ -77,7 +78,8 @@ export class HomeComponent implements OnInit {
       today: 'Hoy',
       clear: 'Borrar'
   }
-       this.carService.getTodo().subscribe (cars =>{ this.datos= cars;
+       this.carService.getTodo('2023').subscribe((cars:any[]) =>{         
+        this.datos= cars['data'];
         }) 
   }
 

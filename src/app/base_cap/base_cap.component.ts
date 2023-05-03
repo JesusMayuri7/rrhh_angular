@@ -1,15 +1,10 @@
 import { Component, OnInit,EventEmitter, Input, Output,ViewChild,ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpParams , HttpResponse, HttpHeaders} from '@angular/common/http';
-import { OrganigramaService } from '../service/organigrama.service';
-import { ExcelService } from '../service/excel.service';
 import CustomStore from 'devextreme/data/custom_store';
-import { Observable } from 'apollo-link';
 import { DxTooltipComponent,DxDataGridComponent } from 'devextreme-angular';  
 //import { BaseCasService } from './base_cas.service';
 import { on } from "devextreme/events";
 import { BaseCapService } from './base_cap.service';
-
-
 
 @Component({
   selector: 'zd-base-cap',
@@ -51,7 +46,7 @@ export class BaseCapComponent implements OnInit {
  areas2:[];
  cap_id:String = '3';
  caps:any=[];
- anio:string= '2022';
+ anio:string= '2023';
 
   constructor(private httpClient: HttpClient,private baseCapService: BaseCapService) { 
     
@@ -99,25 +94,7 @@ export class BaseCapComponent implements OnInit {
    this.cargaData(this);
   }
 
-  on2018Changed(e)
-{
-  this.cap_id = (this.cap_id =='1') ? '2':'1';
-  e.component.option({
-    text: this.cap_id == '1' ? 'CAP 2018' : 'CAP 2021'
-  });
-  this.cargaData(this);
-}
-
- on2021Changed(e)
-{
-  this.cap_id = '2';
-  e.component.option({
-    text: this.cap_id =='1' ? 'CAP 2018' : 'CAP 2021'
-  });
-  this.cargaData(this);
-}
-
-  
+ 
   onToolbarPreparing(e) {
     e.toolbarOptions.items.unshift(
       {
@@ -143,7 +120,12 @@ export class BaseCapComponent implements OnInit {
         widget: 'dxSelectBox',
         options: {
             width: 200,
-            items: [{
+            items: [
+              {
+                value: '2023',
+                text: '2023'
+            },
+              {
                 value: '2022',
                 text: '2022'
             },{
@@ -157,7 +139,7 @@ export class BaseCapComponent implements OnInit {
           ],
             displayExpr: 'text',
             valueExpr: 'value',
-            value: '2022',
+            value: '2023',
            onValueChanged: this.changeAnio.bind(this)
         }
       } 
@@ -271,15 +253,15 @@ export class BaseCapComponent implements OnInit {
           e.row.data.error = 1;
         }
       }
-       if (e.column.dataField ==='estado_actual' && e.row.data.modalidad==='CONCURSO' && e.row.data.tipo_salida == 'LICENCIA_SG') {          
-        if (e.row.data.estado_pap !== 'OCUPADO_LSG' || e.row.data.estado_opp !== 'RESERVADO' || e.row.data.estado_air !== 'TEMPORAL' ) {
+       if (e.column.dataField ==='estado_actual' && e.row.data.modalidad==='CONTRATO' && e.row.data.tipo_salida == 'LICENCIA_SG') {          
+        if (e.row.data.estado_pap !== 'OCUPADO_LSG' || (e.row.data.estado_opp !== 'RESERVADO' && e.row.data.estado_opp !== 'OCUPADO') || e.row.data.estado_air !== 'TEMPORAL' ) {
           e.cellElement.style.color = 'red';
           e.cellElement.style.fontWeight = 'bold';
           e.row.data.error = 1;
         }
       }
-      if (e.column.dataField ==='estado_actual' && e.row.data.modalidad==='CONCURSO' && e.row.data.tipo_salida == 'DESIGNACION') {          
-        if (e.row.data.estado_pap !== 'OCUPADO_PL_RES' || e.row.data.estado_opp !== 'RESERVADO' || e.row.data.estado_air !== 'TEMPORAL' ) {
+      if (e.column.dataField ==='estado_actual' && e.row.data.modalidad==='CONTRATO' && e.row.data.tipo_salida == 'DESIGNACION') {          
+        if (e.row.data.estado_pap !== 'OCUPADO_PL_RES' || (e.row.data.estado_opp !== 'RESERVADO' && e.row.data.estado_opp !== 'OCUPADO') || e.row.data.estado_air !== 'TEMPORAL' ) {
           e.cellElement.style.color = 'red';
           e.cellElement.style.fontWeight = 'bold';
           e.row.data.error = 1;

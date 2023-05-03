@@ -1,6 +1,6 @@
 export interface Cap {
-    idcap;
-    nrocap;
-    especifica;
-    presupuesto;
+    idcap:number;
+    nrocap:number;
+    especifica:string;
+    presupuesto:string;
   }

@@ -3,7 +3,8 @@ import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { BaseCasService } from './base_cas.service';
 import { ExcelService } from '../service/excel.service';
 import { SigaIngresosComponent } from './siga_ingresos.component';
-import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
+import { DialogService} from 'primeng/dynamicdialog';
+import { MessageService} from 'primeng/api';
 import { OrganigramaComponent } from "./organigrama.component";
 
 

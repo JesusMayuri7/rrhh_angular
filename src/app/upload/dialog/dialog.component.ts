@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { UploadService } from '../upload.service';
 import { forkJoin } from 'rxjs';
 import {Presupuesto,Message,SelectItem,MenuItem,LazyLoadEvent,FilterMetadata} from '../../interface';
-import {DynamicDialogRef} from 'primeng/api';
-import {DynamicDialogConfig} from 'primeng/api';
+import {DynamicDialogRef} from 'primeng/dynamicdialog';
+import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-dialog',

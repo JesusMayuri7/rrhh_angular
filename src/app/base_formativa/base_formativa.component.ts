@@ -3,7 +3,7 @@ import { HttpClient, HttpParams , HttpResponse, HttpHeaders} from '@angular/comm
 import { BaseFormativaService } from './base_formativa.service';
 import { ExcelService } from '../service/excel.service';
 import CustomStore from 'devextreme/data/custom_store';
-import { Observable } from 'apollo-link';
+
 import { DxTooltipComponent, DxDataGridComponent } from 'devextreme-angular';
 
 
@@ -16,29 +16,29 @@ import { DxTooltipComponent, DxDataGridComponent } from 'devextreme-angular';
   
 })
 export class BaseFormativaComponent implements OnInit {
-  @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent;
- cap:any[];
- cols: any[];
- frozenCols: any[];
- estados:any[];
- estadosControl:any[];
+  @ViewChild(DxDataGridComponent, { static: false }) dataGrid: DxDataGridComponent | undefined;
+ cap:any[]=[];
+ cols: any[]=[];
+ frozenCols: any[]=[];
+ estados:any[]=[];
+ estadosControl:any[]=[];
  selectCap:any;
- loading:boolean;
+ loading:boolean= false;
  filtrados:number=0;
  TotalServicios:number=0;
- autorizaciones:any[];
- formato:{};
+ autorizaciones:any[]=[];
+ formato:{}={};
  dataSource: any = {};
  applyFilterTypes: any;
  currentFilter: any;
- metas:any[];
- unidades:any[];
- filterValue: any[];
- organos:[];
- unidades2:[];
- metas2:[];
- areas:[];
- anio:string='2022'
+ metas:any[]=[];
+ unidades:any[]=[];
+ filterValue: any[]=[];
+ organos:[]=[];
+ unidades2:[]=[];
+ metas2:[]=[];
+ areas:[]=[];
+ anio:string='2023'
 
 
   constructor(private formativaService:BaseFormativaService,private excelService:ExcelService,private httpClient: HttpClient) { 
@@ -82,30 +82,36 @@ export class BaseFormativaComponent implements OnInit {
 
   }
 
-  onToolbarPreparing(e) {
+  onToolbarPreparing(e:any) {
     e.toolbarOptions.items.unshift(
       {
         location: 'after',
         widget: 'dxSelectBox',
         options: {
             width: 200,
-            items: [{
+            items: [
+              {
+                value: '2023',
+                text: '2023'
+              },
+              {
                 value: '2022',
                 text: '2022'
-            }, {
+              },
+              {
                 value: '2021',
                 text: '2021'
-            }],
+              }],
             displayExpr: 'text',
             valueExpr: 'value',
-            value: '2022',
+            value: '2023',
            onValueChanged: this.changeAnio.bind(this)
         }
       } 
     );
   }
 
-  changeAnio(e){
+  changeAnio(e:any){
     this.anio = e.value;
     this.getMetas();
     this.cargaData(this);
@@ -113,7 +119,7 @@ export class BaseFormativaComponent implements OnInit {
 }
 
 getMetas(){
-  this.formativaService.getMetas(this.anio).subscribe((data) => {     
+  this.formativaService.getMetas(this.anio).subscribe((data:any) => {     
     this.metas2 = data['data'];
     console.log(this.metas2);
   })
@@ -122,7 +128,7 @@ getMetas(){
 
   dependencias() {
     this.formativaService.getDependencias().subscribe(
-      (result)=> {        
+      (result:any)=> {        
         this.metas = result['metas'];  
        // this.metas2 = result['metas2'];           
         console.log('uni',this.unidades);        
@@ -130,7 +136,7 @@ getMetas(){
       });
   }
 
-  onCellPrepared(e) {
+  onCellPrepared(e:any) {
    // console.log("cell");
    // if (e.rowType === "header" && (e.column.dataField === "codigo_plaza")) {    
     //  console.log("plaza");
@@ -182,7 +188,7 @@ getMetas(){
     return value !== undefined && value !== null && value !== "";
   }
 
-  cargaData(a) {
+  cargaData(a:any) {
     let header = new HttpHeaders({'content-type':'application/json'});  
     a.dataSource = new CustomStore({
       key: "id",
@@ -199,8 +205,7 @@ getMetas(){
         id: key,
         values: values
       },{headers :header}).toPromise()
-      .then(result => {    
-        console.log(result);    
+      .then((result: { [x: string]: any; }) => {               
         return {          
             data: result['data'],            
           // groupCount: result.groupCount*/
@@ -217,7 +222,7 @@ getMetas(){
 
   cargarPap():Promise<any>{    
     return this.httpClient.get("http://rrhh.pvn.gob.pe/api/formativa/base_formativa_anio/"+this.anio).toPromise()
-      .then(result => {
+      .then((result: { [x: string]: any; }) => {
         return {
             data: result['data'],
                       
@@ -230,7 +235,7 @@ getMetas(){
     this.excelService.exportAsExcelFile(this.cap, 'BaseFormativa_');
  }
 
-  calcularFooterTotal(tra){
+  calcularFooterTotal(tra: any){
       this.TotalServicios=0;
 
     if (tra) {

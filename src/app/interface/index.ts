@@ -5,7 +5,6 @@ export { TreeNodeDragEvent } from './treenodedragevent';
 export { BlockableUI } from './blockableui';
 export { Confirmation } from './confirmation';
 export { ConfirmationService } from './confirmationservice';*/
-export { Car } from './car';
 export { Cap } from './cap';
 export { Trabajador} from './trabajador';
 export { Presupuesto} from './presupuesto';

@@ -2,7 +2,8 @@ import { Component, OnInit,ViewEncapsulation, OnDestroy } from '@angular/core';
 import { HttpClient, HttpHeaders} from '@angular/common/http';
 import { PlanillaCasService } from './planilla_cas.service';
 import { ExcelService } from '../service/excel.service';
-import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
+import {  DialogService} from 'primeng/dynamicdialog';
+import { MessageService} from 'primeng/api';
 import CustomStore from 'devextreme/data/custom_store';
 //import DataSource from "devextreme/ui/pivot_grid/data_source";
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
@@ -28,7 +29,7 @@ export class PlanillaCasComponent implements OnInit,OnDestroy {
   showRowFields: boolean = true;
   showColumnFields: boolean = true;
   showFilterFields: boolean = true;
-  anio:String = '2022';
+  anio:String = '2023';
   anios:any=[];
 
   constructor(private planillaCasService:PlanillaCasService,private httpClient:HttpClient) { 
@@ -65,6 +66,7 @@ onValueChanged(e)
     ];
 
     this.anios= [    
+      '2023',  
       '2022',  
       '2021',
       '2020',

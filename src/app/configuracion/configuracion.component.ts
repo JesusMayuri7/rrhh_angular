@@ -2,7 +2,8 @@ import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 
 import { ConfiguracionService } from './configuracion.service';
 import { ExcelService } from '../service/excel.service';
-import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
+import { DialogService} from 'primeng/dynamicdialog';
+import { MessageService} from 'primeng/api';
 
 
 

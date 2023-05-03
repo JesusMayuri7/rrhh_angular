@@ -1,0 +1,23 @@
+.gridAll {
+
+    display: grid;
+    
+    grid-template-columns: repeat(4, 1fr);
+    
+    grid-auto-rows: auto;
+    
+    grid-gap: 5rem;
+    
+    }
+    
+    
+    .cap .cas .formativa .presupuestal {
+    
+
+    border-color: #0000ff;
+    
+    border-radius: 5px;
+    
+    padding: .5rem;
+    
+    }

@@ -12,7 +12,6 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
-import { NgPipesModule } from 'ngx-pipes';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CardModule } from 'primeng/card';
 import {TooltipModule} from 'primeng/tooltip';
@@ -20,9 +19,11 @@ import {LightboxModule} from 'primeng/lightbox';
 import {DialogModule} from 'primeng/dialog';
 
 
+
 import {InputSwitchModule} from 'primeng/inputswitch';
-import { DxDataGridModule,DxTabPanelModule,DxCheckBoxModule,DxButtonModule,DxDateBoxModule,DxDropDownButtonModule,DxToastModule } from 'devextreme-angular';
-import { DxTemplateModule,DxDropDownBoxModule,DxPopupModule,DxSelectBoxModule,DxListModule,DxScrollViewModule } from 'devextreme-angular';
+import { DxDataGridModule,
+  DxTabPanelModule,DxCheckBoxModule,DxButtonModule,DxDateBoxModule,DxDropDownButtonModule,DxToastModule } from 'devextreme-angular';
+import { DxTemplateModule,DxDropDownBoxModule,DxPopupModule,DxSelectBoxModule,DxListModule,DxScrollViewModule,DxLookupModule } from 'devextreme-angular';
 import {TabViewModule} from 'primeng/tabview';
 
 import {HelpersModule} from '../helpers/helpers.module';
@@ -58,16 +59,15 @@ const routes:Routes = [
     InputTextareaModule,
     InputTextModule,
     ToastModule,
-    CalendarModule,
-    NgPipesModule,
+    CalendarModule,    
     CheckboxModule,
     CardModule,
     DxToastModule,
     HelpersModule,
     TooltipModule,
-    LightboxModule,
+    LightboxModule,    
     DialogModule,DxDateBoxModule,
-    FormsModule,DxSelectBoxModule,
+    FormsModule,DxSelectBoxModule,DxLookupModule,
     InputSwitchModule,FieldsetModule,DxButtonModule,DxDropDownButtonModule,
     DxDropDownBoxModule,DxPopupModule,DxListModule,DxScrollViewModule,
     RouterModule.forChild(routes)

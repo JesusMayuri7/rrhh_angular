@@ -24,7 +24,9 @@ export class BaseFormativaService {
     }
 
     getSigaFormtiva() {        
+      console.log(this.API+'formativa/siga_formativa');
       return this.http.get(this.API+'formativa/siga_formativa')     
+      
     }
 
     getBaseFormativaProyeccionEjec() {        

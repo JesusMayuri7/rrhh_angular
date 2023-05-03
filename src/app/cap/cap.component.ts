@@ -4,11 +4,11 @@ import { CapService } from '../service/cap.service';
 import { Cap} from '../interface';
 import { ExcelService } from '../service/excel.service';
 import {ViewEncapsulation} from '@angular/core';
-import {DialogService} from 'primeng/api';
+import {DialogService} from 'primeng/dynamicdialog';
 import {MessageService} from 'primeng/api';
 //import {LeftPadPipe} from '../pipes/lpad';
 
-import { NuevoMatrizComponent } from './nuevo_matriz.component';
+
 import { ControlComponent } from "./control.component";
 
 @Component({
@@ -67,7 +67,7 @@ export class CapComponent implements OnInit {
    this.cargarCap();
   }
 
-  showEdit(servicio) {    
+/*   showEdit(servicio) {    
     if (servicio.MtxId){
         const ref = this.dialogService.open(NuevoMatrizComponent, {
             data: {
@@ -86,9 +86,9 @@ export class CapComponent implements OnInit {
     }
     else 
          this.showNew(servicio);
-  }
+  } */
 
-  showNew(servicio) {    
+/*   showNew(servicio) {    
     console.log(servicio);
     const ref = this.dialogService.open(NuevoMatrizComponent, {
          data: {
@@ -106,7 +106,7 @@ export class CapComponent implements OnInit {
           this.messageService.add({severity:'success', summary: 'Control de Personal', detail:car.message});
       }
     });
-  }
+  } */
 
   showControl(servicio) {    
     console.log('servicio',servicio);

@@ -3,9 +3,6 @@ import { Component, OnInit,OnDestroy, ViewEncapsulation,ViewChild } from '@angul
 import { BaseCasService } from './base_cas.service';
 import { ExcelService } from '../service/excel.service';
 import {MessageService} from 'primeng/api';
-import {DynamicDialogConfig} from 'primeng/api';
-import {DynamicDialogRef} from 'primeng/api';
-import { identifierModuleUrl } from '@angular/compiler';
 import { DxDataGridComponent } from 'devextreme-angular';
 
 @Component({

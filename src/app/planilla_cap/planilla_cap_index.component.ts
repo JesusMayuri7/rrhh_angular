@@ -3,7 +3,8 @@ import { Component, OnInit,ViewEncapsulation,ViewContainerRef,ComponentFactoryRe
 
 import { ExcelService } from '../service/excel.service';
 
-import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
+import { DialogService} from 'primeng/dynamicdialog';
+import { MessageService} from 'primeng/api';
 import { PlanillaCapService } from './planilla_cap.service';
 
 

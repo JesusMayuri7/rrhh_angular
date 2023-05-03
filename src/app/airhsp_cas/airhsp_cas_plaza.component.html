@@ -3,7 +3,7 @@
     <div class="p-grid" style="padding-top: 2.0em;">
             <div class="p-col-4">
                     <span class="ui-float-label">
-                        <p-dropdown #sede_id [options]="sedes" formControlName="sede" id="float-sede" [autoWidth]="false"
+                        <p-dropdown #sede_id [options]="sedes" formControlName="sede" id="float-sede" 
                             [style]="{'width':'10%'}" scrollHeight="400px" optionLabel="label">
                             <ng-template let-item pTemplate="selectedItem">
                                 <span style="font-size:1.2em;float:left;margin-top:3.5px">{{item.label}}</span>
@@ -16,13 +16,13 @@
                         </p-dropdown>
                         <label for="float-sede" style="color: #000050">Tipo</label>
                     </span>
-                    <div *ngIf="submitted && f.sede.errors" class="invalid-feedback">
+<!--                     <div *ngIf="submitted && f.sede.errors" class="invalid-feedback">
                         <div *ngIf="f.sede.required">Tipo</div>
-                    </div>
+                    </div> -->
             </div>
             <div class="p-col-4">
                     <span class="ui-float-label">
-                        <p-dropdown #fuente_id [options]="fuentes" formControlName="fuente_id" id="float-fuente" [autoWidth]="false"
+                        <p-dropdown #fuente_id [options]="fuentes" formControlName="fuente_id" id="float-fuente" 
                             [style]="{'width':'10%'}" scrollHeight="400px" optionLabel="label">
                             <ng-template let-item pTemplate="selectedItem">
                                 <span style="font-size:1.2em;float:left;margin-top:3.5px">{{item.label}}</span>
@@ -35,16 +35,16 @@
                         </p-dropdown>
                         <label for="float-fuente" style="color: #000050">Fuente</label>
                     </span>
-                    <div *ngIf="submitted && f.fuente_id.errors" class="invalid-feedback">
+       <!--              <div *ngIf="submitted && f.fuente_id.errors" class="invalid-feedback">
                         <div *ngIf="f.fuente_id.required">Fuente</div>
-                    </div>
+                    </div> -->
             </div>
     </div>
     <div class="p-grid" style="padding-top: 2.0em;">
             <div class="p-col-12">
                     <span class="ui-float-label">
-                        <p-dropdown #meta [options]="metas" formControlName="meta_id" id="float-meta" [autoWidth]="false"
-                            [style]="{'width':'100%'}" scrollHeight="400px" optionLabel="label" filter="true">
+                        <p-dropdown #meta [options]="metas" formControlName="meta_id" id="float-meta" 
+                            [style]="{'width':'100%'}" scrollHeight="400px" optionLabel="label" >
                             <ng-template let-item pTemplate="selectedItem">
                                 <span style="font-size:1.2em;float:left;margin-top:3.5px">{{item.label}}</span>
                             </ng-template>
@@ -56,17 +56,17 @@
                         </p-dropdown>
                         <label for="float-meta" style="color: #000050">Meta</label>
                     </span>
-                    <div *ngIf="submitted && f.meta_id.errors" class="invalid-feedback">
+     <!--                <div *ngIf="submitted && f.meta_id.errors" class="invalid-feedback">
                         <div *ngIf="f.meta_id.required">Tipo</div>
-                    </div>
+                    </div> -->
             </div>
     </div>
     <div class="p-grid" style="padding-top: 2.0em;">
         <div class="p-col">
             <span class="ui-float-label">
                 <p-dropdown #unidad_id [options]="unidades" id="float-unidad" [autoDisplayFirst]="false"
-                    formControlName="unidad" filter="true" [style]="{'width':'100%'}" scrollHeight="400px"
-                    showClear="true" optionLabel="desc_unidad">
+                    formControlName="unidad"  [style]="{'width':'100%'}" scrollHeight="400px"
+                     optionLabel="desc_unidad">
                     <ng-template let-item pTemplate="selectedItem">
                         <span style="font-size:1.2em;Float:left;margin-top:3.5px">{{item.label}}</span>
                     </ng-template>

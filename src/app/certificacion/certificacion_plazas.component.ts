@@ -1,5 +1,5 @@
 import { Component, OnInit,ViewEncapsulation,ViewChild } from '@angular/core';
-import {DialogService} from 'primeng/components/dynamicdialog/dialogservice';
+import {DialogService} from 'primeng/dynamicdialog';
 import { HttpClient, HttpParams , HttpResponse, HttpHeaders} from '@angular/common/http';
 
 import CustomStore from 'devextreme/data/custom_store';
@@ -111,12 +111,6 @@ import { DxTooltipComponent,DxDataGridComponent } from 'devextreme-angular';
           };
       });          
     }
-
-    customDisplayExpr(data) {      
-      if (data) {          
-          return `${data.convocatoria} ${data.cargo}`;
-      }
-  }
 
     cargaData(a) {
       console.log(a);

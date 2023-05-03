@@ -21,7 +21,7 @@ import {DialogModule} from 'primeng/dialog';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {TabViewModule} from 'primeng/tabview';
 import { DxTabPanelModule,DxCheckBoxModule, DxTemplateModule,DxTooltipModule,DxPopupModule,DxToastModule } from 'devextreme-angular';
-import { DxDataGridModule, DxButtonModule,DxSelectBoxModule,DxDateBoxModule,DxDropDownBoxModule } from 'devextreme-angular';
+import { DxDataGridModule, DxButtonModule,DxSelectBoxModule,DxDateBoxModule,DxDropDownBoxModule,DxScrollViewModule } from 'devextreme-angular';
 import {HelpersModule} from '../helpers/helpers.module';
 
 import { BaseCasService } from './base_cas.service';
@@ -36,7 +36,7 @@ import { BaseCasDesignacionComponent } from "./base_cas_detalle/base_cas_designa
 import { BaseCasConcursoComponent } from "./base_cas_detalle/base_cas_concurso.component";
 import { BaseCasBajaComponent } from "./base_cas_detalle/base_cas_baja.component";
 import { BaseCasAltaComponent } from "./base_cas_detalle/base_cas_alta.component";
-import { BaseCasSctrPensionComponent } from "./base_cas_sctr_pension.component";
+
 
 const routes:Routes = [
   { path:'',
@@ -72,11 +72,11 @@ const routes:Routes = [
     DxDataGridModule,
     TabViewModule,
     DxTooltipModule,
-    DxPopupModule,DxButtonModule,DxSelectBoxModule,DxDateBoxModule,DxDropDownBoxModule,DxToastModule,
+    DxPopupModule,DxButtonModule,DxSelectBoxModule,DxDateBoxModule,DxDropDownBoxModule,DxToastModule,DxScrollViewModule,
     RouterModule.forChild(routes)
   ],
   declarations: [BaseCasIndexComponent,OrganigramaComponent,SigaIngresosComponent,AirHspCasComponent,BaseCasDesignacionComponent,
-    BaseCasConcursoComponent,BaseCasBajaComponent,BaseCasSctrPensionComponent,BaseCasAltaComponent]
+    BaseCasConcursoComponent,BaseCasBajaComponent,BaseCasAltaComponent]
 })
 
 export class BaseCasModule { }

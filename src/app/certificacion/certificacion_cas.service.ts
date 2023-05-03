@@ -36,7 +36,7 @@ export class CertificacionCasService {
     }
 
     getMetas() {        
-      return this.http.get(this.API+'presupuesto/get_metas/2022')     
+      return this.http.get(this.API+'presupuesto/get_metas/2023')     
     }
 
     getBaseCas() {        

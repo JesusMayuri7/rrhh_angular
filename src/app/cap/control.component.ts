@@ -3,8 +3,8 @@ import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { CapService } from '../service/cap.service';
 import { ExcelService } from '../service/excel.service';
 import {MessageService} from 'primeng/api';
-import {DynamicDialogConfig} from 'primeng/api';
-import {DynamicDialogRef} from 'primeng/api';
+import {DynamicDialogConfig} from 'primeng/dynamicdialog';
+import {DynamicDialogRef} from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'zd-pap',

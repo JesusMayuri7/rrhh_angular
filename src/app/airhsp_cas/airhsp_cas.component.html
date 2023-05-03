@@ -8,10 +8,10 @@
                     
                     </div>                        
                     <div class="ui-g-3">
-                        <div class="ui-inputgroup">                                                                                         
+<!--                         <div class="ui-inputgroup">                                                                                         
                             <input type="text" pInputText size="50" #valor (input)="dt.filterGlobal($event.target.value, 'contains')" placeholder="Busqueda" style="width:auto">
                             <span class="ui-inputgroup-addon"><i class="pi pi-search" style="margin:4px 4px 0 0;" ></i></span>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="ui-g-1">
                             
@@ -52,7 +52,7 @@
                 <th colspan="2">#</th>                   
             </tr>
             <tr>                
-                <th *ngFor="let col of columns" [ngStyle]="col.estilo_header" [ngSwitch]="col.field">
+<!--                 <th *ngFor="let col of columns" [ngStyle]="col.estilo_header" [ngSwitch]="col.field">
                     <i [ngClass]="'pi pi-plus-circle'" *ngSwitchCase="'id'"  (click)="newPlaza()"></i>
                     <div class="ui-fluid"><input *ngSwitchCase="'codigo_plaza'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>                        
                     <div class="ui-fluid"><input *ngSwitchCase="'nro_convocatoria'" [style]="{'width':'100%'}" pInputText type="text" (input)="dt.filter($event.target.value, col.field, 'contains')"></div>                        
@@ -66,7 +66,7 @@
                     <p-multiSelect *ngSwitchCase="'solicitante'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="unidades"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterSolicitante(dt,$event)"></p-multiSelect>
                     <p-multiSelect *ngSwitchCase="'resultado'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="resultados"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilter(dt,$event)"></p-multiSelect>
                     <p-multiSelect *ngSwitchCase="'fecha_fin_vigencia_cas'" [style]="{'width':'100%'}" defaultLabel="Todos" [options]="vigencias"  styleClass="ui-column-filter" appendTo="body" (onChange)="addFilterVigencias(dt,$event)"></p-multiSelect>                    
-                </th>
+                </th> -->
                 <th colspan="2">
                     <i [ngClass]="'pi pi-list'" style="font-size: 1.0em;text-align: center;color: green;" (click)="listConvocatoria(rowData)"></i>
                 </th>

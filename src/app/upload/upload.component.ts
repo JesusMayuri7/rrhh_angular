@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from './dialog/dialog.component';
 import { UploadService } from './upload.service';
-import {DialogService} from 'primeng/api';
+import {DialogService} from 'primeng/dynamicdialog';
 import {MessageService} from 'primeng/api';
 
 @Component({

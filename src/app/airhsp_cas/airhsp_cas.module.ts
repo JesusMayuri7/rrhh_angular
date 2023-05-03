@@ -12,7 +12,6 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
-import { NgPipesModule } from 'ngx-pipes';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CardModule } from 'primeng/card';
 import {TooltipModule} from 'primeng/tooltip';
@@ -47,8 +46,7 @@ const routes:Routes = [
     InputTextareaModule,
     InputTextModule,
     ToastModule,
-    CalendarModule,
-    NgPipesModule,
+    CalendarModule,    
     CheckboxModule,
     CardModule,
     HelpersModule,

@@ -34,8 +34,8 @@ export class OrdenService {
       map(
         
           // Log the result or error
-          data => {
-          var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+          (data:Blob) => {
+          //var blob = new Blob([data], {type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
           saveAs(data);
           },
           error => console.log(error)

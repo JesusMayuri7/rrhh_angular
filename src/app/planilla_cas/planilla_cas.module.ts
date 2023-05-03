@@ -13,7 +13,6 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
-import { NgPipesModule } from 'ngx-pipes';
 import { CheckboxModule } from 'primeng/checkbox';
 import { CardModule } from 'primeng/card';
 import {TooltipModule} from 'primeng/tooltip';
@@ -28,9 +27,8 @@ import {HelpersModule} from '../helpers/helpers.module';
 import { PlanillaCasIndexComponent } from './planilla_cas_index.component';
 import { PlanillaCasService } from './planilla_cas.service';
 import { DevengadoCasComponent } from './devengado_cas.component';
-import { ProyeccionCasComponent } from './proyeccion_cas.component';
-import { ProyeccionDosCasComponent } from './proyeccion_dos_cas.component';
-import { ProyeccionTresCasComponent } from './proyeccion_tres_cas.component';
+
+
 import { PlanillaCasComponent} from './planilla_cas.component';
 
 
@@ -43,8 +41,7 @@ const routes:Routes = [
 @NgModule({
   providers:[PlanillaCasService],
   imports: [
-    CommonModule,
-    NgPipesModule,
+    CommonModule,    
     ReactiveFormsModule,
     HelpersModule,
     FormsModule,
@@ -73,8 +70,8 @@ const routes:Routes = [
     DxDropDownBoxModule,DxDropDownButtonModule,DxSelectBoxModule,DxNumberBoxModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DevengadoCasComponent,PlanillaCasIndexComponent,ProyeccionCasComponent,PlanillaCasComponent,ProyeccionTresCasComponent,
-    ProyeccionDosCasComponent]
+  declarations: [DevengadoCasComponent,PlanillaCasIndexComponent,PlanillaCasComponent,
+    ]
 })
 
 export class PlanillaCasModule { }

@@ -1,10 +1,12 @@
 import { Component, OnInit,ViewEncapsulation,Input, ViewChild } from '@angular/core';
 import { HttpClient, HttpParams , HttpResponse, HttpHeaders} from '@angular/common/http';
 import CustomStore from 'devextreme/data/custom_store';
-import { DxDataGridComponent } from 'devextreme-angular';  
+import { DxDataGridComponent,DxPivotGridComponent } from 'devextreme-angular';  
 import * as moment from 'moment';
 import { ConfiguracionService } from '../configuracion.service';
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
+import { Workbook } from 'exceljs';
+import { exportPivotGrid } from 'devextreme/excel_exporter';
 
 @Component({
     //moduleId: module.id,
@@ -14,10 +16,12 @@ import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
     encapsulation: ViewEncapsulation.None,
 })
 export class LaudosComponent implements OnInit {
-    dataSource:any[];
-    pivotGridDataSource: any;
-    @Input('archivo') row:any[];
+    dataSource:any[]=[];
+    pivotGridDataSource:  any;
+    @Input('archivo') row:any[] =[];
     @ViewChild('gridVar',{ static: false }) grid: DxDataGridComponent;
+    //@ViewChild(DxPivotGridComponent, { static: false }) pivotGrid: DxPivotGridComponent;
+    showRowTotals:boolean = true;
 
     constructor(private httpClient: HttpClient,private casService:ConfiguracionService) {
         let that = this;  
@@ -31,6 +35,21 @@ export class LaudosComponent implements OnInit {
     
     ngOnInit(): void {            
             this.cargaData(this);
+    }
+
+    onExporting(e) {
+      const workbook = new Workbook();
+      const worksheet = workbook.addWorksheet('Sales');
+    
+      exportPivotGrid({
+        component: e.component,
+        worksheet,
+      }).then(() => {
+        workbook.xlsx.writeBuffer().then((buffer) => {
+          saveAs(new Blob([buffer], { type: 'application/octet-stream' }), 'Sales.xlsx');
+        });
+      });
+      e.cancel = true;
     }
 
     alta(e){

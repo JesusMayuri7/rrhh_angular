@@ -1,4 +1,3 @@
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Component, OnInit,ViewEncapsulation,Input, Output } from '@angular/core';
 import * as moment from 'moment';
 import { BaseCasService } from '../base_cas.service';

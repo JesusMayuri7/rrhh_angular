@@ -1,8 +1,7 @@
 import { NgModule, OnInit } from '@angular/core';
 import { Routes,RouterModule} from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { TabMenuModule,ButtonModule,GrowlModule} from 'primeng/primeng';
-import { DataGridModule,PanelModule,DialogModule} from 'primeng/primeng';
+
 import { InputTextModule} from 'primeng/inputtext';
 import {DropdownModule} from 'primeng/dropdown';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -13,7 +12,30 @@ import { MainContentComponent } from './shell/main-content/main-content.componen
 import {CalendarModule} from 'primeng/calendar';
 import {MenubarModule} from 'primeng/menubar';
 import { CoreGuardChild } from './core_guard_child';
-import { LaudosComponent } from '../configuracion/laudos/laudos.component';
+import { CapModule } from "../cap/cap.module";
+import { PapModule } from '../pap_laudo/pap.module';
+import {DialogModule} from 'primeng/dialog';
+import {DataViewModule} from 'primeng/dataview';
+
+
+import { AirHspModule } from '../airhsp/airhsp.module';
+import { AirHspCasModule } from '../airhsp_cas/airhsp_cas.module';
+import { BaseCasModule } from '../base_cas/base_cas.module';
+import { BaseFormativaModule } from '../base_formativa/base_formativa.module';
+import { BaseCapModule } from '../base_cap/base_cap.module';
+import { CertificacionCasModule } from '../certificacion/certificacion_cas.module';
+import { PlanillaCasModule } from '../planilla_cas/planilla_cas.module';
+import { PlanillaFormativaModule } from '../planilla_formativa/planilla_formativa.module';
+import { PlanillaCapModule } from '../planilla_cap/planilla_cap.module';
+import { UploadModule } from '../upload/upload.module';
+import { PapAirModule } from '../pap_air/pap_air.module';
+import { ConfiguracionModule } from '../configuracion/configuracion.module';
+import { PresupuestoModule } from '../presupuesto/presupuesto.module';
+
+import {PanelModule} from 'primeng/panel';
+import { TableModule } from 'primeng/table';
+
+//import { LaudosComponent } from '../configuracion/laudos/laudos.component';
 
 
 
@@ -22,101 +44,75 @@ const routes:Routes = [
     path: "",
     component: ShellComponent,
     canActivateChild: [CoreGuardChild],
-    children:[
-     
+    children:[     
       {
         path: "",
         component: HomeComponent,
       },
       {
         path : "cap",
-        loadChildren:'./../cap/cap.module#CapModule'
+        loadChildren:() => CapModule,
       }, 
       {
         path : "pap",
-        loadChildren:'./../pap_laudo/pap.module#PapModule'
+        loadChildren:() => PapModule,
       }, 
       {
         path : "presupuesto",
-        loadChildren:'./../presupuesto/presupuesto.module#PresupuestoModule'
+        loadChildren:()=>PresupuestoModule,
       //  loadChildren: () => import('./../presupuesto/presupuesto.module').then(mod => mod.PresupuestoModule)
       },    
-      {
-        path : "organigrama",
-        loadChildren:'./../organigrama/organigrama.module#OrganigramaModule'
-      },    
-      {
-        path : "servicios",
-        loadChildren:'./../servicios/servicios.module#ServiciosModule'
-      },    
-      {
-        path : "sigamef",
-        loadChildren:'./../orden/orden.module#OrdenModule'
-      },  
-      {
-        path : "sigaz",
-        loadChildren:'./../sigaz/sigaz.module#SigaZModule'
-      },  
+     
       {
         path : "airhsp",
-        loadChildren:'./../airhsp/airhsp.module#AirHspModule'
+        loadChildren: ()=>AirHspModule,
       },  
       {
         path : "airhsp_cas",
-        loadChildren:'./../airhsp_cas/airhsp_cas.module#AirHspCasModule'
+        loadChildren:()=>AirHspCasModule,
       },  
       {
         path : "base_cas",
-        loadChildren:'./../base_cas/base_cas.module#BaseCasModule'
+        loadChildren:()=>BaseCasModule,
       },  
       {
         path : "base_formativa",
-        loadChildren:'./../base_formativa/base_formativa.module#BaseFormativaModule',        
+        loadChildren:()=>BaseFormativaModule,    
       }, 
       {
         path : "base_cap",
-        loadChildren:'./../base_cap/base_cap.module#BaseCapModule'
+        loadChildren:()=>BaseCapModule,
       },  
       {
         path : "certificacion_cas",
-        loadChildren:'./../certificacion/certificacion_cas.module#CertificacionCasModule'
+        loadChildren:()=>CertificacionCasModule,
       }, 
-      {
-        path : "proyeccion_cas",
-        loadChildren:'./../proyeccion/proyeccion.module#ProyeccionModule'
-      }, 
+
       {
         path : "planilla_cas",
-        loadChildren:'./../planilla_cas/planilla_cas.module#PlanillaCasModule'
+        loadChildren:()=>PlanillaCasModule,
       }, 
       {
         path : "planilla_formativa",
-        loadChildren:'./../planilla_formativa/planilla_formativa.module#PlanillaFormativaModule'
+        loadChildren:()=>PlanillaFormativaModule,
       }, 
       {
         path : "planilla_cap",
-        loadChildren:'./../planilla_cap/planilla_cap.module#PlanillaCapModule'
+        loadChildren:()=>PlanillaCapModule,
       }, 
-      {
-        path : "designaciones",
-        loadChildren:'./../designacion/designacion.module#DesignacionModule'
-      },  
+
       {
         path : "importar",
-        loadChildren:'./../upload/upload.module#UploadModule'
+        loadChildren:()=>UploadModule,
       },  
       {
         path : "pap_air",
-        loadChildren:'./../pap_air/pap_air.module#PapAirModule'
+        loadChildren:()=>PapAirModule,
       },  
       {
         path : "configuracion",
-        loadChildren:'./../configuracion/configuracion.module#ConfiguracionModule',
-      },
-      {
-        path : "confianza",
-        loadChildren:'./../designacion/designacion.module#DesignacionModule'
-      }, 
+        loadChildren:()=>ConfiguracionModule,
+      }
     ]
   },    
 
@@ -130,11 +126,13 @@ const routes:Routes = [
 @NgModule({
   imports: [
     RouterModule.forChild(routes),
-    CommonModule,
-    GrowlModule,
+    CommonModule,    
     MenubarModule,
-    DropdownModule,TabMenuModule,ButtonModule,FormsModule,ReactiveFormsModule,
-    DataGridModule,PanelModule,DialogModule,InputTextModule,CalendarModule 
+    DialogModule,
+    DropdownModule,
+    PanelModule,TableModule,DataViewModule,
+    FormsModule,ReactiveFormsModule,
+    InputTextModule,CalendarModule 
   ],
   declarations: [ShellComponent, TopBarComponent, MainContentComponent,HomeComponent],
   exports: [ShellComponent,HomeComponent,RouterModule],

@@ -3,7 +3,6 @@ import { HttpClient, HttpParams, HttpResponse, HttpHeaders } from '@angular/comm
 import { OrganigramaService } from '../service/organigrama.service';
 import { ExcelService } from '../service/excel.service';
 import CustomStore from 'devextreme/data/custom_store';
-import { Observable } from 'apollo-link';
 import { DxTooltipComponent, DxDataGridComponent } from 'devextreme-angular';
 import { BaseCasService } from './base_cas.service';
 import { on } from "devextreme/events";
@@ -46,7 +45,7 @@ export class OrganigramaComponent implements OnInit {
   popupBaja: boolean = false;
   popupAlta: boolean = false;
   rowData: any = {};
-  anio:string= '2022';
+  anio:string= '2023';
   isVisible = false;
   type = 'info';
   message = '';
@@ -132,16 +131,22 @@ export class OrganigramaComponent implements OnInit {
         widget: 'dxSelectBox',
         options: {
             width: 200,
-            items: [{
+            items: [
+              {
+                value: '2023',
+                text: '2023'
+              },
+              {
                 value: '2022',
                 text: '2022'
             }, {
                 value: '2021',
                 text: '2021'
-            }],
+            },            
+          ],
             displayExpr: 'text',
             valueExpr: 'value',
-            value: '2022',
+            value: '2023',
            onValueChanged: this.changeAnio.bind(this)
         }
       } 

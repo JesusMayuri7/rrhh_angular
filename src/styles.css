@@ -1,3 +1,9 @@
+/* @import  "~primeicons/primeicons.css";
+@import "~primeflex/primeflex.css";
+@import  "~primeng/resources/themes/lara-light-blue/theme.css";
+@import  "~primeng/resources/primeng.min.css"; */
+@import   "~devextreme/dist/css/dx.softblue.compact.css";
+
 .dx-button-has-text .dx-button-content
 {
     padding: 3px 5px 4px;

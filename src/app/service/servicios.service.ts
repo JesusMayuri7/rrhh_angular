@@ -3,7 +3,7 @@ import {throwError as observableThrowError,Observable, forkJoin,from } from 'rxj
 import {catchError,map} from 'rxjs/operators';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse,  HttpHeaders,  HttpParams  } from '@angular/common/http';
-import { Car,Trabajador, Presupuesto} from '../interface';
+import { Trabajador, Presupuesto} from '../interface';
 import { environment } from '../../environments/environment';
 import {Apollo} from 'apollo-angular';
 import gql from 'graphql-tag';

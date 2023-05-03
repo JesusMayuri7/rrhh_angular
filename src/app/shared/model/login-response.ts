@@ -1,6 +1,6 @@
 export class LoginResponse {
-    status:boolean;
-    token: string;
-    message:string;
-    expiresIn: number;
+    status:boolean = false;
+    token: string = '';
+    message:string = '';
+    expiresIn: number = 0;
 }

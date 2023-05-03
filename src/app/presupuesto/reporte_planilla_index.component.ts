@@ -1,10 +1,6 @@
 import { Component, OnInit,ViewEncapsulation,ViewContainerRef,ComponentFactoryResolver } from '@angular/core';
 
 
-import { ExcelService } from '../service/excel.service';
-
-import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
-
 
 
 

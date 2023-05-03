@@ -86,10 +86,10 @@ export class HttpConfigInterceptor implements HttpInterceptor {
             }));         
           }
           console.log('error....interceptor 401');
-         // return of(error);   
+          return of(error);   
         }
         console.log('error....interceptor');
-          //return of(error);
+          return of(error);
     
       }),
       finalize(() => {

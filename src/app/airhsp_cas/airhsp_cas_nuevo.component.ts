@@ -1,7 +1,7 @@
 import { Component,OnInit,ViewEncapsulation } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import {DynamicDialogRef} from 'primeng/api';
-import {DynamicDialogConfig} from 'primeng/api';
+import {DynamicDialogRef} from 'primeng/dynamicdialog';
+import {DynamicDialogConfig} from 'primeng/dynamicdialog';
 import { AirhspCasService } from './airhsp_cas.service';
 import {MessageService} from 'primeng/api';
 import { isNumber } from 'util';

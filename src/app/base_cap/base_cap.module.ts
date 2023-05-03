@@ -13,7 +13,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
 import { InputTextModule } from 'primeng/inputtext';
 import { ToastModule } from 'primeng/toast';
 import { CalendarModule } from 'primeng/calendar';
-import { NgPipesModule } from 'ngx-pipes';
+
 import { CheckboxModule } from 'primeng/checkbox';
 import { CardModule } from 'primeng/card';
 import {TooltipModule} from 'primeng/tooltip';
@@ -21,7 +21,7 @@ import {LightboxModule} from 'primeng/lightbox';
 import {DialogModule} from 'primeng/dialog';
 import {InputSwitchModule} from 'primeng/inputswitch';
 import {TabViewModule} from 'primeng/tabview';
-import { DxTabPanelModule,DxCheckBoxModule, DxTemplateModule,DxTooltipModule,DxPopupModule } from 'devextreme-angular';
+import { DxTabPanelModule,DxCheckBoxModule, DxTemplateModule,DxTooltipModule,DxPopupModule,DxScrollViewModule } from 'devextreme-angular';
 import { DxDataGridModule, DxButtonModule,DxSelectBoxModule,DxDateBoxModule } from 'devextreme-angular';
 import {HelpersModule} from '../helpers/helpers.module';
 
@@ -37,8 +37,8 @@ import { BaseCapDesignacionComponent } from "./base_cap_detalle/base_cap_designa
 import { BaseCasConcursoComponent } from "./base_cap_detalle/base_cas_concurso.component";
 import { BaseCapBajaComponent } from "./base_cap_detalle/base_cap_baja.component";
 import { BaseCapAltaComponent } from "./base_cap_detalle/base_cap_alta.component";
-import { BaseCapVidaLeyComponent } from "./base_cap_vida_ley.component";
-import { BaseCapSctrPensionComponent } from "./base_cap_sctr_pension.component";
+
+
 
 
 
@@ -53,7 +53,7 @@ const routes:Routes = [
   providers:[BaseCapService],
   imports: [
     CommonModule,
-    NgPipesModule,
+    
     ReactiveFormsModule,
     HelpersModule,
     FormsModule,
@@ -75,13 +75,13 @@ const routes:Routes = [
     DxTabPanelModule,
     DxCheckBoxModule,
     DxTemplateModule,
-    DxDataGridModule,
+    DxDataGridModule,DxScrollViewModule,
     TabViewModule,DxTooltipModule,DxPopupModule,
     DxDataGridModule, DxButtonModule,DxSelectBoxModule,DxDateBoxModule ,
     RouterModule.forChild(routes)
   ],
   declarations: [SigaCapComponent,BaseCapIndexComponent,BaseCapComponent,BaseCapDesignacionComponent,BaseCasConcursoComponent,
-    BaseCapBajaComponent,BaseCapVidaLeyComponent,BaseCapSctrPensionComponent,BaseCapAltaComponent,AirHspCapComponent]
+    BaseCapBajaComponent,BaseCapAltaComponent,AirHspCapComponent]
 })
 
 export class BaseCapModule { }

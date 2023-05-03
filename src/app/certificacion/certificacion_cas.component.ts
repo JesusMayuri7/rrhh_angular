@@ -2,15 +2,15 @@ import { Component, OnInit,ViewEncapsulation } from '@angular/core';
 import { HttpClient, HttpParams , HttpResponse, HttpHeaders} from '@angular/common/http';
 import { CertificacionCasService } from './certificacion_cas.service';
 import { ExcelService } from '../service/excel.service';
-import {LazyLoadEvent, MessageService, DialogService} from 'primeng/primeng';
+import {LazyLoadEvent, MessageService} from 'primeng/api';
+import { DialogService} from 'primeng/dynamicdialog';
 import { FormGroup, FormBuilder, FormArray } from '@angular/forms';
 
 import CustomStore from "devextreme/data/custom_store";
-import {MillonPipe} from '../pipes/millon.pipe';
 
 
 
-import 'jspdf-autotable';
+//import 'jspdf-autotable';
 import { NumberFormat } from 'xlsx/types';
 import { SelectItem } from '../interface';
 import { locale, loadMessages, formatMessage } from 'devextreme/localization';
@@ -186,7 +186,7 @@ export class CertificacionCasComponent implements OnInit {
 
   this.vigencias= [    
     { label: 'SOSTENIBLE', value: 'SOSTENIBLE' },
-    { label: '31/12/2019', value: '31/12/2019' }   
+    { label: '31/12/2023', value: '31/12/2023' }   
 ];
 
     this.estadosControl = [    
@@ -202,13 +202,14 @@ export class CertificacionCasComponent implements OnInit {
       this.sustentos = [    
         { label: 'DU_034_2021', value: 'DU_034_2021' },
         { label: 'DU_083_2021', value: 'DU_083_2021' },
-        { label: 'LEY_31365', value: 'LEY_31365' },
+        { label: 'LEY_PRESUPUESTO', value: 'LEY_PRESUPUESTO' },
         ];
 
     this.sedes = [    
       { label: 'SEDE', value: 'SEDE'},
-      { label: 'ZONAL',value:'ZONAL'}            
-  ]; 
+      { label: 'ZONAL',value:'ZONAL'},            
+      { label: 'PEAJE',value:'PEAJE'},            
+    ]; 
 
   this.fuentes = [    
       { label: 'RO', value: 1},
@@ -235,11 +236,10 @@ export class CertificacionCasComponent implements OnInit {
   getAreas() {
     this.loading = true; 
     this.certificacionCasService.getAreas().subscribe(
-      (result)=> {
-        
-        console.log('areas ',result);
+      (result)=> {        
         this.areas = result['data'];                 
         this.loading = false; 
+        console.log('areas ',this.areas);
       });
   }
 
@@ -430,7 +430,7 @@ cargarPap():Promise<any>{
     var doc = new jsPDF('landscape', 'pt', 'a4');
 
     doc.setFontSize(15);        
-    doc.text('PRESUPUESTO PARA REQUERIMIENTO CAS - 2020',220, 80);
+    doc.text('PRESUPUESTO PARA REQUERIMIENTO CAS - 2023',220, 80);
     doc.setFontSize(8);
     doc.setTextColor(100);
     

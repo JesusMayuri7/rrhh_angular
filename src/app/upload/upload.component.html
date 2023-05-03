@@ -1,145 +1,127 @@
-<div class="p-grid" style="margin: 2.0em">
-    <div class="col-p-4">
-        <p-fieldset legend="Cap">
-            <p-card>
-                <div class="p-col-12">
-                    Datos laborales - AirHsp
-                </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
-                    <button pButton (click)="showPresupuestal('activos/airhsp/importar','AirHsp',false)" label="Subir archivo airhsp (Mef)" style="margin: 0.5em"></button>        
-                </div>
-            </p-card>
-            <p-card>            
-                <div class="p-col-12">
+    <div class="gridAll" style="margin: 2.0em">    
+        <div class="cap">
+            <span>CAP</span>
+            <hr>
+            <div class="card">            
+                <div>
                     Personal - SigaNet
                 </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
-                    <button pButton (click)="showPresupuestal('cap/personal/personal_cap_import','Personal Cap',false)" label="Subir archivo servicios (Siga-Net)" style="margin: 0.5em"></button>        
+                <div>
+                    <button pButton (click)="showPresupuestal('cap/personal/personal_cap_import','Personal Cap',false)" label="Subir archivo personal CAP (Siga-Net)" style="margin: 0.5em"></button>        
                 </div>
-            </p-card>
-            <p-card>            
-                <div class="p-col-12">
+            </div>
+            <div class="card">            
+                <div>
                     Planilla - SigaPower
                 </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
-                    <button pButton (click)="showPresupuestal('cap/planilla/planilla_cap_import','Planilla Cap',true)" label="Subir archivo servicios (Siga-Power)" style="margin: 0.5em"></button>        
+                <div>
+                    <button pButton (click)="showPresupuestal('cap/planilla/planilla_cap_import','Planilla Cap',true)" label="Subir archivo planilla CAP (Siga-Power)" style="margin: 0.5em"></button>        
                 </div>
-            </p-card>
-            <p-card>            
-                <div class="p-col-12">
+            </div>
+            <div class="card">            
+                <div>
                     Planilla Cts - SigaPower
                 </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
-                    <button pButton (click)="showPresupuestal('cap/planilla/planilla_cap_cts_import','Planilla Cap Cts',true)" label="Subir archivo servicios (Siga-Power)" style="margin: 0.5em"></button>        
+                <div>
+                    <button pButton (click)="showPresupuestal('cap/planilla/planilla_cap_cts_import','Planilla Cap Cts',true)" label="Subir archivo planilla CTS (Siga-Power)" style="margin: 0.5em"></button>        
                 </div>
-            </p-card>
-        </p-fieldset>
-         <p-fieldset legend="Cas">        
-            <p-card>            
-                <div class="p-col-12">
-                    Planilla - SigaNet
-                </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
-                    <button pButton (click)="showPresupuestal('cas/planilla/importar','Planilla',true)" label="Subir archivo servicios (Siga-Net)" style="margin: 0.5em"></button>        
-                </div>
-            </p-card>
-            <p-card>            
-                <div class="p-col-12">
-                    Personal - SigaNet
-                </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
-                    <button pButton (click)="showPresupuestal('cas/personal/importar','Personal Cas',false)" label="Subir archivo servicios (Siga-Net)" style="margin: 0.5em"></button>        
-                </div>
-            </p-card>
-            <p-card>
-                <div class="p-col-12">
+            </div>
+            <div class="card">
+                <div>
                     Datos laborales - AirHsp
                 </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
+                <div>
+                    <button pButton (click)="showPresupuestal('activos/airhsp/importar','AirHsp',false)" label="Subir archivo airhsp (Mef)" style="margin: 0.5em"></button>        
+                </div>
+            </div>
+        </div>
+        <div class="cas">   
+            <span>CAS</span>
+            <hr>     
+            <div class="card">            
+                <div>
+                    Planilla - SigaNet
+                </div>
+                <div>
+                    <button pButton (click)="showPresupuestal('cas/planilla/importar','Planilla',true)" label="Subir archivo planilla CAS (Siga-Net)" style="margin: 0.5em"></button>        
+                </div>
+            </div>
+            <div class="card">            
+                <div>
+                    Personal - SigaNet
+                </div>
+                <div>
+                    <button pButton (click)="showPresupuestal('cas/personal/importar','Personal Cas',false)" label="Subir archivo personal CAS (Siga-Net)" style="margin: 0.5em"></button>        
+                </div>
+            </div>
+            <div class="card">
+                <div>
+                    Datos laborales - AirHsp
+                </div>
+                <div>
                     <button pButton (click)="showPresupuestal('cas/airhsp/importar','AirHsp Cas',false)" label="Subir archivo airhsp (Mef)" style="margin: 0.5em"></button>        
                 </div>
-            </p-card>            
-        </p-fieldset>
-    </div>
-    <div class="col-p-4">
-        <p-fieldset legend="Formativa">        
-           <p-card>            
-               <div class="p-col-12">
+            </div> 
+        </div>
+
+        <div class="formativa">  
+            <span>PRACTICANTES</span>
+            <hr>      
+           <div class="card">            
+               <div>
                    Planilla - SigaNet
                </div>
-               <div class="p-col-12" style="margin-top: -1.0em">
-                   <button pButton (click)="showPresupuestal('formativa/planilla/importar','Planilla Formativa',true)" label="Subir archivo servicios (Siga-Net)" style="margin: 0.5em"></button>        
+               <div>
+                   <button pButton (click)="showPresupuestal('formativa/planilla/importar','Planilla Formativa',true)" label="Subir archivo planilla PRACTICANTES (Siga-Net)" style="margin: 0.5em"></button>        
                </div>
-           </p-card>
-           <p-card>            
-            <div class="p-col-12">
-                Personal - SigaNet
-            </div>
-            <div class="p-col-12" style="margin-top: -1.0em">
-                <button pButton (click)="showPresupuestal('formativa/personal/personal_formativa_import','Personal',false)" label="Subir archivo servicios (Siga-Net)" style="margin: 0.5em"></button>        
-            </div>
-        </p-card>    
-        <p-card>
-            <div class="p-col-12">
-                Datos laborales - AirHsp
-            </div>
-            <div class="p-col-12" style="margin-top: -1.0em">
-                <button pButton (click)="showPresupuestal('formativa/airhsp/importar','AirHsp',false)" label="Subir archivo airhsp (Mef)" style="margin: 0.5em"></button>        
-            </div>
-        </p-card>             
-       </p-fieldset>
-   </div>
-    <div class="col-p-4">
-        <p-fieldset legend="Ordenes">        
-            <p-card> 
-                <div class="p-col-12">
-                    Ordenes de servicio - Siga-Mef 
+           </div>
+           <div class="card">            
+                <div>
+                    Personal - SigaNet
                 </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
-                    <button pButton (click)="showPresupuestal('servicios/siga/importar',' - (Previamente guardarlo en formato excel 97-2003)',false)" label="Subir archivo servicios (Siga-Mef)" style="margin: 0.5em"></button>        
-                </div>                
-            </p-card>
-            <p-card>
-                <div class="p-col-12">
-                    Ordenes x Meta - Siga Z 
+                <div>
+                    <button pButton (click)="showPresupuestal('formativa/personal/personal_formativa_import','Personal',false)" label="Subir archivo personal PRACTICANTES (Siga-Net)" style="margin: 0.5em"></button>        
                 </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
-                    <button pButton (click)="showPresupuestal('servicios/sigaz/importar','Zonales',false)" label="Subir archivo servicios (Siga-Web)" style="margin: 0.5em"></button>        
+            </div> 
+            <div class="card">
+                <div>
+                    Datos laborales - AirHsp
                 </div>
-            </p-card>
-        </p-fieldset>
-    </div>
-    <div class="col-p-4">
-        <p-fieldset legend="Presupuestal">                   
-            <p-card>
-                <div class="p-col-12">
+                <div>
+                    <button pButton (click)="showPresupuestal('formativa/airhsp/importar','AirHsp',false)" label="Subir archivo airhsp (Mef)" style="margin: 0.5em"></button>        
+                </div>
+            </div> 
+       </div>
+
+         <div class="presupuestal">
+            <span>PRESUPUESTO</span>
+            <hr>                   
+            <div class="card">
+                <div>
                     Certificacion - Siaf 
                 </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
+                <div>
                     <button pButton (click)="showPresupuestal('presupuestal/certificacion/importar','Certificacion',false)" label="Subir archivo certificacion (Siaf)" style="margin: 0.5em"></button>        
                 </div>
-            </p-card>
-            <p-card>            
-                <div class="p-col-12">
+            </div>
+            <div class="card">            
+                <div>
                     Devengado - Siaf
                 </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
-                    <button pButton (click)="showPresupuestal('presupuestal/devengado/importar','Devengado',false)" label="Subir archivo servicios (Siga-Net)" style="margin: 0.5em"></button>        
+                <div>
+                    <button pButton (click)="showPresupuestal('presupuestal/devengado/importar','Devengado',false)" label="Subir archivo FORMATO-H (Siga-Net)" style="margin: 0.5em"></button>        
                 </div>
-            </p-card>
-            <p-card>
-                <div class="p-col-12" >
+            </div>
+            <div class="card">
+                <div>
                     Ejecucion Presupuestal - Siaf (genera-data)
                 </div>
-                <div class="p-col-12" style="margin-top: -1.0em">
+                <div>
                     <button pButton (click)="showPresupuestal('presupuesto/importar','Presupuesto',false)" label="Subir archivo presupuestal (Siaf)" style="margin: 0.5em"></button>        
                 </div>
-            </p-card>
-        </p-fieldset>
+            </div>
+        </div>    
     </div>
-
-
-</div>
 
 
 
