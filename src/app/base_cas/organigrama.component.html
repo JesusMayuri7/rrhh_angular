@@ -39,6 +39,19 @@
     </div>  
 </dx-popup> 
 
+<dx-popup #popup     
+    [height]="650"
+    [showTitle]="true"
+    title="Historial"
+    [dragEnabled]="false"    
+    [(visible)]="popupHistorial">  
+    <div *dxTemplate="let data of 'content'">  
+        <dx-scroll-view width="100%" height="100%">
+        <zd-base-cas-historial [archivo]="historial" ></zd-base-cas-historial>  
+        </dx-scroll-view>
+    </div>  
+</dx-popup> 
+
 <dx-popup  
     [height]="650"
     [showTitle]="true"
@@ -56,7 +69,6 @@
             <dx-data-grid id="gridContainer"     
                 keyExpr="id"                             
                 [dataSource]="dataSource"
-
                 [columnWidth]="40"
                 (onToolbarPreparing)="onToolbarPreparing($event)"
                 (onCellPrepared)="onCellPrepared($event)"                
@@ -234,33 +246,7 @@
                                         [precision]="2">
                                     </dxo-format>
                                 </dxi-column>
-                                <dxi-column
-                                [minWidth]="80"  
-                                caption="Estado Actual"
-                                alignment="center"
-                                dataField="estado_actual"
-                                dataType="string"
-                                selectedFilterOperation="contains"
-                                [filterOperations]="[]">    
-                                </dxi-column>
-                                <dxi-column
-                                [minWidth]="80"  
-                                caption="Estado OPP"
-                                alignment="center"
-                                dataField="estado_opp"
-                                dataType="string"
-                                selectedFilterOperation="contains"
-                                [filterOperations]="[]">    
-                                </dxi-column>
-                                <dxi-column
-                                [minWidth]="80"  
-                                caption="Meses"
-                                alignment="center"
-                                dataField="meses"
-                                dataType="string"
-                                selectedFilterOperation="contains"
-                                [filterOperations]="[]">    
-                                </dxi-column>
+
                         </dxi-column>
 
 
@@ -406,19 +392,6 @@
                             </dxi-column>
                         </dxi-column>
                         <dxi-column
-                        [minWidth]="100"  
-                        caption="Modalidad"
-                        alignment="center"
-                        dataField="modalidad"
-                        dataType="string"
-                        selectedFilterOperation="contains"
-                        [filterOperations]="[]">  
-                        <dxo-lookup 
-                        [dataSource]="['CONTRATO','CONFIANZA','TEMPORAL']"
-                        >
-                        </dxo-lookup>                          
-                        </dxi-column>
-                        <dxi-column
                         caption='Confianza'
                         alignment="center">
                             <dxi-column
@@ -459,6 +432,47 @@
                             </dxi-column>
                         </dxi-column>
                         <dxi-column
+                        [minWidth]="80"  
+                        caption="Estado Actual"
+                        alignment="center"
+                        dataField="estado_actual"
+                        dataType="string"
+                        selectedFilterOperation="contains"
+                        [filterOperations]="[]">    
+                        </dxi-column>
+                        <dxi-column
+                        [minWidth]="80"  
+                        caption="Estado OPP"
+                        alignment="center"
+                        dataField="estado_opp"
+                        dataType="string"
+                        selectedFilterOperation="contains"
+                        [filterOperations]="[]">    
+                        </dxi-column>
+                        <dxi-column
+                        [minWidth]="80"  
+                        caption="Meses"
+                        alignment="center"
+                        dataField="meses"
+                        dataType="string"
+                        selectedFilterOperation="contains"
+                        [filterOperations]="[]">    
+                        </dxi-column>
+                        <dxi-column
+                        [minWidth]="100"  
+                        caption="Modalidad"
+                        alignment="center"
+                        dataField="modalidad"
+                        dataType="string"
+                        selectedFilterOperation="contains"
+                        [filterOperations]="[]">  
+                        <dxo-lookup 
+                        [dataSource]="['CONTRATO','CONFIANZA','TEMPORAL']"
+                        >
+                        </dxo-lookup>                          
+                        </dxi-column>
+ 
+                        <dxi-column
                         [minWidth]="120"  
                         caption="Sustento"
                         alignment="center"
@@ -471,8 +485,20 @@
                         >
                         </dxo-lookup>
                         </dxi-column>
-
-                        <dxi-column                                                                     
+                        <dxi-column
+                        [minWidth]="80"  
+                        caption="Teletrabajo"
+                        alignment="center"
+                        dataField="teletrabajo"
+                        dataType="string"
+                        selectedFilterOperation="contains"
+                        [filterOperations]="[]"> 
+                        <dxo-lookup 
+                        [dataSource]="['PRESENCIAL','MIXTA','COMPLETA']"
+                        >
+                        </dxo-lookup>
+                        </dxi-column>
+                         <dxi-column                                                                     
                         dataField="base_cas_detalle_id"
                         dataType="string"
                         [visible]="false">    

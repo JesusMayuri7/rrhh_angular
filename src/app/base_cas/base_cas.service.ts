@@ -15,6 +15,11 @@ export class BaseCasService {
       return this.http.get(this.API+'presupuestal/dependencias');        
     }
 
+    getHistorialCas(base_cas_id:number):Observable<any> {   
+      console.log('getHistorialCas ',base_cas_id)     
+      return this.http.get(this.API+'cas/base_cas_historial/'+base_cas_id);        
+    }
+
     postCasDesignacion(data):Observable<any> {        
       return this.http.post(this.API+'cas/base_cas/nuevo_designacion',data);        
     }

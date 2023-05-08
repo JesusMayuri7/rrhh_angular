@@ -7,6 +7,7 @@ import { ConfiguracionService } from '../configuracion.service';
 import PivotGridDataSource from 'devextreme/ui/pivot_grid/data_source';
 import { Workbook } from 'exceljs';
 import { exportPivotGrid } from 'devextreme/excel_exporter';
+import * as saveAs from 'file-saver';
 
 @Component({
     //moduleId: module.id,
@@ -19,7 +20,8 @@ export class LaudosComponent implements OnInit {
     dataSource:any[]=[];
     pivotGridDataSource:  any;
     @Input('archivo') row:any[] =[];
-    @ViewChild('gridVar',{ static: false }) grid: DxDataGridComponent;
+    @ViewChild('gridVar', { static: false })
+  grid!: DxDataGridComponent;
     //@ViewChild(DxPivotGridComponent, { static: false }) pivotGrid: DxPivotGridComponent;
     showRowTotals:boolean = true;
 
@@ -37,7 +39,7 @@ export class LaudosComponent implements OnInit {
             this.cargaData(this);
     }
 
-    onExporting(e) {
+    onExporting(e: { component: any; cancel: boolean; }) {
       const workbook = new Workbook();
       const worksheet = workbook.addWorksheet('Sales');
     
@@ -52,7 +54,7 @@ export class LaudosComponent implements OnInit {
       e.cancel = true;
     }
 
-    alta(e){
+    alta(e: any){
         let data_alta:any;
          data_alta = Object.assign({},this.grid.instance.getSelectedRowsData()[0]);        
          data_alta['org_unidad_id'] = this.row[0].org_unidad_id;
@@ -72,7 +74,7 @@ export class LaudosComponent implements OnInit {
     }
 
 
-    cargaData(a) {   
+    cargaData(a:any) {   
         let header = new HttpHeaders({'content-type':'application/json'});  
         this.pivotGridDataSource = new PivotGridDataSource({
           onFieldsPrepared: fields => {
@@ -152,7 +154,7 @@ export class LaudosComponent implements OnInit {
             return a.httpClient.get("http://rrhh.pvn.gob.pe/api/configuracion/laudos",
             {headers :header})
             .toPromise()
-            .then(result => {              
+            .then((result:any) => {              
               return {          
                   data: result['data'],        
                 // groupCount: result.groupCount*/

@@ -33,6 +33,7 @@ import { BaseCasIndexComponent } from './base_cas_index.component';
 import { AirHspCasComponent } from "./airhsp_cas.component";
 import { AirhspCasService } from './airhsp_cas.service';
 import { BaseCasDesignacionComponent } from "./base_cas_detalle/base_cas_designacion.component";
+import { BaseCasHistorialComponent } from "./base_cas_detalle/base_cas_historial.component";
 import { BaseCasConcursoComponent } from "./base_cas_detalle/base_cas_concurso.component";
 import { BaseCasBajaComponent } from "./base_cas_detalle/base_cas_baja.component";
 import { BaseCasAltaComponent } from "./base_cas_detalle/base_cas_alta.component";
@@ -76,7 +77,7 @@ const routes:Routes = [
     RouterModule.forChild(routes)
   ],
   declarations: [BaseCasIndexComponent,OrganigramaComponent,SigaIngresosComponent,AirHspCasComponent,BaseCasDesignacionComponent,
-    BaseCasConcursoComponent,BaseCasBajaComponent,BaseCasAltaComponent]
+    BaseCasConcursoComponent,BaseCasBajaComponent,BaseCasAltaComponent,BaseCasHistorialComponent]
 })
 
 export class BaseCasModule { }

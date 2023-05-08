@@ -1,10 +1,10 @@
 .DS_STORE
 
-/angular
 /dist/
 /bazel-out
 /integration/bazel/bazel-*
 *.log
+*.angular
 node_modules
 
 # CircleCI temporary file for cache key computation.

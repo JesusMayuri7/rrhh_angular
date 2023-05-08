@@ -44,7 +44,9 @@ export class OrganigramaComponent implements OnInit {
   popupConcurso: boolean = false;
   popupBaja: boolean = false;
   popupAlta: boolean = false;
+  popupHistorial: boolean = false;
   rowData: any = {};
+  historial:any=[];
   anio:string= '2023';
   isVisible = false;
   type = 'info';
@@ -234,13 +236,30 @@ export class OrganigramaComponent implements OnInit {
         }
       },
       {
-        text: "Alta por DNI",
+        text: "por DNI",
         onClick: () => {          
           this.popupAlta = true;
+        }
+      },
+      {
+        text: "Historial",
+        onClick: () => {          
+             this.historialPopup();
         }
       }
     );
     e.items = items;
+  }
+
+  historialPopup() {
+    let base_cas_id = this.rowData[0].id;
+    console.log('base_cas_id ',base_cas_id);
+    this.casService.getHistorialCas(base_cas_id).subscribe(
+      (data)=> {          
+           this.historial = data['data'];
+           this.popupHistorial = true;          
+         } 
+        );              
   }
 
 
@@ -362,24 +381,20 @@ export class OrganigramaComponent implements OnInit {
           e.row.data.error = 1;
         }
       }
-    
-
-    
-      if (e.column.dataField === "meta" && (e.row.data.estado_actual === 'OCUPADO')) {
-        if (e.row.data.meta !== e.row.data.meta_siga) {
+       
+      if (e.column.dataField === "meta_cert" && (e.row.data.estado_actual === 'OCUPADO')) {
+        if (e.row.data.meta_cert !== e.row.data.meta_siga) {
           e.cellElement.style.color = 'red';
           e.cellElement.style.fontWeight = 'bold';
           e.row.data.error = 1;
+        }
+      }
 
-          /*
-          on(e.cellElement, "mouseover", arg => {
-            this.currentEmployee = e.data;
-            this.tooltip.instance.show(arg.target);
-          });
-          on(e.cellElement, "mouseout", arg => {
-            this.tooltip.instance.hide();
-          });
-          */
+      if (e.column.dataField === "cargo" && (e.row.data.estado_actual === 'OCUPADO')) {
+        if (e.row.data.cargo !== e.row.data.cargo_cert) {
+          e.cellElement.style.color = 'red';
+          e.cellElement.style.fontWeight = 'bold';
+          e.row.data.error = 1;
         }
       }
     }
@@ -388,7 +403,6 @@ export class OrganigramaComponent implements OnInit {
   cargaData(a) {
     let header = new HttpHeaders({ 'content-type': 'application/json' });
     a.dataSource = new CustomStore({
-
       key: ["id", "base_cas_detalle_id"],
       load: () => this.cargarCAS(),
       update: (key, values) => this.httpClient.put("http://rrhh.pvn.gob.pe/api/cas/base_cas_update", {
@@ -410,16 +424,8 @@ export class OrganigramaComponent implements OnInit {
     console.log(this.anio);
     return this.httpClient.get("http://rrhh.pvn.gob.pe/api/cas/base_cas/"+this.anio).toPromise()
       .then(result => {
-        console.log(result);
-        //this.metas = result['metas'];
-        //this.metas2 = result['metas2'];
-        //this.unidades = result['unidades'];
-        //this.unidades2 = result['unidades2'];
-
         return {
           data: result['data'],
-          //  sumary:588            
-          // groupCount: result.groupCount*/
         };
       });
   }

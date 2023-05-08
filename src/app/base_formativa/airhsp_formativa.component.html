@@ -3,16 +3,12 @@
             [columnMinWidth]="30"                
             height="100%" 
             [dataSource]="cap"
-
             (onToolbarPreparing)="onToolbarPreparing($event)"
             >
             <dxo-paging [enabled]="false"></dxo-paging>                                 
-
-
             <div *dxTemplate="let data of 'actualizado'">                
                     <span >Actualizado {{actualizado}}   </span>                
             </div>
-
             <dxi-column
             width="50"
             dataField="presupuesto"
@@ -24,32 +20,28 @@
             width="100"
             dataField="modalidad"
             caption="Modalidad"
-            dataType="string"            
-            
+            dataType="string"                        
             >  
             </dxi-column>   
             <dxi-column
             width="50"
             dataField="fuente_base"
             caption="Fuente"
-            dataType="string"            
-            
+            dataType="string"                        
             >  
             </dxi-column>  
             <dxi-column
             width="50"
             dataField="fuente_air"
             caption="Fuente"
-            dataType="string"            
-            
+            dataType="string"                        
             >  
             </dxi-column>              
             <dxi-column
             width="50"
             dataField="meta"
             caption="Meta"
-            dataType="string"            
-            
+            dataType="string"                        
             >  
             </dxi-column> 
             <dxi-column            
@@ -58,29 +50,24 @@
             dataType="string"                        
             >  
             </dxi-column>   
-            <dxi-column
-            
+            <dxi-column            
             dataField="desc_area"
             caption="Area"
             dataType="string"                        
             >  
             </dxi-column>
-            <dxi-column
-            
+            <dxi-column            
             dataField="desc_unidad"
             caption="Unidad AIR"
             dataType="string"                        
             >  
-            </dxi-column>
-  
-         
+            </dxi-column>        
             <dxi-column                   
             width="60"
             caption="Codigo_Air"
             alignment="center"
             dataField="codigo_plaza"                    
-            dataType="string"
-            
+            dataType="string"            
             >                                        
             </dxi-column>
             <dxi-column
@@ -88,56 +75,76 @@
             dataField="numero_documento"
             caption="Dni"
             alignment="center"                        
-            dataType="string"
-            
+            dataType="string"            
             >  
             </dxi-column>
-            <dxi-column
-            
+            <dxi-column            
             dataField="nombres_air"
             alignment="left"            
-            dataType="string"
-                        
+            dataType="string"                    
             >  
             </dxi-column>             
-            <dxi-column
-            
+            <dxi-column            
             dataField="desc_cargo_funcional"
             caption="Cargo"
-            dataType="string"
-            
+            dataType="string"            
             >                  
             </dxi-column>  
             <dxi-column
             width="70"
             dataField="estado_air"
             dataType="string" 
-            caption="Estado"
-            
+            caption="Estado"            
             >  
-            </dxi-column>
-               
+            </dxi-column>               
             <dxi-column
-            width="50"
+            width="70"
             dataField="honorarios"
             caption="Monto"
             dataType="number">
- 
+                <dxo-format
+                type="fixedPoint"
+                [precision]="2">
+                </dxo-format> 
             </dxi-column>
             <dxi-column
-            width="50"
+            width="70"
             dataField="primera_subvencion"
             caption="Subvencion"
             dataType="number">
-
             </dxi-column>
             <dxi-column
             width="50"
             dataField="segunda_subvencion"
             caption="Subvencion"
             dataType="number">
-
             </dxi-column> 
+            <dxo-summary>
+                <dxi-total-item
+                    column="codigo_plaza"
+                    summaryType="count"                    
+                    displayFormat="{0}"
+                    >
+                </dxi-total-item>
+                <dxi-total-item
+                column="monto_base"
+                summaryType="sum"
+                valueFormat="#,##0.00"
+                displayFormat="{0}">
+            </dxi-total-item>
+                <dxi-total-item
+                    column="honorarios"
+                    summaryType="sum"
+                    valueFormat="#,##0.00"
+                    displayFormat="{0}">
+                </dxi-total-item>
+                <dxi-total-item
+                column="primera_subvencion"
+                summaryType="sum"
+                valueFormat="#,##0.00"
+                displayFormat="{0}">
+            </dxi-total-item>
+            </dxo-summary> 
         </dx-data-grid>
     </div>
 

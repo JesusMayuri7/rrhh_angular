@@ -1,0 +1,116 @@
+<dx-toast [(visible)]="isVisible" [type]="type" [message]="message"></dx-toast>
+                    <dx-data-grid id="gridContainer"   
+                    [columnMinWidth]="30"     
+                    width="100%"             
+                    height="100%"             
+                    [dataSource]="row"
+                    [selectedRowKeys]="[]"
+                    (onToolbarPreparing)="onToolbarPreparing($event)"
+                    >
+                    <dxo-selection mode="single"></dxo-selection>   
+                    <dxo-load-panel [enabled]="true"></dxo-load-panel>    
+                    <dxo-filter-row 
+                    [visible]="true"             
+                    ></dxo-filter-row>
+                    <dxo-header-filter 
+                    [visible]="true"></dxo-header-filter>
+                    <dxi-column
+                    [width]="230"  
+                    dataField="finalidad"
+                    caption="Finalidad"
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    [filterOperations]="[]">                  
+                    </dxi-column>  
+                    <dxi-column                   
+                    [width]="80"
+                    caption="Codigo_Air"
+                    alignment="center"
+                    dataField="codigo_plaza"                    
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    [filterOperations]="[]">                                        
+                    </dxi-column>
+                    <dxi-column
+                    [width]="80"  
+                    dataField="dni"
+                    caption="Dni"
+                    alignment="center"                        
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    [filterOperations]="[]">  
+                    </dxi-column>
+                    <dxi-column
+                    [width]="250"  
+                    dataField="nombres"
+                    alignment="left"            
+                    dataType="string"
+                    selectedFilterOperation="contains"
+                    [filterOperations]="[]">  
+                    </dxi-column>
+                    <dxi-column     
+                        [width]="230"          
+                        dataField="cargo"
+                        caption="Cargo"> 
+                                       
+                    </dxi-column>                                
+                    <dxi-column     
+                    [width]="100"          
+                    dataField="tipo_ingreso"
+                    caption="Tipo Ing.">    
+                    </dxi-column>
+                    <dxi-column
+                    [width]="70"  
+                    dataField="fe_ingreso"
+                    dataType="string" 
+                    caption="Fec. Ing."
+                    selectedFilterOperation="contains"
+                    [filterOperations]="[]">  
+                        <dxo-format
+                            displayFormat='yyyy-dd-MM'
+                            type="shortDate"
+                            >
+                        </dxo-format>
+                    </dxi-column>    
+                    <dxi-column     
+                    [width]="100"          
+                    dataField="tipo_salida"
+                    caption="Tipo Sal."> 
+                    </dxi-column> 
+                    <dxi-column
+                    [width]="70"  
+                    dataField="fe_salida"
+                    dataType="string" 
+                    caption="Fec. Sal."
+                    selectedFilterOperation="contains"
+                    [filterOperations]="[]">  
+                        <dxo-format
+                            displayFormat='yyyy-dd-MM'
+                            type="shortDate"
+                            >
+                        </dxo-format>
+                    </dxi-column>       
+                    <dxi-column
+                    [width]="80"  
+                    dataField="monto"
+                    caption="Monto"
+                    dataType="number">
+                        <dxo-format
+                            type="fixedPoint"
+                            [precision]="2">
+                        </dxo-format>
+                    </dxi-column>
+                    <dxi-column     
+                    [width]="90"          
+                    dataField="teletrabajo"
+                    caption="Teletrabajo">   
+                    </dxi-column>
+                    <dxo-paging [enabled]="false"></dxo-paging>
+                    
+                    
+                    <dxo-search-panel
+                    [width]="300"
+                    [visible]="true"
+                    [highlightCaseSensitive]="false">
+                    </dxo-search-panel>
+                </dx-data-grid>     
