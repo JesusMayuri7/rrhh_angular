@@ -7,24 +7,18 @@
     height="100%"            
     [showBorders]="true"
     rowHeaderLayout="standard"        
-    [showRowGrandTotals]="true"
-    
-    
+    [showRowGrandTotals]="false" 
+    [showRowTotals]="false" 
     [allowExpandAll]="true"
-    [dataSource]="pivotGridDataSource"  
-   
+    [dataSource]="pivotGridDataSource"     
   >
-    <dxo-header-filter
-    
-    
-    
+    <dxo-header-filter  
     >
     </dxo-header-filter>
     <dxo-export [enabled]="true" fileName="Laudos"></dxo-export>
     <dxo-field-panel
     [showDataFields]="false"
-    [showRowFields]="true"
-    
+    [showRowFields]="true"    
     [showFilterFields]="true"
     [allowFieldDragging]="true"
     [visible]="true">

@@ -330,7 +330,6 @@ export class OrganigramaComponent implements OnInit {
               e.cellElement.style.fontWeight = 'bold';
               e.row.data.error = 1;
             }
-
       }      
 
       if ((e.column.dataField === 'dni_confianza') && (e.row.data.estado_actual === 'OCUPADO') && e.row.data.estado_confianza =='VIGENTE') {
@@ -392,6 +391,15 @@ export class OrganigramaComponent implements OnInit {
 
       if (e.column.dataField === "cargo" && (e.row.data.estado_actual === 'OCUPADO')) {
         if (e.row.data.cargo !== e.row.data.cargo_cert) {
+          e.cellElement.style.color = 'red';
+          e.cellElement.style.fontWeight = 'bold';
+          e.row.data.error = 1;
+        }
+      }
+
+      if (e.column.dataField === 'estado_opp' && e.row.data.estado_actual === 'OCUPADO' ) {
+        // console.log(e.row.data.estado_air,"-",e.row.data.dni,"-",e.row.data.dni);         
+        if (e.row.data.estado_opp !== 'OCUPADO') {
           e.cellElement.style.color = 'red';
           e.cellElement.style.fontWeight = 'bold';
           e.row.data.error = 1;

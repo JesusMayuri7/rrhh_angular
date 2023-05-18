@@ -124,6 +124,18 @@ export class LaudosComponent implements OnInit {
           area: "row",
         }, 
         {
+          width:10,
+          caption: "Inc. (%)",
+          dataField: "porcentaje_incremento",
+          dataType: "number",      
+          summaryType: "sum",
+          format: {
+            type: "fixedPoint", // one of the predefined formats
+            precision: 0, // the precision of values        
+          },
+          area: "data"
+        },
+        {
           width:20,
           caption: "Monto",
           dataField: "monto",
@@ -135,18 +147,7 @@ export class LaudosComponent implements OnInit {
           },
           area: "data"
         },
-        {
-          width:20,
-          caption: "Incremento (%)",
-          dataField: "porcentaje_incremento",
-          dataType: "number",      
-          summaryType: "sum",
-          format: {
-            type: "fixedPoint", // one of the predefined formats
-            precision: 0, // the precision of values        
-          },
-          area: "data"
-        }
+
       ],
         remoteOperations: false,
         store: new CustomStore({

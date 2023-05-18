@@ -446,6 +446,17 @@
                                 <a href="{{cellInfo.data.doc_licencia}}" target="_blank">Doc</a>
                             </div>                            
                         </div>   
+                        <dxi-column
+                        [minWidth]="80"  
+                        caption="Est. Lic."
+                        dataField="estado_licencia"
+                        dataType="string"
+                        selectedFilterOperation="contains"
+                        [filterOperations]="[]">  
+                        <dxo-lookup 
+                        [dataSource]="['VIGENTE','VENCIDA']">
+                        </dxo-lookup>
+                        </dxi-column>
                 </dxi-column>               
                 <dxi-column
                  caption='AIRHSP'

@@ -433,15 +433,6 @@
                         </dxi-column>
                         <dxi-column
                         [minWidth]="80"  
-                        caption="Estado Actual"
-                        alignment="center"
-                        dataField="estado_actual"
-                        dataType="string"
-                        selectedFilterOperation="contains"
-                        [filterOperations]="[]">    
-                        </dxi-column>
-                        <dxi-column
-                        [minWidth]="80"  
                         caption="Estado OPP"
                         alignment="center"
                         dataField="estado_opp"
@@ -449,6 +440,16 @@
                         selectedFilterOperation="contains"
                         [filterOperations]="[]">    
                         </dxi-column>
+                        <dxi-column
+                        [minWidth]="80"  
+                        caption="Estado Actual"
+                        alignment="center"
+                        dataField="estado_actual"
+                        dataType="string"
+                        selectedFilterOperation="contains"
+                        [filterOperations]="[]">    
+                        </dxi-column>
+
                         <dxi-column
                         [minWidth]="80"  
                         caption="Meses"
@@ -471,7 +472,6 @@
                         >
                         </dxo-lookup>                          
                         </dxi-column>
- 
                         <dxi-column
                         [minWidth]="120"  
                         caption="Sustento"
@@ -560,6 +560,13 @@
                         dataField="fin_licencia"
                         dataType="string">  
                         </dxi-column>
+
+                        <dxi-column dataField="doc_licencia" cellTemplate="cellDocLicencia"></dxi-column>
+                        <div *dxTemplate="let cellInfo of 'cellDocLicencia'">
+                            <div *ngIf="cellInfo.data.doc_licencia">
+                                <a href="{{cellInfo.data.doc_licencia}}" target="_blank">Doc</a>
+                            </div>                            
+                        </div>  
                         <dxi-column                   
                         [minWidth]="80"
                         caption="Estado Lic."
@@ -572,13 +579,7 @@
                             <dxo-lookup 
                             [dataSource]="['VIGENTE','VENCIDA']">
                             </dxo-lookup>
-                        </dxi-column>  
-                        <dxi-column dataField="doc_licencia" cellTemplate="cellDocLicencia"></dxi-column>
-                        <div *dxTemplate="let cellInfo of 'cellDocLicencia'">
-                            <div *ngIf="cellInfo.data.doc_licencia">
-                                <a href="{{cellInfo.data.doc_licencia}}" target="_blank">Doc</a>
-                            </div>                            
-                        </div>   
+                        </dxi-column>   
                 </dxi-column>
                 <dxi-column
                  caption='AirHsp'

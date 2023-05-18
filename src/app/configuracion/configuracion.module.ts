@@ -19,6 +19,7 @@ import { ConfiguracionComponent } from "./configuracion.component";
 import { CertificadosComponent } from "./certificados/certificados.component";
 import { MopComponent } from "./mop/mop.component";
 import { AddCertificadoComponent } from './certificados/add_certificado/add_certificado.component';
+import { LaudosComponent } from './laudos/laudos.component';
 
 
 
@@ -49,7 +50,7 @@ const routes:Routes = [
   ],
   declarations: [ConfiguracionComponent,MetasComponent,
     //LaudosComponent,
-    ConvocatoriasComponent,CertificadosComponent,MopComponent,AddCertificadoComponent
+    ConvocatoriasComponent,CertificadosComponent,MopComponent,AddCertificadoComponent,LaudosComponent
     ],
  schemas:[
   CUSTOM_ELEMENTS_SCHEMA

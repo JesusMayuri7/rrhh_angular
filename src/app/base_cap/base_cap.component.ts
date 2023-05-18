@@ -238,8 +238,16 @@ export class BaseCapComponent implements OnInit {
           e.row.data.error = 1;
         }
       }
-      if (e.column.dataField ==='estado_actual' && e.row.data.estado_actual == 'VACANTE') {          
+/*       if (e.column.dataField ==='estado_actual' && e.row.data.estado_actual == 'VACANTE') {          
         if (e.row.data.estado_air == 'OCUPADO' ) {
+          e.cellElement.style.color = 'red';
+          e.cellElement.style.fontWeight = 'bold';
+          e.row.data.error = 1;
+        }
+      } */
+
+      if (e.column.dataField ==='estado_air' && e.row.data.estado_actual == 'OCUPADO') {          
+        if (e.row.data.estado_air !== 'OCUPADO' ) {
           e.cellElement.style.color = 'red';
           e.cellElement.style.fontWeight = 'bold';
           e.row.data.error = 1;
