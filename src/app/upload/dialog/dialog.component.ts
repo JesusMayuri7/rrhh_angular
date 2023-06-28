@@ -47,6 +47,9 @@ export class DialogComponent implements OnInit {
   showCancelButton = true;
   uploading = false;
   uploadSuccessful = false;
+  isVisible = false;
+  type = 'info';
+  message = '';
 
   onFilesAdded() {
     const files: { [key: string]: File } = this.file.nativeElement.files;
@@ -57,23 +60,36 @@ export class DialogComponent implements OnInit {
     }
   }
 
+  toast(_type:string,_message:string) {
+    this.type = _type;
+    this.message = _message;
+    this.isVisible = true;
+  }
+
   addFiles() {
     this.file.nativeElement.click();
   }
 
   
-  closeDialog(mes) {    
-    
+  closeDialog(mes) {        
     // if everything was uploaded already, just close the dialog
     if (this.uploadSuccessful) {
        return this.ref.close();
+    }
+
+    //console.log(this.config.data.mes);
+    //console.log(mes.value.value);
+    if ( this.config.data.mes && mes.value.value==0)
+    {
+      this.toast('error','Seleccione el mes de proceso');      
+        return;
     }
 
     // set the component state to "uploading"
     this.uploading = true;
     
     // start the upload and save the progress map
-    console.log(mes.value);
+    
     if (mes.value)
         this.progress = this.uploadService.upload(this.files,this.paramData.url,mes.value.value);
     else

@@ -18,6 +18,7 @@ import {MessageService} from 'primeng/api';
 import {DropdownModule} from 'primeng/dropdown';
 import {CardModule} from 'primeng/card';
 import {FieldsetModule} from 'primeng/fieldset';
+import { DxToastModule } from 'devextreme-angular';
 
 const routes:Routes = [
   { path:'',
@@ -28,7 +29,7 @@ const routes:Routes = [
 @NgModule({
   imports: [ MatButtonModule, DropdownModule,CardModule,FieldsetModule,
     MatDialogModule,CommonModule, MatListModule, ButtonModule, 
-     MatProgressBarModule,DynamicDialogModule,
+     MatProgressBarModule,DynamicDialogModule,DxToastModule,
   RouterModule.forChild(routes)],
   declarations: [UploadComponent, DialogComponent],
   entryComponents: [DialogComponent], // Add the DialogComponent as entry component

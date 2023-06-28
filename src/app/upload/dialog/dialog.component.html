@@ -1,3 +1,4 @@
+<dx-toast [(visible)]="isVisible" [type]="type" [message]="message"></dx-toast>
 <input type="file" #file style="display: none" (change)="onFilesAdded()" multiple />
 <div class="p-grid">  
   <div class="p-col-2">
@@ -10,7 +11,7 @@
       </div>
     </div>        
   <div class="p-col-5">  
-    <p-dropdown #mes autoWidth="true" dataKey="value" [options]="meses" optionLabel="label" [disabled]=!paramData.mes></p-dropdown>
+    <p-dropdown #mes appendTo="body" autoWidth="true" dataKey="value" [options]="meses" optionLabel="label" [disabled]=!paramData.mes></p-dropdown>
     <button *ngIf="showCancelButton" pButton label="Cancelar"></button>  
     <button color="primary" [disabled]="!canBeClosed" (click)="closeDialog(mes)" pButton label="{{primaryButtonText}}"></button>
   </div>  

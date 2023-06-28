@@ -191,6 +191,20 @@ onValueChanged(e)
         caption:"Planilla",
         dataField: "desc_planilla",
         dataType: "string",
+        area: "filter",    
+        width:450,        
+      },
+      {
+        caption:"Tipo",
+        dataField: "planilla_tipo",
+        dataType: "string",
+        area: "filter",    
+      
+      },
+      {
+        caption:"Clasificador",
+        dataField: "dsc_clasificador",
+        dataType: "string",
         area: "filter",            
       },
       {

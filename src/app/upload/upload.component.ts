@@ -13,6 +13,7 @@ import {MessageService} from 'primeng/api';
 export class UploadComponent {
   constructor(public uploadService: UploadService,public dialogService: DialogService,private messageService: MessageService) { }
 
+
   
   
   public openUploadDialog() {
@@ -30,4 +31,6 @@ export class UploadComponent {
         width: '60%'
     });    
   }
+
+
 }
