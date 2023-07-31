@@ -1,74 +1,60 @@
 <dx-toast [(visible)]="isVisible" [type]="type" [message]="message"></dx-toast>
-<div class="p-grid">
-    <div class="p-col-6">
-        <div class="p-grid">
-            <div class="p-col-12">
-                <span class="ui-float-label">
-                    <input id="float-codigo_plaza" type="text" size="10" pInputText [ngModel]="row[0].codigo_plaza"> 
-                    <label for="float-codigo_plaza">Codigo Plaza</label>
-                </span>
+<div id="grid">
+            <div id="row">                
+                    <div id="cell" >Codigo Plaza</div>
+                    <div id="cell"><label id="float-codigo_plaza">{{row[0].codigo_plaza}}</label>
+                    </div>
             </div>
-            <div class="p-col-12">
-                <span class="ui-float-label">
-                    <input id="float-fuente_base" type="text" size="10" pInputText [ngModel]="row[0].fuente_base"> 
-                    <label for="float-fuente_base">Fuente</label>
-                </span>
+            <div id="row">                
+                    <div id="cell">Fuente</div>
+                    <div id="cell"><label id="float-fuente_base">{{row[0].fuente_base}} </label>
+                    </div>
             </div>    
-            <div class="p-col-12">
-                <span class="ui-float-label">
-                    <input id="float-meta" type="text" size="50" pInputText [ngModel]="row[0].meta_2019"> 
-                    <label for="float-meta">Meta</label>
-                </span>
-            </div>   
-            <div class="p-col-12">    
-                    <label for="float-fe_ingreso">Fecha Ingreso</label>            
-                    <span class="ui-float-label">                   
+            <div id="row">                
+                    <div id="cell">Meta</div>
+                    <div id="cell"><label id="float-meta" >{{row[0].meta_2019}}</label>                 </div>
+            </div>
+            <hr id="row-all" style="border: 1px solid grey; width: 100%;"/>   
+            <div id="row">    
+                    <div id="cell">Fecha Ingreso</div>  
+                    <div id="cell">
                         <dx-date-box id="float-fe_ingreso"
                             [width]="250"
                             [value]="row[0].fe_ingreso"
                             displayFormat="dd-MM-yyyy">
-                        </dx-date-box>                        
-                    </span>
-            </div>                           
-        </div>
-    </div>
-    <div class="p-col-6">       
-        <div class="p-grid">
-            <div class="p-col-12">
-                <label for="float-estado_final">Estado</label>
-                <span class="ui-float-label">
+                        </dx-date-box>                                            
+                    </div>                                                 
+            </div>                                   
+    
+            <div id="row">                
+                <div id="cell">Estado</div>                
+                <div id="cell">
                     <dx-select-box id="float-estado_final"
                     [dataSource]="tipo_salida" 
                     (onValueChanged)="onValueChanged($event)"      
                     [value]="row[0].tipo_salida"                    
-                    ></dx-select-box>                    
-                </span>
+                    ></dx-select-box>  
+                </div>                                  
             </div>  
-            <div class="p-col-12">
-                <label for="float-fe_ingreso">Fecha Salida</label>            
-                <span class="ui-float-label">       
+            <div id="row">
+                <div id="cell">Fecha Salida</div>            
+                <div id="cell">
                         <dx-date-box
                             [width]="250"
                             [value]="row[0].fe_salida"
                             displayFormat="dd-MM-yyyy"
                             (onValueChanged)="changeFeSalida($event)"
                             >
-                        </dx-date-box>
-                </span>
-            </div> 
-        </div>
-    </div>
-
-    <div class="p-col-11">
-        botones
-    </div>
-    <div class="p-col-1">
+                        </dx-date-box>  
+                </div>                     
+            </div>             
+    <div id="row-all">
         <dx-button
                     stylingMode="contained"
                     text="Baja"
                     type="default"
-                    [width]="120"
+                    width="100%"
                     (onClick)="baja()">
-                </dx-button>
+        </dx-button>
     </div>
 </div>
